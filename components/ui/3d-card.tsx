@@ -7,7 +7,6 @@ import React, {
   useState,
   useContext,
   useRef,
-  useEffect,
 } from "react";
 
 const MouseEnterContext = createContext<
@@ -35,15 +34,15 @@ export const CardContainer = ({
     containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
   };
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = () => {
     setIsMouseEntered(true);
-    if (!containerRef.current) return;
   };
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
+  const handleMouseLeave = () => {
     setIsMouseEntered(false);
-    containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
+    if (containerRef.current) {
+      containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
+    }
   };
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
@@ -116,14 +115,10 @@ export const CardItem = ({
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
-  [key: string]: any;
+  [key: string]: unknown;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isMouseEntered] = useMouseEnter();
-
-  useEffect(() => {
-    handleAnimations();
-  }, [isMouseEntered]);
 
   const handleAnimations = () => {
     if (!ref.current) return;

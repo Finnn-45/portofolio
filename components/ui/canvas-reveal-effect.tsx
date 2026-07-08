@@ -66,7 +66,7 @@ export function CanvasRevealEffect({
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       particlesRef.current.forEach((p) => {
-        let { x, y, dx, dy, color, radius } = p;
+        const { x, y, color, radius } = p;
 
         if (x + radius > canvas.width || x - radius < 0) p.dx = -p.dx;
         if (y + radius > canvas.height || y - radius < 0) p.dy = -p.dy;

@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Arfin Desca Alzachri | Portfolio",
   description:
-    "Portfolio Arfin Desca Alzachri — siswa SMK dengan keahlian di web development dan IoT, berpengalaman dalam desain visual dan pengembangan aplikasi berbasis website. Terbuka untuk program magang digital. Bogor, Indonesia.",
+    "Portfolio Arfin Desca Alzachri — siswa SMK yang suka banget bikin web, utak-atik IoT, dan desain visual. Lagi open buat magang digital. Bogor, Indonesia.",
 };
 
 export default function RootLayout({

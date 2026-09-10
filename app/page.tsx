@@ -91,7 +91,7 @@ export default function Home() {
               Portfolio ↓
             </a>
             <a href="#works" className="px-4 py-1.5 rounded-full border border-[#1a1a1a]/15 text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f4f1ea] transition-all">
-              See All My Work
+              cek works ↓
             </a>
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function Home() {
               <StatusChip />
               <a
                 href={`mailto:${socials.email}?subject=${encodeURIComponent(
-                  "Peluang Kerja / Magang — via Portfolio"
+                  "halo! ada peluang menarik nih — via portfolio"
                 )}`}
                 className="px-6 py-3 rounded-full bg-[#1a1a1a] text-[#f4f1ea] font-medium hover:bg-[#831514] transition-colors"
               >
@@ -238,8 +238,8 @@ export default function Home() {
           <motion.div {...fadeUp}>
             <BracketLabel>experience</BracketLabel>
             <p className="mt-8 text-2xl md:text-3xl font-medium leading-snug text-[#1a1a1a]">
-              Dari kegiatan sekolah hingga proyek berskala besar — pengalaman-pengalaman
-              ini yang membentuk cara saya memandang teknologi dan desain.
+              Dari kegiatan sekolah sampai proyek yang beneran dipake orang —
+              semua ini yang ngebentuk cara aku pandang teknologi dan desain.
             </p>
 
             <div className="mt-12 rounded-2xl border border-[#1a1a1a]/10 p-6">
@@ -276,7 +276,7 @@ export default function Home() {
             </div>
 
             <motion.p {...fadeUp} className="mt-6 font-mono text-sm text-[#a8a294]">
-              and many more experiences ahead….
+              masih banyak cerita lain on the way…
             </motion.p>
           </div>
         </div>
@@ -294,9 +294,9 @@ export default function Home() {
             MENTION&apos;s Key Collaborations
           </motion.h2>
           <motion.p {...fadeUp} className="mt-4 max-w-2xl text-[#57534e] leading-relaxed">
-            MENTION (Media Design and Information) adalah pengelola desain media dan
-            informasi SMK TI Bazma — menghasilkan konten visual untuk mendukung seluruh
-            kegiatan sekolah.
+            MENTION (Media Design and Information) itu tim yang megang semua
+            konten visual di SMK TI Bazma — dari desain sampai video, buat
+            dukung semua kegiatan sekolah.
           </motion.p>
 
           <div className="mt-12 divide-y divide-[#1a1a1a]/10 border-y border-[#1a1a1a]/10">
@@ -521,15 +521,15 @@ export default function Home() {
             {...fadeUp}
             className="mt-8 text-center text-[#57534e] text-base md:text-lg leading-relaxed max-w-xl mx-auto"
           >
-            Sedang mencari kesempatan magang atau kerja di bidang web development,
-            IoT, atau desain. Kalau tim Anda butuh orang yang bisa langsung
-            berkontribusi — nggak perlu ragu buat hubungi saya.
+            Sedang nyari kesempatan magang atau kerja di web development, IoT,
+            atau desain. Kalau tim kamu butuh orang yang bisa langsung gas
+            kontribusi — jangan sungkan, chat aja!
           </motion.p>
 
           <motion.div {...fadeUp} className="mt-10 flex justify-center">
             <a
               href={`mailto:${socials.email}?subject=${encodeURIComponent(
-                "Peluang Kerja / Magang — via Portfolio"
+                "halo! ada peluang menarik nih — via portfolio"
               )}`}
               className="px-8 py-4 rounded-full bg-[#1a1a1a] text-[#f4f1ea] font-medium text-lg hover:bg-[#831514] transition-colors"
             >
@@ -538,7 +538,7 @@ export default function Home() {
           </motion.div>
 
           <div className="mt-14 flex flex-col md:flex-row items-center justify-center gap-6 text-lg md:text-2xl">
-            <span className="text-[#57534e]">follow me on</span>
+            <span className="text-[#57534e]">mampir juga ke</span>
             <a
               href={socials.instagram}
               target="_blank"

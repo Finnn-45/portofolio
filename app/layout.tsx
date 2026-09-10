@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arfin Desca Alzachri | Web Developer — IoT — Visual Designer",
+  title: "Arfin Desca Alzachri | Portfolio",
   description:
-    "Portfolio Arfin Desca Alzachri — membangun produk digital yang benar-benar dipakai orang: aplikasi web full-stack dengan 1.000+ pengguna, perangkat IoT, dan desain visual untuk event nasional. Terbuka untuk peluang kerja & magang. Bogor, Indonesia.",
+    "Portfolio Arfin Desca Alzachri — siswa SMK dengan keahlian di web development dan IoT, berpengalaman dalam desain visual dan pengembangan aplikasi berbasis website. Terbuka untuk program magang digital. Bogor, Indonesia.",
 };
 
 export default function RootLayout({

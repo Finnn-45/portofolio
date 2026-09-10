@@ -4,9 +4,9 @@
 
 export const profile = {
   name: "Arfin Desca Alzachri",
-  roles: "WEB DEVELOPER — IOT — VISUAL DESIGNER",
+  roles: "ENGINEER — ILLUSTRATOR",
   tagline:
-    "Saya tidak cuma belajar coding — saya membangun produk digital yang benar-benar dipakai orang. Aplikasi web full-stack yang melayani 1.000+ pengguna, perangkat IoT yang berjalan setiap hari, dan desain visual untuk event nasional. Kalau Anda butuh orang yang bisa mengeksekusi ide dari 0 sampai jadi — itulah saya.",
+    "Siswa SMK dengan keahlian di web development dan IoT, berpengalaman dalam desain visual dan pengembangan aplikasi berbasis website — bersemangat terus bertumbuh dan mengumpulkan pengalaman melalui program magang digital.",
 };
 
 export const socials = {
@@ -20,50 +20,42 @@ export const socials = {
 export const location = "Bogor, Indonesia";
 
 export const stats = [
-  { value: "1.000+", label: "Pengguna nyata aplikasi yang saya bangun" },
-  { value: "5+", label: "Proyek web & IoT yang sudah jalan" },
-  { value: "3", label: "Bidang: Web Dev, IoT, dan Desain Visual" },
-  { value: "2×", label: "Sertifikasi Data Science tingkat ASEAN" },
+  { value: "1.000+", label: "Pengguna platform pendaftaran siswa yang saya bangun front-end-nya" },
+  { value: "4", label: "Proyek web & IoT yang sudah dibangun" },
+  { value: "3", label: "Bidang: Development, Engineering, dan Design" },
+  { value: "2", label: "Program Data Science: Samsung Innovation Campus & ASEAN DSE" },
 ];
 
 export const works = [
   {
     id: "01",
-    title: "Rice & Shine",
-    desc: "Aplikasi katering online full-stack yang saya bangun sendiri dari nol — katalog menu, alur pemesanan, sampai dashboard manajemen. Next.js + Prisma, end-to-end. Buktinya saya bisa memikul tanggung jawab produk penuh, bukan cuma potongan kecil.",
-    role: "Full-stack Developer",
-    tags: ["Next.js", "TypeScript", "Prisma"],
-    badge: "FINAL PROJECT",
-  },
-  {
-    id: "02",
     title: "SPMB — Student Admission System",
-    desc: "Platform pendaftaran siswa baru yang live di production dan dipakai 1.000+ pengguna nyata. Saya merancang front-end dengan alur pendaftaran yang disederhanakan lewat otomatisasi dan integrasi WhatsApp — error input turun drastis karena form yang memandu, bukan menyulitkan.",
+    desc: "Membangun dan mendesain front-end platform pendaftaran siswa baru yang digunakan 1.000+ pengguna — menyederhanakan alur pendaftaran dengan otomatisasi dan integrasi WhatsApp. Tech: Next.js.",
     role: "Front-end Developer",
-    tags: ["Next.js", "WhatsApp Integration", "Production"],
-    badge: "1.000+ USERS",
+    tags: ["Next.js", "WhatsApp Integration"],
+    badge: "2025",
     link: "https://spmb.smktibazma.sch.id/",
   },
   {
-    id: "03",
+    id: "02",
     title: "Attendance via RFID Card",
-    desc: "Absensi manual yang makan waktu? Saya ganti dengan kartu RFID berbasis Arduino: siswa tap, sistem mencatat kehadiran otomatis dan menyimpannya ke database. Masalah nyata, solusi nyata, dan tetap dipakai sampai sekarang.",
+    desc: "Sistem absensi menggunakan kartu RFID dan Arduino — mendeteksi kehadiran siswa secara otomatis dan menyimpan data absensi ke dalam sistem. Tech: C++.",
     role: "IoT Engineer",
     tags: ["C++", "Arduino", "RFID"],
     badge: "2025",
   },
   {
-    id: "04",
-    title: "JWS Digital Clock",
-    desc: "Jam waktu sholat digital dengan jadwal real-time yang otomatis akurat tanpa di-set ulang — sudah terpasang dan berjalan di masjid & musala. Perangkat keras + software yang saya rancang agar sekali pasang, langsung andal.",
+    id: "03",
+    title: "JWS Digital Clock (Prayer Time Clock)",
+    desc: "Jam waktu sholat digital yang menampilkan jadwal sholat real-time secara otomatis — dibangun dengan teknologi mikrokontroler dan integrasi LED display untuk informasi waktu sholat yang akurat di masjid dan musala.",
     role: "IoT Engineer",
-    tags: ["Mikrokontroler", "LED Display", "Real-time"],
+    tags: ["Mikrokontroler", "LED Display"],
     badge: "2025",
   },
   {
-    id: "05",
+    id: "04",
     title: "RC Car with ESP32",
-    desc: "Mobil RC berbasis ESP32 dengan kendali nirkabel dari perangkat mobile — komunikasi IoT dan kontrol motor real-time yang saya tulis sendiri dari bawah. Proyek yang mengasah pemahaman saya soal sistem embedded dan responsiveness.",
+    desc: "Membangun mobil RC berbasis ESP32 dengan kendali nirkabel — kontrol gerakan real-time melalui perangkat mobile, mengimplementasikan komunikasi berbasis IoT dan sistem kontrol motor.",
     role: "IoT Engineer",
     tags: ["ESP32", "IoT", "Motor Control"],
     badge: "2025",
@@ -71,82 +63,82 @@ export const works = [
 ];
 
 export const fieldNotes = [
-  "Development — HTML, CSS, JavaScript, TypeScript, Laravel, React.js, Next.js, C++",
-  "Engineering — IoT Development, Arduino, ESP32, RFID & Embedded Systems",
-  "Design — UI/UX, Graphic Illustration, Adobe Illustrator, Figma, Canva",
-  "Yang saya cari: magang / kerja di tim yang gerak cepat, biar skill saya makin tajam",
+  "Development — HTML, CSS, JavaScript, Laravel, React.js, Next.js, C++",
+  "Engineering — IoT Development, Arduino & ESP32",
+  "Design — Graphic Illustration, UI/UX Design, Adobe Illustrator, Figma, Canva",
+  "Yang saya cari: pengalaman lewat program magang digital",
 ];
 
 export const skills = [
   {
     category: "Development",
-    items: "HTML, CSS, JavaScript, TypeScript, Laravel, React.js, Next.js, C++, Git & GitHub",
+    items: "HTML, CSS, JavaScript, Laravel, React.js, Next.js, C++",
   },
   {
     category: "Engineering",
-    items: "IoT Development, Arduino, ESP32, RFID, Embedded Systems",
+    items: "IoT Development, Arduino & ESP32",
   },
   {
     category: "Design",
-    items: "UI/UX Design, Graphic Illustration, Adobe Illustrator, Figma, Canva, Video Editing",
+    items: "Graphic Illustration, UI/UX Design, Adobe Illustrator, Figma, Canva",
   },
 ];
 
 export const education = {
   school: "SMK TI BAZMA Islamic Boarding School",
-  desc: "Program belajar 4 tahun — mempelajari web development, desain grafis, Internet of Things, sistem komputer, dan pengembangan bisnis kreatif, sembari membangun kedisiplinan dan kerja sama di lingkungan asrama.",
+  desc: "Sekolah boarding dengan program belajar 4 tahun — mempelajari web development, desain grafis, Internet of Things, sistem komputer, pengembangan bisnis kreatif, studi agama, dan mata pelajaran umum lainnya, sembari membangun kedisiplinan dan kerja sama di lingkungan asrama.",
 };
 
 export const experiences = [
   {
     year: "2024 — 2025",
     role: "Vice Chairman — MCROBO (Organisasi Robotika SMK TI Bazma)",
-    desc: "Dipercaya jadi wakil ketua organisasi robotika: mengoordinasi tim, mengelola proyek dari roadmap sampai eksekusi, dan memimpin pengembangan teknologi di lingkungan sekolah. Pengalaman kepemimpinan teknis di usia muda.",
+    desc: "Menjabat sebagai Wakil Ketua Organisasi Robotika SMK TI Bazma (MCROBO) — berkontribusi dalam koordinasi tim, manajemen proyek, dan pengembangan kegiatan robotika serta teknologi di organisasi.",
   },
   {
     year: "2025",
     role: "Anggota OSIS — Divisi Prestasi Akademik & Seni Olahraga",
-    desc: "Mengorganisir event sekolah, lomba, dan program pengembangan siswa — dari perencanaan sampai hari-H. Terbiasa bekerja dengan tenggat, tim yang beragam, dan ekspektasi tinggi.",
+    desc: "Berkontribusi mengorganisir kegiatan akademik, seni, dan olahraga di OSIS — mendukung event sekolah, lomba, dan program pengembangan siswa.",
   },
   {
     year: "2024",
     role: "Anggota Forum OSIS SMK Se-Jawa Barat",
-    desc: "Berkolaborasi lintas sekolah se-Jawa Barat dalam kegiatan kepemimpinan dan edukasi — memperluas jaringan dan kemampuan komunikasi di level provinsi.",
+    desc: "Berpartisipasi dalam Forum OSIS SMK Se-Jawa Barat — berkolaborasi dengan siswa dari berbagai sekolah dalam kegiatan kepemimpinan, organisasi, dan edukasi.",
   },
 ];
 
 export const professional = [
   {
     year: "2025 — Sekarang",
-    role: "MENTION — Media Design and Information SMK TI Bazma",
-    desc: "Menangani seluruh kebutuhan visual sekolah: desain grafis, video, dan materi promosi yang mendukung branding sekolah di media sosial — bukan tugas kelas, tapi tanggung jawab produksi rutin dengan standar profesional.",
+    role: "Social Media Branding — MENTION (Media Design and Information SMK TI Bazma)",
+    desc: "MENTION adalah tulang punggung pengelolaan desain media dan informasi SMK TI BAZMA — memproduksi berbagai konten visual, termasuk desain grafis, video, dan materi promosi, untuk mendukung seluruh kegiatan sekolah.",
   },
   {
     year: "",
     role: "Bazma Pertamina — Socmed & Content Creator",
-    desc: "Mengeksekusi content calendar bulanan menjadi aset visual siap tayang: desain grafis, fotografi, dan video editing untuk Instagram harian — konsisten, terjadwal, dan on-brand.",
+    desc: "Menerima dan mengeksekusi daftar konten bulanan menjadi aset visual siap pakai — desain grafis, fotografi, dan video editing untuk Instagram harian.",
   },
   {
     year: "",
     role: "Himpana — Desain Event Nasional",
-    desc: "Mendesain X-banner, banner, dan materi cetak untuk publikasi event berskala nasional — karya yang dibaca ribuan orang, bukan cuma untuk tugas.",
+    desc: "Berkontribusi dalam pembuatan desain visual untuk event nasional — merancang X-banner, banner, dan materi cetak lainnya untuk kebutuhan publikasi event.",
   },
   {
     year: "",
     role: "SPMB SMK TI BAZMA 2025 — Tim Multimedia",
-    desc: "Merancang materi promosi dan memproduksi konten visual (foto & video) untuk kampanye penerimaan siswa baru — bagian dari tim yang sukses mendatangkan 1.000+ pendaftar.",
+    desc: "Berkontribusi di tim multimedia — merancang materi promosi, mendokumentasikan kegiatan lewat foto & video, serta memproduksi konten visual untuk kampanye penerimaan siswa baru dan branding sekolah.",
   },
 ];
 
 export const achievements = [
   {
-    year: "2024 — 2025",
+    year: "2024",
     title: "Samsung Innovation Campus — Batch 6 & Batch 7",
-    desc: "Lulus dua batch berturut-turut program data science dari Samsung — dedikasi yang tidak banyak orang pertahankan.",
+    desc: "Data Science",
   },
   {
     year: "2025",
     title: "ASEAN Data Science Explorations",
-    desc: "Sertifikasi data science tingkat ASEAN — kompetensi analisis data yang diakui secara regional.",
+    desc: "Sertifikasi data science tingkat ASEAN",
   },
 ];

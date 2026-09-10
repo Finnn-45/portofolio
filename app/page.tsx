@@ -15,6 +15,7 @@ import {
   profile,
   stats,
   githubProjects,
+  skills,
 } from "@/lib/data";
 
 /* ============================================================
@@ -29,7 +30,7 @@ function BracketLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Marquee({ text, reverse = false }: { text: string; reverse?: boolean }) {
+function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
   return (
     <div className="overflow-hidden border-y border-[#1a1a1a]/10 py-4 select-none">
       <div
@@ -39,15 +40,17 @@ function Marquee({ text, reverse = false }: { text: string; reverse?: boolean })
       >
         {[0, 1].map((dup) => (
           <div key={dup} className="flex shrink-0 items-center">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <span
-                key={i}
-                className="mx-8 text-sm uppercase tracking-[0.35em] text-[#78716c]"
-              >
-                {text}
-                <span className="ml-8 text-[#c9c2b2]">✦</span>
-              </span>
-            ))}
+            {Array.from({ length: 3 }).map((_, round) =>
+              items.map((tool) => (
+                <span
+                  key={`${round}-${tool}`}
+                  className="mx-8 text-sm uppercase tracking-[0.35em] text-[#78716c]"
+                >
+                  {tool}
+                  <span className="ml-8 text-[#c9c2b2]">✦</span>
+                </span>
+              ))
+            )}
           </div>
         ))}
       </div>
@@ -63,6 +66,7 @@ const fadeUp = {
 };
 
 export default function Home() {
+  const tools = skills.flatMap((s) => s.items.split(", "));
   return (
     <main className="relative min-h-screen bg-[#f4f1ea] text-[#1a1a1a] overflow-x-hidden">
       {/* ===== DECOR: cursor, progress, noise ===== */}
@@ -169,7 +173,7 @@ export default function Home() {
         </div>
 
         <div className="mt-20">
-          <Marquee text="arfin portfolio" />
+          <Marquee items={tools} />
         </div>
       </section>
 
@@ -572,7 +576,7 @@ export default function Home() {
           </div>
 
           <div className="mt-24">
-            <Marquee text="arfin portfolio" reverse />
+            <Marquee items={tools} reverse />
           </div>
 
           <div className="mt-10 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs text-[#a8a294]">

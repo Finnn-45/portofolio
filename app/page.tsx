@@ -441,9 +441,8 @@ export default function Home() {
           <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl font-bold tracking-tight">
             More Projects
           </motion.h2>
-          <motion.p {...fadeUp} className="mt-4 max-w-2xl text-[#57534e] leading-relaxed">
-            Repositori lain dari GitHub saya — beberapa di antaranya cukup besar
-            dan terus berkembang. Klik kartu untuk melihat kodenya langsung.
+          <motion.p {...fadeUp} className="mt-3 text-sm text-[#78716c]">
+            Repositori lain dari GitHub.
           </motion.p>
 
           <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -495,12 +494,8 @@ export default function Home() {
             >
               <span className="font-mono text-xs text-[#a8a294]">06</span>
               <h3 className="text-lg md:text-xl font-semibold tracking-tight group-hover:text-[#831514] transition-colors">
-                Lihat semua repositori ↗
+                All repositories ↗
               </h3>
-              <p className="text-sm text-[#78716c] leading-relaxed">
-                23 repositori public di GitHub — termasuk latihan, eksperimen,
-                dan tugas sekolah.
-              </p>
             </motion.a>
           </div>
         </div>

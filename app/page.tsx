@@ -115,7 +115,7 @@ export default function Home() {
               hidden: {},
               show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
             }}
-            className="mt-6 font-bold uppercase leading-[0.95] tracking-tight text-[clamp(3.5rem,12vw,11.5rem)]"
+            className="mt-6 font-bold uppercase leading-[0.95] tracking-tight text-[clamp(3.25rem,10.5vw,10rem)] tracking-[-0.02em]"
           >
             {[
               { text: "Arfin", muted: false },
@@ -206,7 +206,7 @@ export default function Home() {
             <BracketLabel>notes</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
+          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
             Field Notes
           </motion.h2>
 
@@ -218,7 +218,7 @@ export default function Home() {
                 transition={{ ...fadeUp.transition, delay: i * 0.08 }}
                 className="group flex items-center justify-between py-7 hover:pl-4 transition-all duration-300"
               >
-                <span className="text-xl md:text-3xl text-[#292524] group-hover:text-[#831514] transition-colors">
+                <span className="text-lg md:text-2xl text-[#292524] group-hover:text-[#831514] transition-colors">
                   {note}
                 </span>
                 <span className="font-mono text-[#a8a294] text-sm">0{i + 1}</span>
@@ -294,7 +294,7 @@ export default function Home() {
             <BracketLabel>2025 — now</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
+          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
             MENTION&apos;s Key Collaborations
           </motion.h2>
           <motion.p {...fadeUp} className="mt-4 max-w-2xl text-lg md:text-xl text-[#57534e] leading-relaxed">
@@ -336,7 +336,7 @@ export default function Home() {
             <BracketLabel>certifications</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
+          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
             Achievement &amp; Certification
           </motion.h2>
 
@@ -370,7 +370,7 @@ export default function Home() {
             <BracketLabel>works</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
+          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
             Selected Works
           </motion.h2>
 
@@ -395,7 +395,7 @@ export default function Home() {
                 </div>
 
                 <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}>
-                  <h3 className="text-3xl md:text-5xl lg:text-6xl group-hover:text-[#831514] transition-colors">
+                  <h3 className="text-2xl md:text-4xl lg:text-5xl group-hover:text-[#831514] transition-colors">
                     {work.title}
                     <span className="inline-block ml-2 text-xl md:text-3xl opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                       ↗
@@ -442,7 +442,7 @@ export default function Home() {
             <BracketLabel>on github</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
+          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
             More Projects
           </motion.h2>
           <motion.p {...fadeUp} className="mt-3 text-base md:text-lg text-[#78716c]">
@@ -516,7 +516,7 @@ export default function Home() {
 
           <motion.p
             {...fadeUp}
-            className="mt-14 text-center font-mono text-2xl md:text-5xl tracking-[0.35em] text-[#78716c]"
+            className="mt-14 text-center font-mono text-xl md:text-4xl tracking-[0.35em] text-[#78716c]"
           >
             open for opportunities
           </motion.p>

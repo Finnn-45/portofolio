@@ -1,598 +1,918 @@
-﻿"use client";
+"use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import { CustomCursor, ScrollProgress, LocalTime, StatusChip } from "@/components/site/decor";
-import {
-  works,
-  fieldNotes,
-  education,
-  experiences,
-  professional,
-  achievements,
-  socials,
-  location,
-  profile,
-  stats,
-  githubProjects,
-  skills,
-} from "@/lib/data";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { profile, socials } from "@/lib/data";
+import { CustomCursor } from "@/components/site/decor";
 
 /* ============================================================
-   REUSABLE PIECES
+   DATA
 ============================================================ */
 
-function BracketLabel({ children }: { children: React.ReactNode }) {
+const tools = [
+  { name: "HTML", icon: "◈" },
+  { name: "CSS", icon: "◑" },
+  { name: "JavaScript", icon: "✦" },
+  { name: "React.js", icon: "⚛" },
+  { name: "Next.js", icon: "▲" },
+  { name: "Laravel", icon: "⬢" },
+  { name: "C++", icon: "✚" },
+  { name: "Arduino", icon: "⏣" },
+  { name: "ESP32", icon: "⌬" },
+  { name: "Figma", icon: "✏" },
+  { name: "Illustrator", icon: "✒" },
+  { name: "Canva", icon: "◧" },
+];
+
+const serviceRow1 = ["Web Development", "IoT Engineering", "UI/UX Design"];
+const serviceRow2 = ["Graphic Illustration", "Arduino & ESP32", "Visual Design"];
+
+const insideList = [
+  { num: "01", title: "WEB DEVELOPMENT" },
+  { num: "02", title: "IOT PROJECTS" },
+  { num: "03", title: "DESIGN WORKS" },
+  { num: "04", title: "ACHIEVEMENTS" },
+];
+
+type CaseStudy = {
+  id: string;
+  title: string;
+  subtitle: string;
+  category: string;
+  year: string;
+  tools: string[];
+  description: string;
+  overview: string;
+  challenge: string;
+  process: string;
+  solution: string;
+  result: string;
+};
+
+const caseStudies: CaseStudy[] = [
+  {
+    id: "01",
+    title: "SPMB",
+    subtitle: "Sistem Penerimaan Murid Baru",
+    category: "WEB DEVELOPMENT",
+    year: "2025",
+    tools: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui", "WhatsApp API"],
+    description:
+      "Front-end platform pendaftaran siswa baru SMK TI BAZMA — dipakai 1.000+ pengguna, dengan alur daftar se-simple mungkin plus auto-notif WhatsApp.",
+    overview:
+      "Sistem pendaftaran online terpadu yang memfasilitasi calon siswa dan orang tua dalam seluruh tahapan registrasi, pengunggahan berkas, verifikasi data, sampai pemantauan status seleksi secara real-time. Aku pegang bagian front-end-nya — dari desain antarmuka sampai implementasi.",
+    challenge:
+      "Banyaknya tahapan administrasi dan formulir data yang berpotensi membingungkan pengguna baru — memicu tingginya drop-off dan kesalahan pengisian data saat proses pendaftaran.",
+    process:
+      "Analisis alur pendaftaran lama → pemetaan user flow multi-step → perancangan komponen UI yang konsisten → implementasi dengan Next.js + validasi ketat di tiap langkah → usability testing sama calon pengguna.",
+    solution:
+      "Formulir dibagi jadi multi-step form dengan validasi otomatis, progres pendaftaran yang keliatan jelas, informasi ringkas per langkah, plus notifikasi WhatsApp otomatis di tiap milestone supaya pendaftar nggak perlu nebak statusnya.",
+    result:
+      "Platform dipakai 1.000+ pengguna selama periode pendaftaran — prosesnya jadi jauh lebih mudah diikuti, kesalahan input berkurang drastis, dan tim PPDB terbantu banget sama notifikasi otomatisnya.",
+  },
+  {
+    id: "02",
+    title: "Attendance via RFID",
+    subtitle: "Sistem Absensi Kartu RFID",
+    category: "IOT ENGINEERING",
+    year: "2025",
+    tools: ["Arduino", "C++", "RFID RC522", "Embedded System"],
+    description:
+      "Absensi siswa pake kartu RFID + Arduino. Tempel kartu, langsung kecatat otomatis ke sistem. Nggak ada lagi absen manual.",
+    overview:
+      "Sistem absensi otomatis berbasis kartu RFID — siswa tinggal tempel kartu ke reader, dan kehadirannya langsung tercatat ke sistem tanpa proses manual sama sekali.",
+    challenge:
+      "Absensi manual makan waktu, rawan salah catat, dan datanya susah direkap ulang — apalagi buat kelas dengan jumlah siswa yang banyak.",
+    process:
+      "Riset hardware reader RFID → perakitan modul Arduino + RC522 → pemrograman pembacaan UID kartu di C++ → sinkronisasi data kehadiran ke sistem → uji coba akurasi dan kecepatan pembacaan.",
+    solution:
+      "Setiap kartu dipetakan ke data siswa, pembacaan UID divalidasi anti duplikat dalam sesi yang sama, dan hasil kehadiran langsung tersimpan terstruktur supaya gampang direkap.",
+    result:
+      "Proses absensi yang tadinya makan waktu berubah jadi hitungan detik per siswa — data lebih akurat, rekap otomatis, dan absen manual resmi pensiun.",
+  },
+  {
+    id: "03",
+    title: "JWS Digital Clock",
+    subtitle: "Prayer Time Clock",
+    category: "IOT ENGINEERING",
+    year: "2025",
+    tools: ["Mikrokontroler", "LED Display", "Real-time Data"],
+    description:
+      "Jam waktu sholat digital yang nyambung ke jadwal sholat real-time — LED display + mikrokontroler, waktunya selalu akurat tanpa diatur manual.",
+    overview:
+      "Perangkat jam waktu sholat digital berbasis mikrokontroler dengan LED display yang menampilkan jadwal sholat secara real-time — dirancang supaya info waktu selalu akurat tanpa perlu diatur ulang manual.",
+    challenge:
+      "Jam waktu sholat konvensional harus diatur manual dan sering telat berubah pas jadwalnya geser — repot dan gampang salah.",
+    process:
+      "Perancangan rangkaian mikrokontroler + LED display → integrasi data jadwal sholat real-time → pemrograman logika tampilan dan alarm waktu sholat → kalibrasi dan uji akurasi harian.",
+    solution:
+      "Perangkat menarik data jadwal secara real-time, menampilkannya di LED display dengan format yang gampang dibaca, dan otomatis menyesuaikan perubahan jadwal tanpa intervensi manual.",
+    result:
+      "Jam waktu sholat yang selalu akurat, nggak perlu diatur-atur lagi, dan jadi perangkat yang bener-bener kepakai sehari-hari.",
+  },
+  {
+    id: "04",
+    title: "RC Car ESP32",
+    subtitle: "Wireless Control Car",
+    category: "IOT ENGINEERING",
+    year: "2025",
+    tools: ["ESP32", "IoT", "Motor Control", "Wireless"],
+    description:
+      "Mobil RC dari ESP32 yang dikendaliin wireless langsung dari HP — komunikasi IoT + kontrol motor. Proyek paling seru buat diutak-atik.",
+    overview:
+      "Mobil RC berbasis ESP32 yang dikendalikan wireless lewat perangkat mobile — gabungan komunikasi IoT, kontrol motor, dan rangkaian elektronik dalam satu proyek seru.",
+    challenge:
+      "Membangun kendali kendaraan yang responsif dan stabil lewat koneksi wireless, sekaligus mengatur kecepatan dan arah motor secara presisi dengan daya yang terbatas.",
+    process:
+      "Perakitan chassis + motor driver → pemrograman ESP32 untuk penerimaan perintah → pembuatan antarmuka kontrol di HP → kalibrasi responsivitas motor dan kestabilan koneksi → uji lapangan.",
+    solution:
+      "Komunikasi wireless low-latency antara HP dan ESP32, kontrol arah dan kecepatan yang dihaluskan lewat pengaturan PWM, plus struktur rangkaian yang ringkas dan hemat daya.",
+    result:
+      "Mobil RC yang responsif dan stabil dikendalikan dari jarak jauh — dan proyek yang paling banyak ngajarin soal integrasi hardware, software, dan troubleshooting.",
+  },
+];
+
+/* ============================================================
+   LOADER — counter 000 → 100
+============================================================ */
+
+function Loader({ isLoading }: { isLoading: boolean }) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (!isLoading) return;
+    const start = Date.now();
+    const timer = setInterval(() => {
+      const value = Math.min(100, Math.floor(((Date.now() - start) / 1200) * 100));
+      setProgress(value);
+      if (value >= 100) clearInterval(timer);
+    }, 25);
+    return () => clearInterval(timer);
+  }, [isLoading]);
+
   return (
-    <span className="font-mono text-sm md:text-base text-[#78716c] tracking-wide">
-      [ {children} ]
-    </span>
+    <AnimatePresence>
+      {isLoading && (
+        <motion.div
+          className="fixed inset-0 z-[9999] bg-[#f4f1ea] flex items-center justify-center select-none"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="text-7xl sm:text-8xl md:text-9xl font-extrabold text-[#1a1a1a] tracking-tighter tabular-nums"
+          >
+            {String(progress).padStart(3, "0")}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
-function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
+/* ============================================================
+   KOMPONEN KECIL
+============================================================ */
+
+function SectionLabel({ dark = false }: { dark?: boolean }) {
+  const today = new Date()
+    .toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" })
+    .toUpperCase();
   return (
-    <div className="overflow-hidden border-y border-[#1a1a1a]/10 py-4 select-none">
-      <div
-        className={`flex whitespace-nowrap w-max animate-marquee ${
-          reverse ? "marquee-reverse" : ""
-        }`}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className={`flex justify-between items-start text-xs md:text-sm font-medium tracking-wider uppercase select-none ${
+        dark ? "text-neutral-400" : "text-neutral-600"
+      }`}
+    >
+      <span>{profile.roles}</span>
+      <span>{today}</span>
+    </motion.div>
+  );
+}
+
+function ArrowUpRight() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+    >
+      <path
+        d="M5 15L15 5M15 5H7.5M15 5V12.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+
+function Hero() {
+  const today = new Date()
+    .toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" })
+    .toUpperCase();
+
+  return (
+    <section className="relative w-full min-h-screen bg-white flex flex-col justify-between">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="pt-8 px-8 md:pt-12 md:px-12 lg:pt-16 lg:px-16 z-10 flex flex-col items-start"
       >
-        {[0, 1].map((dup) => (
-          <div key={dup} className="flex shrink-0 items-center">
-            {Array.from({ length: 3 }).map((_, round) =>
-              items.map((tool) => (
-                <span
-                  key={`${round}-${tool}`}
-                  className="mx-8 text-base md:text-lg uppercase tracking-[0.35em] text-[#78716c]"
-                >
-                  {tool}
-                  <span className="ml-8 text-[#c9c2b2]">✦</span>
-                </span>
-              ))
-            )}
-          </div>
-        ))}
+        <div className="w-8 h-8 mb-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
+            <circle cx="12" cy="12" r="10" />
+            <ellipse cx="12" cy="12" rx="10" ry="4" />
+            <line x1="12" y1="2" x2="12" y2="22" />
+          </svg>
+        </div>
+        <p className="text-xs text-gray-500 mb-1">{today}</p>
+        <h3 className="text-sm font-bold text-[#1a1a1a] mb-1">Web Developer — IoT — Visual Designer</h3>
+        <p className="text-xs text-gray-600">By: {profile.name}</p>
+      </motion.div>
+
+      <div className="flex-1 flex items-center justify-center py-6 select-none overflow-hidden">
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-[17vw] md:text-[20vw] lg:text-[25vw] font-black text-[#1a1a1a] leading-none tracking-tighter"
+        >
+          Portfolio
+        </motion.h1>
       </div>
+
+      <div className="px-8 md:px-12 lg:px-16 pb-8 md:pb-12 lg:pb-16 z-10 w-full">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex items-center gap-3"
+          >
+            <span className="text-xs text-gray-400">©</span>
+            <span className="text-gray-400">/</span>
+            <span className="text-xs md:text-sm font-medium text-[#1a1a1a]">Engineer — Illustrator</span>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-wrap gap-6 md:gap-8 text-left w-full md:w-auto"
+          >
+            <div>
+              <p className="text-xs text-gray-500 mb-1">Email</p>
+              <a href={`mailto:${socials.email}`} className="hover:text-[#831514] transition-colors text-sm">
+                {socials.email}
+              </a>
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 mb-1">GitHub</p>
+              <a href={socials.github} target="_blank" className="hover:text-[#831514] transition-colors text-sm">
+                Finnn-45
+              </a>
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 mb-1">Location</p>
+              <span className="text-sm">Bogor, Indonesia</span>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+
+function About() {
+  return (
+    <section id="about" className="relative w-full min-h-screen bg-white py-16 md:py-24 px-8 md:px-16 lg:px-24">
+      <div className="max-w-[1800px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start mb-16 lg:mb-24">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5"
+          >
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#f4f1ea] flex flex-col items-center justify-center border border-neutral-100">
+              <span className="text-[10rem] md:text-[14rem] font-black text-[#831514]/15 leading-none select-none">
+                AD
+              </span>
+              <span className="absolute bottom-6 left-6 font-mono text-[11px] uppercase tracking-widest text-neutral-500">
+                Arfin Desca Alzachri
+              </span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-7 lg:pt-8"
+          >
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-[#1a1a1a] leading-[0.95] mb-2 tracking-tight">
+              Hello!
+            </h1>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal text-[#1a1a1a] leading-[0.95] mb-8 tracking-tight">
+              I&apos;m {profile.name}
+            </h1>
+            <p className="text-base md:text-lg text-gray-600 mb-6 leading-relaxed max-w-2xl">
+              Siswa SMK yang suka banget bikin web, utak-atik IoT, dan desain visual.
+            </p>
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed max-w-2xl">
+              Buat aku, ngoding itu bukan cuma soal kode — itu cara nyelesaiin masalah beneran. Sekarang lagi gas nyari
+              pengalaman lewat magang digital, soalnya skill itu tumbuhnya dari praktik, bukan cuma teori.
+            </p>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="w-full pt-12 border-t border-gray-200"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <p className="text-xs text-gray-500 mb-1">Email</p>
+              <a href={`mailto:${socials.email}`} className="hover:text-[#831514] transition-colors">
+                {socials.email}
+              </a>
+            </div>
+            <div className="md:text-center text-left">
+              <p className="text-xs text-gray-500 mb-1">LinkedIn</p>
+              <a href={socials.linkedin} target="_blank" className="hover:text-[#831514] transition-colors">
+                Arfin Desca Alzachri
+              </a>
+            </div>
+            <div className="md:text-right text-left">
+              <p className="text-xs text-gray-500 mb-1">Location</p>
+              <span>Bogor, Indonesia</span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   SERVICES — What I do?
+============================================================ */
+
+function Services() {
+  return (
+    <section
+      id="services"
+      className="relative w-full min-h-screen bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 flex flex-col justify-between"
+    >
+      <div className="w-full flex flex-col gap-4 mb-12 md:mb-16">
+        <SectionLabel />
+      </div>
+
+      <div className="w-full mb-6">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-[#1a1a1a] leading-[0.95] tracking-tight mb-8"
+        >
+          What I do?
+          <br />
+          (and love doing)
+        </motion.h2>
+      </div>
+
+      <div className="w-full mb-16 md:mb-24">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-base md:text-lg text-gray-700 leading-relaxed max-w-2xl"
+        >
+          Aku gabungin web development, IoT, dan desain grafis. Fokusnya simple: kode yang bersih, perangkat yang jalan,
+          dan visual yang nendang.
+        </motion.p>
+      </div>
+
+      <div className="w-full flex flex-col gap-y-8 md:gap-y-14 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8 w-full flex-wrap"
+        >
+          {serviceRow1.map((s) => (
+            <p key={s} className="text-2xl md:text-3xl font-bold tracking-tight text-[#1a1a1a] text-center whitespace-normal lg:whitespace-nowrap">
+              {s}
+            </p>
+          ))}
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex flex-col md:flex-row justify-center md:justify-around items-center gap-6 md:gap-8 w-full flex-wrap"
+        >
+          {serviceRow2.map((s) => (
+            <p key={s} className="text-2xl md:text-3xl font-bold tracking-tight text-[#1a1a1a] text-center whitespace-normal lg:whitespace-nowrap">
+              {s}
+            </p>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   TOOLS — marquee chip 2 baris, pelan, pause on hover
+============================================================ */
+
+function ToolChip({ name, icon }: { name: string; icon: string }) {
+  return (
+    <div className="group flex items-center gap-3 shrink-0 px-6 py-3 rounded-full border border-neutral-200 bg-white hover:border-[#831514]/40 transition-colors duration-300">
+      <span className="text-[#831514] text-base leading-none">{icon}</span>
+      <span className="font-mono text-xs md:text-sm font-semibold uppercase tracking-widest text-[#1a1a1a] whitespace-nowrap">
+        {name}
+      </span>
     </div>
   );
 }
 
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.6, ease: "easeOut" as const },
-};
+function Tools() {
+  const firstRow = tools.slice(0, 6);
+  const secondRow = tools.slice(6);
 
-export default function Home() {
-  const tools = skills.flatMap((s) => s.items.split(", "));
   return (
-    <main className="relative min-h-screen bg-[#f4f1ea] text-[#1a1a1a] overflow-x-hidden">
-      {/* ===== DECOR: cursor, progress, noise ===== */}
-      <CustomCursor />
-      <ScrollProgress />
-      <div className="noise-overlay" aria-hidden />
+    <section
+      id="tools"
+      className="relative w-full min-h-screen bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 flex flex-col justify-between overflow-hidden"
+    >
+      <div className="w-full flex flex-col gap-4 mb-12 md:mb-16">
+        <SectionLabel />
+      </div>
 
-      {/* ===== TOP BAR ===== */}
-      <nav className="fixed top-0 inset-x-0 z-50 bg-[#f4f1ea]/85 backdrop-blur-md border-b border-[#1a1a1a]/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="#" className="font-mono text-sm text-[#57534e] hover:text-[#1a1a1a] transition-colors">
-            arfin — portfolio
-          </a>
-          <div className="flex items-center gap-6 font-mono text-xs md:text-sm">
-            <LocalTime />
-            <a href={socials.cv} target="_blank" className="text-[#57534e] hover:text-[#1a1a1a] transition-colors">
-              CV
-            </a>
-            <a href={socials.linkedin} target="_blank" className="text-[#57534e] hover:text-[#1a1a1a] transition-colors">
-              LinkedIn
-            </a>
-            <a
-              href="/portfolio"
-              className="px-4 py-1.5 rounded-full bg-[#1a1a1a] text-[#f4f1ea] font-mono text-xs md:text-sm hover:bg-[#831514] transition-colors"
-            >
-              Portfolio ↓
-            </a>
-            <a href="#works" className="px-4 py-1.5 rounded-full border border-[#1a1a1a]/15 text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f4f1ea] transition-all">
-              cek works ↓
-            </a>
-          </div>
-        </div>
-      </nav>
+      <div className="w-full mb-16 md:mb-24">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-[#1a1a1a] leading-[0.95] tracking-tight mb-8"
+        >
+          Tools I&apos;m
+          <br />
+          fluent in.
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-base md:text-lg text-gray-700 leading-relaxed max-w-2xl"
+        >
+          Dari ngoding sampai desain — ini senjata andalan yang kepake tiap hari buat bikin produk digital dari nol
+          sampai jadi.
+        </motion.p>
+      </div>
 
-      {/* ===== HERO ===== */}
-      <section className="relative pt-40 pb-0 px-6">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeUp}>
-            <BracketLabel>start here</BracketLabel>
-          </motion.div>
-
-          <motion.h1
-            initial="hidden"
-            animate="show"
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-            }}
-            className="mt-6 font-bold uppercase leading-[0.95] tracking-tight text-[clamp(3.25rem,10.5vw,10rem)] tracking-[-0.02em]"
+      <div className="w-full flex flex-col gap-6 mb-16">
+        {[firstRow, secondRow].map((row, rowIndex) => (
+          <motion.div
+            key={rowIndex}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 + rowIndex * 0.15 }}
+            className="group w-full flex overflow-hidden"
           >
-            {[
-              { text: "Arfin", muted: false },
-              { text: "Desca", muted: true },
-              { text: "Alzachri", muted: false },
-            ].map((line) => (
-              <motion.span
-                key={line.text}
-                variants={{
-                  hidden: { opacity: 0, y: "60%" },
-                  show: {
-                    opacity: 1,
-                    y: "0%",
-                    transition: { duration: 0.7, ease: "easeOut" },
-                  },
-                }}
-                className={`block overflow-hidden ${line.muted ? "text-[#78716c]" : ""}`}
-              >
-                {line.text}
-              </motion.span>
-            ))}
-          </motion.h1>
-
-          <div className="mt-12 grid md:grid-cols-2 gap-10 items-end">
-            <motion.p {...fadeUp} className="text-[#57534e] text-lg md:text-xl leading-relaxed max-w-lg">
-              {profile.tagline}
-            </motion.p>
-
-            <motion.div {...fadeUp} className="flex flex-col items-start md:items-end gap-4">
-              <StatusChip />
-              <a
-                href={`mailto:${socials.email}?subject=${encodeURIComponent(
-                  "halo! ada peluang menarik nih — via portfolio"
-                )}`}
-                className="px-6 py-3 rounded-full bg-[#1a1a1a] text-[#f4f1ea] font-medium hover:bg-[#831514] transition-colors"
-              >
-                Hire Me →
-              </a>
-              <a
-                href={socials.cv}
-                target="_blank"
-                className="font-mono text-xs text-[#78716c] hover:text-[#1a1a1a] transition-colors underline underline-offset-4"
-              >
-                download my CV ↓
-              </a>
-              <div className="flex flex-wrap gap-4 font-mono text-xs text-[#78716c]">
-                <a href={`mailto:${socials.email}`} className="hover:text-[#1a1a1a] transition-colors">
-                  {socials.email}
-                </a>
-                <span>/</span>
-                <span>{location}</span>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        <div className="mt-20">
-          <Marquee items={tools} />
-        </div>
-      </section>
-
-      {/* ===== IMPACT STATS ===== */}
-      <section className="px-6 py-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-[#1a1a1a]/10 rounded-2xl overflow-hidden border border-[#1a1a1a]/10">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-              className="bg-[#f4f1ea] p-8 flex flex-col gap-2"
+            <div
+              className={`flex gap-4 pr-4 group-hover:[animation-play-state:paused] ${
+                rowIndex % 2 === 0 ? "animate-marquee-left" : "animate-marquee-right"
+              }`}
             >
-              <span className="text-4xl md:text-6xl font-bold tracking-tight text-[#1a1a1a]">
-                {stat.value}
-              </span>
-              <span className="text-sm md:text-base text-[#78716c] leading-relaxed">
-                {stat.label}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ===== FIELD NOTES ===== */}
-      <section className="px-6 py-36">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeUp} className="flex items-center justify-between">
-            <BracketLabel>field notes</BracketLabel>
-            <BracketLabel>notes</BracketLabel>
-          </motion.div>
-
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
-            Field Notes
-          </motion.h2>
-
-          <div className="mt-12 divide-y divide-[#1a1a1a]/10 border-y border-[#1a1a1a]/10">
-            {fieldNotes.map((note, i) => (
-              <motion.div
-                key={i}
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                className="group flex items-center justify-between py-7 hover:pl-4 transition-all duration-300"
-              >
-                <span className="text-lg md:text-2xl text-[#292524] group-hover:text-[#831514] transition-colors">
-                  {note}
-                </span>
-                <span className="font-mono text-[#a8a294] text-sm">0{i + 1}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div {...fadeUp} className="mt-10 flex flex-wrap gap-3 font-mono text-xs text-[#78716c]">
-            {["links", "name", "photo", "notes", "byline", "duct-tape"].map((w) => (
-              <span key={w} className="px-3 py-1 rounded-full border border-[#1a1a1a]/10">
-                {w}
-              </span>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ===== EDUCATION + EXPERIENCE ===== */}
-      <section className="px-6 py-36">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
-          <motion.div {...fadeUp}>
-            <BracketLabel>experience</BracketLabel>
-            <p className="mt-8 text-2xl md:text-4xl font-medium leading-snug text-[#1a1a1a]">
-              Dari kegiatan sekolah sampai proyek yang beneran dipake orang —
-              semua ini yang ngebentuk cara aku pandang teknologi dan desain.
-            </p>
-
-            <div className="mt-12 rounded-2xl border border-[#1a1a1a]/10 p-6">
-              <BracketLabel>education</BracketLabel>
-              <h3 className="mt-4 text-xl md:text-2xl text-[#1a1a1a]">
-                {education.school}
-              </h3>
-              <p className="mt-2 text-base md:text-lg text-[#78716c] leading-relaxed">
-                {education.desc}
-              </p>
-            </div>
-          </motion.div>
-
-          <div>
-            <div className="divide-y divide-[#1a1a1a]/10 border-y border-[#1a1a1a]/10">
-              {experiences.map((exp, i) => (
-                <motion.div
-                  key={i}
-                  {...fadeUp}
-                  transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                  className="py-6 group"
-                >
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h3 className="text-[#1a1a1a] group-hover:pl-2 transition-all duration-300">
-                      {exp.role}
-                    </h3>
-                    <span className="shrink-0 font-mono text-xs text-[#a8a294]">
-                      {exp.year}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-base md:text-lg text-[#78716c] leading-relaxed">{exp.desc}</p>
-                </motion.div>
+              {[...row, ...row, ...row, ...row].map((t, i) => (
+                <ToolChip key={`${t.name}-${i}`} name={t.name} icon={t.icon} />
               ))}
             </div>
-
-            <motion.p {...fadeUp} className="mt-6 font-mono text-sm text-[#a8a294]">
-              masih banyak cerita lain on the way…
-            </motion.p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PROFESSIONAL EXPERIENCE ===== */}
-      <section className="px-6 pb-36">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeUp} className="flex items-center justify-between">
-            <BracketLabel>professional experience</BracketLabel>
-            <BracketLabel>2025 — now</BracketLabel>
           </motion.div>
-
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
-            MENTION&apos;s Key Collaborations
-          </motion.h2>
-          <motion.p {...fadeUp} className="mt-4 max-w-2xl text-lg md:text-xl text-[#57534e] leading-relaxed">
-            MENTION (Media Design and Information) itu tim yang megang semua
-            konten visual di SMK TI Bazma — dari desain sampai video, buat
-            dukung semua kegiatan sekolah.
-          </motion.p>
-
-          <div className="mt-12 divide-y divide-[#1a1a1a]/10 border-y border-[#1a1a1a]/10">
-            {professional.map((exp, i) => (
-              <motion.div
-                key={i}
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                className="py-6 group"
-              >
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-[#1a1a1a] group-hover:pl-2 transition-all duration-300">
-                    {exp.role}
-                  </h3>
-                  {exp.year && (
-                    <span className="shrink-0 font-mono text-xs text-[#a8a294]">
-                      {exp.year}
-                    </span>
-                  )}
-                </div>
-                <p className="mt-2 text-base md:text-lg text-[#78716c] leading-relaxed">{exp.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== ACHIEVEMENTS ===== */}
-      <section className="px-6 pb-36">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeUp} className="flex items-center justify-between">
-            <BracketLabel>achievements</BracketLabel>
-            <BracketLabel>certifications</BracketLabel>
-          </motion.div>
-
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
-            Achievement &amp; Certification
-          </motion.h2>
-
-          <div className="mt-12 grid md:grid-cols-2 gap-8">
-            {achievements.map((ach, i) => (
-              <motion.div
-                key={i}
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                className="group rounded-2xl border border-[#1a1a1a]/10 p-8 hover:border-[#831514]/40 transition-colors duration-300"
-              >
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-xl md:text-2xl text-[#1a1a1a]">{ach.title}</h3>
-                  <span className="shrink-0 font-mono text-xs text-[#a8a294]">
-                    {ach.year}
-                  </span>
-                </div>
-                <p className="mt-2 text-base md:text-lg text-[#78716c] leading-relaxed">{ach.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* ===== SELECTED WORKS ===== */}
-      <section id="works" className="px-6 py-36">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeUp} className="flex items-center gap-4">
-            <BracketLabel>selected</BracketLabel>
-            <BracketLabel>works</BracketLabel>
-          </motion.div>
-
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
-            Selected Works
-          </motion.h2>
-
-          <div className="mt-14 space-y-20">
-            {works.map((work, i) => (
-              <motion.article
-                key={work.id}
-                {...fadeUp}
-                className={`group grid md:grid-cols-12 gap-8 items-start ${
-                  i % 2 === 1 ? "md:text-right" : ""
-                }`}
-              >
-                <div className={`md:col-span-5 flex ${i % 2 === 1 ? "md:order-2 md:justify-end" : ""}`}>
-                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-[#1a1a1a]/10 bg-[#e9e4d9] flex items-center justify-center">
-                    <span className="text-[6rem] md:text-[8rem] font-bold text-[#1a1a1a]/10 group-hover:text-[#1a1a1a]/20 transition-colors duration-500">
-                      {work.id}
-                    </span>
-                    <span className="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-[#78716c]">
-                      {work.badge}
-                    </span>
-                  </div>
-                </div>
-
-                <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}>
-                  <h3 className="text-2xl md:text-4xl lg:text-5xl group-hover:text-[#831514] transition-colors">
-                    {work.title}
-                    <span className="inline-block ml-2 text-xl md:text-3xl opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                      ↗
-                    </span>
-                  </h3>
-                  <p className="mt-4 text-lg md:text-xl text-[#57534e] leading-relaxed max-w-lg md:max-w-none inline-block">
-                    {work.desc}
-                  </p>
-                  <p className="mt-6 font-mono text-xs tracking-[0.4em] uppercase text-[#78716c]">
-                    {work.role}
-                  </p>
-                  <div className={`mt-6 flex flex-wrap gap-2 ${i % 2 === 1 ? "md:justify-end" : ""}`}>
-                    {work.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 rounded-full border border-[#1a1a1a]/10 font-mono text-xs text-[#57534e]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {work.link && (
-                      <a
-                        href={work.link}
-                        target="_blank"
-                        className="px-3 py-1 rounded-full bg-[#1a1a1a] text-[#f4f1ea] font-mono text-xs hover:bg-[#831514] transition-colors"
-                      >
-                        visit →
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* ===== MORE FROM GITHUB ===== */}
-      <section className="px-6 pb-36">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeUp} className="flex items-center gap-4">
-            <BracketLabel>more</BracketLabel>
-            <BracketLabel>on github</BracketLabel>
-          </motion.div>
-
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl lg:text-6xl">
-            More Projects
-          </motion.h2>
-          <motion.p {...fadeUp} className="mt-3 text-base md:text-lg text-[#78716c]">
-            Repositori lain dari GitHub.
-          </motion.p>
-
-          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {githubProjects.map((repo, i) => (
-              <motion.a
-                key={repo.name}
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-                href={repo.link}
-                target="_blank"
-                className="group flex flex-col rounded-2xl border border-[#1a1a1a]/10 p-6 hover:border-[#831514]/40 hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <span className="font-mono text-xs text-[#a8a294]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#78716c]">
-                    {repo.size}
-                  </span>
-                </div>
-                <h3 className="mt-4 text-xl md:text-2xl font-semibold tracking-tight break-words group-hover:text-[#831514] transition-colors">
-                  {repo.name}
-                  <span className="inline-block ml-2 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                    ↗
-                  </span>
-                </h3>
-                <p className="mt-3 text-base md:text-lg text-[#57534e] leading-relaxed flex-1">
-                  {repo.desc}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {repo.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full border border-[#1a1a1a]/10 font-mono text-xs text-[#57534e]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.a>
-            ))}
-
-            <motion.a
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 5 * 0.06 }}
-              href={socials.github}
-              target="_blank"
-              className="group flex flex-col items-start justify-center gap-3 rounded-2xl border border-dashed border-[#1a1a1a]/20 p-6 hover:border-[#831514]/50 hover:-translate-y-1 transition-all duration-300"
-            >
-              <span className="font-mono text-xs text-[#a8a294]">06</span>
-              <h3 className="text-xl md:text-2xl font-semibold tracking-tight group-hover:text-[#831514] transition-colors">
-                All repositories ↗
-              </h3>
-            </motion.a>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FOOTER ===== */}
-      <footer className="px-6 pt-36 pb-10">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeUp} className="flex items-center justify-between">
-            <BracketLabel>footer</BracketLabel>
-            <span className="font-mono text-xs text-[#a8a294]">–</span>
-            <BracketLabel>starts here</BracketLabel>
-          </motion.div>
-
-          <motion.p
-            {...fadeUp}
-            className="mt-14 text-center font-mono text-xl md:text-4xl tracking-[0.35em] text-[#78716c]"
-          >
-            open for opportunities
-          </motion.p>
-
-          <motion.p
-            {...fadeUp}
-            className="mt-8 text-center text-[#57534e] text-lg md:text-xl leading-relaxed max-w-xl mx-auto"
-          >
-            Sedang nyari kesempatan magang atau kerja di web development, IoT,
-            atau desain. Kalau tim kamu butuh orang yang bisa langsung gas
-            kontribusi — jangan sungkan, chat aja!
-          </motion.p>
-
-          <motion.div {...fadeUp} className="mt-10 flex justify-center">
-            <a
-              href={`mailto:${socials.email}?subject=${encodeURIComponent(
-                "halo! ada peluang menarik nih — via portfolio"
-              )}`}
-              className="px-8 py-4 rounded-full bg-[#1a1a1a] text-[#f4f1ea] font-medium text-xl md:text-2xl hover:bg-[#831514] transition-colors"
-            >
-              {socials.email}
-            </a>
-          </motion.div>
-
-          <div className="mt-14 flex flex-col md:flex-row items-center justify-center gap-6 text-xl md:text-3xl">
-            <span className="text-[#57534e]">mampir juga ke</span>
-            <a
-              href={socials.instagram}
-              target="_blank"
-              className="font-semibold text-[#1a1a1a] border-b border-[#1a1a1a]/30 hover:border-[#831514] transition-colors"
-            >
-              Instagram
-            </a>
-            <a
-              href={socials.github}
-              target="_blank"
-              className="font-semibold text-[#1a1a1a] border-b border-[#1a1a1a]/30 hover:border-[#831514] transition-colors"
-            >
-              GitHub
-            </a>
-            <a
-              href={socials.linkedin}
-              target="_blank"
-              className="font-semibold text-[#1a1a1a] border-b border-[#1a1a1a]/30 hover:border-[#831514] transition-colors"
-            >
-              LinkedIn
-            </a>
-          </div>
-
-          <div className="mt-10 text-center">
-            <a
-              href="/portfolio"
-              className="font-mono text-xs text-[#78716c] hover:text-[#1a1a1a] transition-colors"
-            >
-              download portfolio as pdf ↓
-            </a>
-          </div>
-
-          <div className="mt-24">
-            <Marquee items={tools} reverse />
-          </div>
-
-          <div className="mt-10 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs text-[#a8a294]">
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="hover:text-[#1a1a1a] transition-colors cursor-pointer"
-            >
-              back to top ↑
-            </button>
-            <span>
-              [version 0.1] [arfin] [2026]
-            </span>
-          </div>
-        </div>
-      </footer>
-    </main>
+        ))}
+      </div>
+    </section>
   );
 }
 
+/* ============================================================
+   INSIDE — What you will find inside?
+============================================================ */
+
+function Inside() {
+  return (
+    <section
+      id="inside"
+      className="relative w-full min-h-screen bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 flex flex-col"
+    >
+      <div className="w-full flex flex-col gap-4 mb-12 md:mb-16">
+        <SectionLabel />
+      </div>
+
+      <div className="w-full mb-16 md:mb-24">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-[0.88] text-[#1a1a1a] uppercase mb-8"
+        >
+          What you will
+          <br />
+          find inside?
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-base md:text-lg text-gray-700 leading-relaxed max-w-2xl"
+        >
+          Scroll terus — semua proyek, perangkat, dan pencapaian ada di bawah. Tersusun rapi biar gampang disimak.
+        </motion.p>
+      </div>
+
+      <div className="w-full flex flex-col">
+        {insideList.map((item, i) => (
+          <motion.div
+            key={item.num}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.08 }}
+            className="group flex items-center justify-between py-5 md:py-6 text-lg sm:text-xl md:text-2xl font-bold uppercase tracking-tight text-[#1a1a1a] transition-all duration-300 hover:text-[#831514] hover:pl-2 border-b-2 border-[#1a1a1a]"
+          >
+            <span>{item.title}</span>
+            <span className="flex items-center gap-4 md:gap-8">
+              <span className="font-mono text-xs md:text-sm text-neutral-400 font-medium">{item.num}</span>
+              <span className="inline-block opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <ArrowUpRight />
+              </span>
+            </span>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   BLACK COVER — section hitam dengan kata raksasa
+============================================================ */
+
+function BlackCover() {
+  return (
+    <section className="relative w-full min-h-[80vh] md:min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center overflow-hidden">
+      <motion.h2
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-[0.88] text-white text-center uppercase select-none px-6"
+      >
+        Web Development.
+        <br />
+        IoT Engineering.
+        <br />
+        Visual Design.
+      </motion.h2>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="mt-10 md:mt-14 text-[#f4f1ea]/60 text-4xl md:text-6xl"
+      >
+        ↓
+      </motion.div>
+    </section>
+  );
+}
+
+/* ============================================================
+   WORKS — list karya + modal case study
+============================================================ */
+
+function Works() {
+  const [activeCase, setActiveCase] = useState<CaseStudy | null>(null);
+
+  return (
+    <section id="works" className="relative w-full bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24">
+      <div className="w-full flex flex-col gap-4 mb-12 md:mb-16">
+        <SectionLabel />
+      </div>
+
+      <div className="w-full mb-16 md:mb-24">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-[0.88] text-[#1a1a1a] uppercase mb-8"
+        >
+          Designing Digital
+          <br />
+          Experiences.
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-base md:text-lg text-gray-700 leading-relaxed max-w-2xl"
+        >
+          Klik salah satu karya buat buka case study-nya — dari tantangan, proses, sampai hasilnya.
+        </motion.p>
+      </div>
+
+      <div className="w-full flex flex-col">
+        {caseStudies.map((work, i) => (
+          <motion.button
+            key={work.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.06 }}
+            onClick={() => setActiveCase(work)}
+            className="group flex items-center justify-between gap-6 py-6 md:py-8 text-left border-b-2 border-[#1a1a1a] transition-all duration-300 hover:pl-2"
+          >
+            <div className="flex items-baseline gap-4 md:gap-8 min-w-0">
+              <span className="font-mono text-xs md:text-sm text-neutral-400 font-medium shrink-0">
+                /{work.id}
+              </span>
+              <div className="min-w-0">
+                <h3 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-[#1a1a1a] uppercase tracking-tight leading-tight transition-colors duration-300 group-hover:text-[#831514]">
+                  {work.title}
+                </h3>
+                <p className="mt-1 text-xs md:text-sm text-neutral-500 font-mono uppercase tracking-wider">
+                  {work.category} — {work.year}
+                </p>
+              </div>
+            </div>
+            <span className="shrink-0 text-[#1a1a1a] transition-all duration-300 group-hover:text-[#831514] group-hover:scale-110">
+              <ArrowUpRight />
+            </span>
+          </motion.button>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {activeCase && <CaseStudyModal caseStudy={activeCase} onClose={() => setActiveCase(null)} />}
+      </AnimatePresence>
+    </section>
+  );
+}
+
+/* ============================================================
+   CASE STUDY MODAL
+============================================================ */
+
+function CaseStudyModal({ caseStudy, onClose }: { caseStudy: CaseStudy; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  const sections = [
+    { label: "01 / Overview", body: caseStudy.overview },
+    { label: "02 / Challenge", body: caseStudy.challenge },
+    { label: "03 / Process", body: caseStudy.process },
+    { label: "04 / Solution", body: caseStudy.solution },
+    { label: "05 / Result", body: caseStudy.result },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[9998] bg-[#f4f1ea] overflow-y-auto"
+    >
+      <div className="sticky top-0 z-10 bg-[#f4f1ea] border-b border-neutral-200 px-8 md:px-16 py-5 flex items-center justify-between">
+        <span className="font-mono text-xs md:text-sm uppercase tracking-widest text-neutral-500">
+          {caseStudy.category}
+        </span>
+        <button
+          onClick={onClose}
+          className="inline-flex items-center gap-2 font-mono text-xs md:text-sm font-semibold uppercase tracking-widest text-[#1a1a1a] hover:text-[#831514] transition-colors"
+        >
+          Close [Esc] <span className="text-lg leading-none">×</span>
+        </button>
+      </div>
+
+      <div className="px-8 md:px-16 lg:px-24 py-12 md:py-20 max-w-[1400px]">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="font-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-[#831514] font-semibold mb-4"
+        >
+          {caseStudy.year} — {caseStudy.subtitle}
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.88] text-[#1a1a1a] uppercase mb-8"
+        >
+          {caseStudy.title}
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-base md:text-lg text-gray-700 leading-relaxed max-w-3xl mb-10"
+        >
+          {caseStudy.description}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-wrap gap-2 mb-16"
+        >
+          {caseStudy.tools.map((t) => (
+            <span
+              key={t}
+              className="font-mono text-[11px] uppercase tracking-wider text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded border border-neutral-200"
+            >
+              {t}
+            </span>
+          ))}
+        </motion.div>
+
+        <div className="flex flex-col gap-16 md:gap-20">
+          {sections.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 + i * 0.08 }}
+              className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10"
+            >
+              <h3 className="md:col-span-4 font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-neutral-500 font-semibold">
+                {s.label}
+              </h3>
+              <p className="md:col-span-8 text-base md:text-lg text-[#1a1a1a] leading-relaxed">{s.body}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-20 pt-10 border-t border-neutral-200">
+          <button
+            onClick={onClose}
+            className="group inline-flex items-center gap-2 font-mono text-xs md:text-sm font-semibold uppercase tracking-widest text-[#1a1a1a] hover:text-[#831514] transition-colors"
+          >
+            ← Back to Portfolio
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ============================================================
+   CONTACT + FOOTER
+============================================================ */
+
+function Contact() {
+  const links = [
+    { label: "GITHUB", href: socials.github, external: true },
+    { label: "GMAIL", href: `mailto:${socials.email}`, external: false },
+    { label: "LINKEDIN", href: socials.linkedin, external: true },
+    { label: "DOWNLOAD CV", href: "/cv.pdf", external: true },
+  ];
+
+  return (
+    <section id="contact" className="relative w-full bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24">
+      <div className="w-full flex flex-col gap-4 mb-12 md:mb-16">
+        <SectionLabel />
+      </div>
+
+      <div className="w-full mb-16 md:mb-24">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.9] text-[#1a1a1a] uppercase mb-8"
+        >
+          Let&apos;s Collaborate.
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-base md:text-lg text-gray-700 leading-relaxed max-w-2xl"
+        >
+          Punya ide, proyek, atau sekadar mau ngobrol? Feel free to reach out — yang penting jangan sungkan.
+        </motion.p>
+      </div>
+
+      <div className="w-full flex flex-col">
+        {links.map((link, i) => (
+          <motion.a
+            key={link.label}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.08 }}
+            href={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            className="group flex items-center justify-between py-5 md:py-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#1a1a1a] uppercase tracking-tight transition-all duration-300 hover:text-[#831514] hover:pl-2 border-b-2 border-[#1a1a1a]"
+          >
+            {link.label}
+            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5">
+              <ArrowUpRight />
+            </span>
+          </motion.a>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="w-full pt-8 mt-20 border-t border-neutral-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs md:text-sm font-medium tracking-wider uppercase text-neutral-500"
+      >
+        <span>© 2026 {profile.name.toUpperCase()}</span>
+        <span>Thank you for scrolling all the way down.</span>
+      </motion.div>
+    </section>
+  );
+}
+
+/* ============================================================
+   PAGE
+============================================================ */
+
+export default function Page() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="grain-overlay min-h-screen bg-white relative z-0">
+      <Loader isLoading={isLoading} />
+      <CustomCursor />
+      <Hero />
+      <About />
+      <Services />
+      <Tools />
+      <Inside />
+      <BlackCover />
+      <Works />
+      <Contact />
+    </div>
+  );
+}

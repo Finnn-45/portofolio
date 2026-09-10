@@ -24,7 +24,7 @@ import {
 
 function BracketLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-xs md:text-sm text-[#78716c] tracking-wide">
+    <span className="font-mono text-sm md:text-base text-[#78716c] tracking-wide">
       [ {children} ]
     </span>
   );
@@ -44,7 +44,7 @@ function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolea
               items.map((tool) => (
                 <span
                   key={`${round}-${tool}`}
-                  className="mx-8 text-sm uppercase tracking-[0.35em] text-[#78716c]"
+                  className="mx-8 text-base md:text-lg uppercase tracking-[0.35em] text-[#78716c]"
                 >
                   {tool}
                   <span className="ml-8 text-[#c9c2b2]">✦</span>
@@ -76,7 +76,7 @@ export default function Home() {
 
       {/* ===== TOP BAR ===== */}
       <nav className="fixed top-0 inset-x-0 z-50 bg-[#f4f1ea]/85 backdrop-blur-md border-b border-[#1a1a1a]/10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="#" className="font-mono text-sm text-[#57534e] hover:text-[#1a1a1a] transition-colors">
             arfin — portfolio
           </a>
@@ -103,7 +103,7 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section className="relative pt-40 pb-0 px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp}>
             <BracketLabel>start here</BracketLabel>
           </motion.div>
@@ -115,7 +115,7 @@ export default function Home() {
               hidden: {},
               show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
             }}
-            className="mt-6 font-bold uppercase leading-[0.95] tracking-tight text-[clamp(2.8rem,9vw,8.5rem)]"
+            className="mt-6 font-bold uppercase leading-[0.95] tracking-tight text-[clamp(3.5rem,12vw,11.5rem)]"
           >
             {[
               { text: "Arfin", muted: false },
@@ -140,7 +140,7 @@ export default function Home() {
           </motion.h1>
 
           <div className="mt-12 grid md:grid-cols-2 gap-10 items-end">
-            <motion.p {...fadeUp} className="text-[#57534e] text-base md:text-lg leading-relaxed max-w-md">
+            <motion.p {...fadeUp} className="text-[#57534e] text-lg md:text-xl leading-relaxed max-w-lg">
               {profile.tagline}
             </motion.p>
 
@@ -179,7 +179,7 @@ export default function Home() {
 
       {/* ===== IMPACT STATS ===== */}
       <section className="px-6 py-20">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-[#1a1a1a]/10 rounded-2xl overflow-hidden border border-[#1a1a1a]/10">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-[#1a1a1a]/10 rounded-2xl overflow-hidden border border-[#1a1a1a]/10">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
@@ -187,10 +187,10 @@ export default function Home() {
               transition={{ ...fadeUp.transition, delay: i * 0.08 }}
               className="bg-[#f4f1ea] p-8 flex flex-col gap-2"
             >
-              <span className="text-3xl md:text-5xl font-bold tracking-tight text-[#1a1a1a]">
+              <span className="text-4xl md:text-6xl font-bold tracking-tight text-[#1a1a1a]">
                 {stat.value}
               </span>
-              <span className="text-xs md:text-sm text-[#78716c] leading-relaxed">
+              <span className="text-sm md:text-base text-[#78716c] leading-relaxed">
                 {stat.label}
               </span>
             </motion.div>
@@ -199,14 +199,14 @@ export default function Home() {
       </section>
 
       {/* ===== FIELD NOTES ===== */}
-      <section className="px-6 py-28">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-6 py-36">
+        <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="flex items-center justify-between">
             <BracketLabel>field notes</BracketLabel>
             <BracketLabel>notes</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl font-bold tracking-tight">
+          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
             Field Notes
           </motion.h2>
 
@@ -216,9 +216,9 @@ export default function Home() {
                 key={i}
                 {...fadeUp}
                 transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                className="group flex items-center justify-between py-5 hover:pl-4 transition-all duration-300"
+                className="group flex items-center justify-between py-7 hover:pl-4 transition-all duration-300"
               >
-                <span className="text-[#292524] group-hover:text-[#831514] transition-colors">
+                <span className="text-xl md:text-3xl text-[#292524] group-hover:text-[#831514] transition-colors">
                   {note}
                 </span>
                 <span className="font-mono text-[#a8a294] text-sm">0{i + 1}</span>
@@ -237,21 +237,21 @@ export default function Home() {
       </section>
 
       {/* ===== EDUCATION + EXPERIENCE ===== */}
-      <section className="px-6 py-28">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+      <section className="px-6 py-36">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
           <motion.div {...fadeUp}>
             <BracketLabel>experience</BracketLabel>
-            <p className="mt-8 text-2xl md:text-3xl font-medium leading-snug text-[#1a1a1a]">
+            <p className="mt-8 text-2xl md:text-4xl font-medium leading-snug text-[#1a1a1a]">
               Dari kegiatan sekolah sampai proyek yang beneran dipake orang —
               semua ini yang ngebentuk cara aku pandang teknologi dan desain.
             </p>
 
             <div className="mt-12 rounded-2xl border border-[#1a1a1a]/10 p-6">
               <BracketLabel>education</BracketLabel>
-              <h3 className="mt-4 text-lg font-semibold text-[#1a1a1a]">
+              <h3 className="mt-4 text-xl md:text-2xl text-[#1a1a1a]">
                 {education.school}
               </h3>
-              <p className="mt-2 text-sm text-[#78716c] leading-relaxed">
+              <p className="mt-2 text-base md:text-lg text-[#78716c] leading-relaxed">
                 {education.desc}
               </p>
             </div>
@@ -274,7 +274,7 @@ export default function Home() {
                       {exp.year}
                     </span>
                   </div>
-                  <p className="mt-2 text-sm text-[#78716c] leading-relaxed">{exp.desc}</p>
+                  <p className="mt-2 text-base md:text-lg text-[#78716c] leading-relaxed">{exp.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -287,17 +287,17 @@ export default function Home() {
       </section>
 
       {/* ===== PROFESSIONAL EXPERIENCE ===== */}
-      <section className="px-6 pb-28">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-6 pb-36">
+        <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="flex items-center justify-between">
             <BracketLabel>professional experience</BracketLabel>
             <BracketLabel>2025 — now</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl font-bold tracking-tight">
+          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
             MENTION&apos;s Key Collaborations
           </motion.h2>
-          <motion.p {...fadeUp} className="mt-4 max-w-2xl text-[#57534e] leading-relaxed">
+          <motion.p {...fadeUp} className="mt-4 max-w-2xl text-lg md:text-xl text-[#57534e] leading-relaxed">
             MENTION (Media Design and Information) itu tim yang megang semua
             konten visual di SMK TI Bazma — dari desain sampai video, buat
             dukung semua kegiatan sekolah.
@@ -321,7 +321,7 @@ export default function Home() {
                     </span>
                   )}
                 </div>
-                <p className="mt-2 text-sm text-[#78716c] leading-relaxed">{exp.desc}</p>
+                <p className="mt-2 text-base md:text-lg text-[#78716c] leading-relaxed">{exp.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -329,18 +329,18 @@ export default function Home() {
       </section>
 
       {/* ===== ACHIEVEMENTS ===== */}
-      <section className="px-6 pb-28">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-6 pb-36">
+        <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="flex items-center justify-between">
             <BracketLabel>achievements</BracketLabel>
             <BracketLabel>certifications</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl font-bold tracking-tight">
+          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
             Achievement &amp; Certification
           </motion.h2>
 
-          <div className="mt-12 grid md:grid-cols-2 gap-6">
+          <div className="mt-12 grid md:grid-cols-2 gap-8">
             {achievements.map((ach, i) => (
               <motion.div
                 key={i}
@@ -349,12 +349,12 @@ export default function Home() {
                 className="group rounded-2xl border border-[#1a1a1a]/10 p-8 hover:border-[#831514]/40 transition-colors duration-300"
               >
                 <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-lg font-semibold text-[#1a1a1a]">{ach.title}</h3>
+                  <h3 className="text-xl md:text-2xl text-[#1a1a1a]">{ach.title}</h3>
                   <span className="shrink-0 font-mono text-xs text-[#a8a294]">
                     {ach.year}
                   </span>
                 </div>
-                <p className="mt-2 text-sm text-[#78716c] leading-relaxed">{ach.desc}</p>
+                <p className="mt-2 text-base md:text-lg text-[#78716c] leading-relaxed">{ach.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -363,14 +363,14 @@ export default function Home() {
 
 
       {/* ===== SELECTED WORKS ===== */}
-      <section id="works" className="px-6 py-28">
-        <div className="max-w-6xl mx-auto">
+      <section id="works" className="px-6 py-36">
+        <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="flex items-center gap-4">
             <BracketLabel>selected</BracketLabel>
             <BracketLabel>works</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl font-bold tracking-tight">
+          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
             Selected Works
           </motion.h2>
 
@@ -395,13 +395,13 @@ export default function Home() {
                 </div>
 
                 <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}>
-                  <h3 className="text-2xl md:text-4xl font-bold tracking-tight group-hover:text-[#831514] transition-colors">
+                  <h3 className="text-3xl md:text-5xl lg:text-6xl group-hover:text-[#831514] transition-colors">
                     {work.title}
                     <span className="inline-block ml-2 text-xl md:text-3xl opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                       ↗
                     </span>
                   </h3>
-                  <p className="mt-4 text-[#57534e] leading-relaxed max-w-lg md:max-w-none inline-block">
+                  <p className="mt-4 text-lg md:text-xl text-[#57534e] leading-relaxed max-w-lg md:max-w-none inline-block">
                     {work.desc}
                   </p>
                   <p className="mt-6 font-mono text-xs tracking-[0.4em] uppercase text-[#78716c]">
@@ -435,21 +435,21 @@ export default function Home() {
 
 
       {/* ===== MORE FROM GITHUB ===== */}
-      <section className="px-6 pb-28">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-6 pb-36">
+        <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="flex items-center gap-4">
             <BracketLabel>more</BracketLabel>
             <BracketLabel>on github</BracketLabel>
           </motion.div>
 
-          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl font-bold tracking-tight">
+          <motion.h2 {...fadeUp} className="mt-8 text-4xl md:text-6xl lg:text-7xl">
             More Projects
           </motion.h2>
-          <motion.p {...fadeUp} className="mt-3 text-sm text-[#78716c]">
+          <motion.p {...fadeUp} className="mt-3 text-base md:text-lg text-[#78716c]">
             Repositori lain dari GitHub.
           </motion.p>
 
-          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {githubProjects.map((repo, i) => (
               <motion.a
                 key={repo.name}
@@ -467,13 +467,13 @@ export default function Home() {
                     {repo.size}
                   </span>
                 </div>
-                <h3 className="mt-4 text-lg md:text-xl font-semibold tracking-tight break-words group-hover:text-[#831514] transition-colors">
+                <h3 className="mt-4 text-xl md:text-2xl font-semibold tracking-tight break-words group-hover:text-[#831514] transition-colors">
                   {repo.name}
                   <span className="inline-block ml-2 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                     ↗
                   </span>
                 </h3>
-                <p className="mt-3 text-sm text-[#57534e] leading-relaxed flex-1">
+                <p className="mt-3 text-base md:text-lg text-[#57534e] leading-relaxed flex-1">
                   {repo.desc}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
@@ -497,7 +497,7 @@ export default function Home() {
               className="group flex flex-col items-start justify-center gap-3 rounded-2xl border border-dashed border-[#1a1a1a]/20 p-6 hover:border-[#831514]/50 hover:-translate-y-1 transition-all duration-300"
             >
               <span className="font-mono text-xs text-[#a8a294]">06</span>
-              <h3 className="text-lg md:text-xl font-semibold tracking-tight group-hover:text-[#831514] transition-colors">
+              <h3 className="text-xl md:text-2xl font-semibold tracking-tight group-hover:text-[#831514] transition-colors">
                 All repositories ↗
               </h3>
             </motion.a>
@@ -506,8 +506,8 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="px-6 pt-28 pb-10">
-        <div className="max-w-6xl mx-auto">
+      <footer className="px-6 pt-36 pb-10">
+        <div className="max-w-7xl mx-auto">
           <motion.div {...fadeUp} className="flex items-center justify-between">
             <BracketLabel>footer</BracketLabel>
             <span className="font-mono text-xs text-[#a8a294]">–</span>
@@ -516,14 +516,14 @@ export default function Home() {
 
           <motion.p
             {...fadeUp}
-            className="mt-14 text-center font-mono text-xl md:text-4xl tracking-[0.35em] text-[#78716c]"
+            className="mt-14 text-center font-mono text-2xl md:text-5xl tracking-[0.35em] text-[#78716c]"
           >
             open for opportunities
           </motion.p>
 
           <motion.p
             {...fadeUp}
-            className="mt-8 text-center text-[#57534e] text-base md:text-lg leading-relaxed max-w-xl mx-auto"
+            className="mt-8 text-center text-[#57534e] text-lg md:text-xl leading-relaxed max-w-xl mx-auto"
           >
             Sedang nyari kesempatan magang atau kerja di web development, IoT,
             atau desain. Kalau tim kamu butuh orang yang bisa langsung gas
@@ -535,13 +535,13 @@ export default function Home() {
               href={`mailto:${socials.email}?subject=${encodeURIComponent(
                 "halo! ada peluang menarik nih — via portfolio"
               )}`}
-              className="px-8 py-4 rounded-full bg-[#1a1a1a] text-[#f4f1ea] font-medium text-lg hover:bg-[#831514] transition-colors"
+              className="px-8 py-4 rounded-full bg-[#1a1a1a] text-[#f4f1ea] font-medium text-xl md:text-2xl hover:bg-[#831514] transition-colors"
             >
               {socials.email}
             </a>
           </motion.div>
 
-          <div className="mt-14 flex flex-col md:flex-row items-center justify-center gap-6 text-lg md:text-2xl">
+          <div className="mt-14 flex flex-col md:flex-row items-center justify-center gap-6 text-xl md:text-3xl">
             <span className="text-[#57534e]">mampir juga ke</span>
             <a
               href={socials.instagram}

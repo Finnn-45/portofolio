@@ -138,6 +138,8 @@ const caseStudies: CaseStudy[] = [
 
 function Loader({ isLoading }: { isLoading: boolean }) {
   const [progress, setProgress] = useState(0);
+  const roles = ["WEB DEVELOPER", "IOT ENGINEER", "VISUAL DESIGNER"];
+  const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -147,14 +149,21 @@ function Loader({ isLoading }: { isLoading: boolean }) {
       setProgress(value);
       if (value >= 100) clearInterval(timer);
     }, 25);
-    return () => clearInterval(timer);
+    const roleTimer = setInterval(() => {
+      setRoleIndex((i) => (i + 1) % roles.length);
+    }, 350);
+    return () => {
+      clearInterval(timer);
+      clearInterval(roleTimer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return (
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className="fixed inset-0 z-[9999] bg-[#f4f1ea] flex items-center justify-center select-none"
+          className="fixed inset-0 z-[9999] bg-[#f4f1ea] flex flex-col items-center justify-center select-none gap-4"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -167,6 +176,24 @@ function Loader({ isLoading }: { isLoading: boolean }) {
           >
             {String(progress).padStart(3, "0")}
           </motion.div>
+          <div className="w-48 h-px bg-[#1a1a1a]/10 overflow-hidden">
+            <div
+              className="h-full bg-[#831514] transition-all duration-100"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={roleIndex}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="font-mono text-[11px] uppercase tracking-[0.3em] text-neutral-500"
+            >
+              {roles[roleIndex]}
+            </motion.span>
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>
@@ -226,6 +253,22 @@ function Hero() {
   const today = new Date()
     .toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" })
     .toUpperCase();
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const update = () =>
+      setTime(
+        new Date().toLocaleTimeString("id-ID", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          timeZone: "Asia/Jakarta",
+        })
+      );
+    update();
+    const timer = setInterval(update, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="relative w-full min-h-screen bg-white flex flex-col justify-between">
@@ -233,18 +276,39 @@ function Hero() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="pt-8 px-8 md:pt-12 md:px-12 lg:pt-16 lg:px-16 z-10 flex flex-col items-start"
+        className="pt-8 px-8 md:pt-12 md:px-12 lg:pt-16 lg:px-16 z-10 flex justify-between items-start"
       >
-        <div className="w-8 h-8 mb-4">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
-            <circle cx="12" cy="12" r="10" />
-            <ellipse cx="12" cy="12" rx="10" ry="4" />
-            <line x1="12" y1="2" x2="12" y2="22" />
-          </svg>
+        <div className="flex flex-col items-start">
+          <div className="w-8 h-8 mb-4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
+              <circle cx="12" cy="12" r="10" />
+              <ellipse cx="12" cy="12" rx="10" ry="4" />
+              <line x1="12" y1="2" x2="12" y2="22" />
+            </svg>
+          </div>
+          <p className="text-xs text-gray-500 mb-1">{today}</p>
+          <h3 className="text-sm font-bold text-[#1a1a1a] mb-1">Web Developer — IoT — Visual Designer</h3>
+          <p className="text-xs text-gray-600">By: {profile.name}</p>
         </div>
-        <p className="text-xs text-gray-500 mb-1">{today}</p>
-        <h3 className="text-sm font-bold text-[#1a1a1a] mb-1">Web Developer — IoT — Visual Designer</h3>
-        <p className="text-xs text-gray-600">By: {profile.name}</p>
+
+        {/* jam live WIB — khas punya Arfin */}
+        <div className="hidden sm:flex flex-col items-end gap-2">
+          <span className="font-mono text-xs md:text-sm tabular-nums text-[#1a1a1a] tracking-widest">
+            {time} WIB
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-400">
+            Jakarta, ID
+          </span>
+          <span className="inline-flex items-center gap-2 mt-1 px-3 py-1.5 rounded-full border border-[#831514]/20 bg-[#831514]/5">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#831514] opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#831514]" />
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#831514] font-semibold">
+              open for internship
+            </span>
+          </span>
+        </div>
       </motion.div>
 
       <div className="flex-1 flex items-center justify-center py-6 select-none overflow-hidden">
@@ -296,6 +360,41 @@ function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+/* ============================================================
+   TICKER — strip hitam berjalan pelan (khas punya Arfin)
+============================================================ */
+
+function TickerStrip() {
+  const items = [
+    "OPEN FOR DIGITAL INTERNSHIP",
+    "1.000+ USERS SHIPPED",
+    "BASED IN BOGOR",
+    "SMK TI BAZMA",
+    "WEB DEV ✦ IOT ✦ DESIGN",
+  ];
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="w-full bg-[#0a0a0a] py-4 overflow-hidden group"
+    >
+      <div className="flex whitespace-nowrap animate-marquee-left group-hover:[animation-play-state:paused]">
+        {[...items, ...items, ...items, ...items].map((item, i) => (
+          <span
+            key={i}
+            className="inline-flex items-center font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-[#f4f1ea]/80 px-6"
+          >
+            {item}
+            <span className="ml-12 text-[#831514]">✦</span>
+          </span>
+        ))}
+      </div>
+    </motion.div>
   );
 }
 
@@ -906,6 +1005,7 @@ export default function Page() {
       <Loader isLoading={isLoading} />
       <CustomCursor />
       <Hero />
+      <TickerStrip />
       <About />
       <Services />
       <Tools />

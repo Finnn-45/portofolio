@@ -23,15 +23,15 @@ function Label({ children }: { children: React.ReactNode }) {
 
 export default function PortfolioPage() {
   return (
-    <main className="min-h-screen bg-[#f7f5f0] text-neutral-900">
+    <main className="min-h-screen bg-[#f4f1ea] text-neutral-900">
       {/* Toolbar — tidak ikut tercetak */}
-      <div className="no-print sticky top-0 z-10 flex items-center justify-between bg-[#f7f5f0]/90 backdrop-blur border-b border-neutral-300 px-6 py-3">
+      <div className="no-print sticky top-0 z-10 flex items-center justify-between bg-[#f4f1ea]/90 backdrop-blur border-b border-neutral-300 px-6 py-3">
         <a href="/" className="font-mono text-sm text-neutral-500 hover:text-neutral-900 transition-colors">
           ← back to site
         </a>
         <button
           onClick={() => window.print()}
-          className="px-5 py-2 rounded-full bg-neutral-900 text-[#f7f5f0] font-mono text-sm hover:bg-neutral-700 transition-colors cursor-pointer"
+          className="px-5 py-2 rounded-full bg-[#831514] text-[#fafafa] font-mono text-sm hover:bg-[#5a0e0e] transition-colors cursor-pointer"
         >
           ⬇ Save as PDF
         </button>

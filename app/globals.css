@@ -17,14 +17,14 @@
   width: 6px;
   height: 6px;
   margin: -3px 0 0 -3px;
-  background: #f5f5f5;
+  background: #1a1a1a;
 }
 
 .cursor-ring {
   width: 34px;
   height: 34px;
   margin: -17px 0 0 -17px;
-  border: 1px solid rgba(245, 245, 245, 0.7);
+  border: 1px solid rgba(26, 26, 26, 0.7);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -47,6 +47,11 @@
 }
 
 /* ===== Marquee (gaya jenul) ===== */
+::selection {
+  background: #831514;
+  color: #fafafa;
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

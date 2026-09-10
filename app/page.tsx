@@ -14,6 +14,7 @@ import {
   location,
   profile,
   stats,
+  githubProjects,
 } from "@/lib/data";
 
 /* ============================================================
@@ -428,6 +429,82 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* ===== MORE FROM GITHUB ===== */}
+      <section className="px-6 pb-28">
+        <div className="max-w-6xl mx-auto">
+          <motion.div {...fadeUp} className="flex items-center gap-4">
+            <BracketLabel>more</BracketLabel>
+            <BracketLabel>on github</BracketLabel>
+          </motion.div>
+
+          <motion.h2 {...fadeUp} className="mt-8 text-3xl md:text-5xl font-bold tracking-tight">
+            More Projects
+          </motion.h2>
+          <motion.p {...fadeUp} className="mt-4 max-w-2xl text-[#57534e] leading-relaxed">
+            Repositori lain dari GitHub saya — beberapa di antaranya cukup besar
+            dan terus berkembang. Klik kartu untuk melihat kodenya langsung.
+          </motion.p>
+
+          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {githubProjects.map((repo, i) => (
+              <motion.a
+                key={repo.name}
+                {...fadeUp}
+                transition={{ ...fadeUp.transition, delay: i * 0.06 }}
+                href={repo.link}
+                target="_blank"
+                className="group flex flex-col rounded-2xl border border-[#1a1a1a]/10 p-6 hover:border-[#831514]/40 hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span className="font-mono text-xs text-[#a8a294]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#78716c]">
+                    {repo.size}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-lg md:text-xl font-semibold tracking-tight break-words group-hover:text-[#831514] transition-colors">
+                  {repo.name}
+                  <span className="inline-block ml-2 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                    ↗
+                  </span>
+                </h3>
+                <p className="mt-3 text-sm text-[#57534e] leading-relaxed flex-1">
+                  {repo.desc}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {repo.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-full border border-[#1a1a1a]/10 font-mono text-xs text-[#57534e]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.a>
+            ))}
+
+            <motion.a
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 5 * 0.06 }}
+              href={socials.github}
+              target="_blank"
+              className="group flex flex-col items-start justify-center gap-3 rounded-2xl border border-dashed border-[#1a1a1a]/20 p-6 hover:border-[#831514]/50 hover:-translate-y-1 transition-all duration-300"
+            >
+              <span className="font-mono text-xs text-[#a8a294]">06</span>
+              <h3 className="text-lg md:text-xl font-semibold tracking-tight group-hover:text-[#831514] transition-colors">
+                Lihat semua repositori ↗
+              </h3>
+              <p className="text-sm text-[#78716c] leading-relaxed">
+                23 repositori public di GitHub — termasuk latihan, eksperimen,
+                dan tugas sekolah.
+              </p>
+            </motion.a>
+          </div>
+        </div>
+      </section>
 
       {/* ===== FOOTER ===== */}
       <footer className="px-6 pt-28 pb-10">

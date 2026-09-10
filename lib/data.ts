@@ -62,6 +62,44 @@ export const works = [
   },
 ];
 
+export const githubProjects = [
+  {
+    name: "front-end-ppdb",
+    size: "20.4 MB",
+    desc: "Front-end platform PPDB — proyek yang sama dengan SPMB di atas. Form pendaftaran siswa baru yang dipakai 1.000+ pengguna, dibangun dengan Next.js, shadcn/ui, react-hook-form + zod, dan animasi GSAP.",
+    tags: ["Next.js", "TypeScript", "shadcn/ui"],
+    link: "https://github.com/Finnn-45/front-end-ppdb",
+  },
+  {
+    name: "task-manager-api_S2",
+    size: "2.9 MB",
+    desc: "REST API untuk manajemen tugas — CRUD dan penyimpanan data dengan Express + MongoDB (Mongoose).",
+    tags: ["Node.js", "Express", "MongoDB"],
+    link: "https://github.com/Finnn-45/task-manager-api_S2",
+  },
+  {
+    name: "ukk-hotel-management",
+    size: "620 KB",
+    desc: "Sistem manajemen hotel (proyek UKK) — reservasi, laporan PDF (dompdf), pembayaran Midtrans, QR code, dan role management dengan spatie/permission. Deployment pakai Docker.",
+    tags: ["Laravel", "Midtrans", "Docker"],
+    link: "https://github.com/Finnn-45/ukk-hotel-management",
+  },
+  {
+    name: "PT.patra-jasa",
+    size: "351 KB",
+    desc: "Company profile website dengan elemen 3D (Three.js), animasi GSAP, dan smooth scrolling Lenis — live di Vercel.",
+    tags: ["Next.js", "Three.js", "GSAP"],
+    link: "https://github.com/Finnn-45/PT.patra-jasa",
+  },
+  {
+    name: "PRAKTIK-SAAS",
+    size: "160 KB",
+    desc: "Eksperimen landing page SaaS — partikel interaktif, animasi framer-motion, dan masonry layout.",
+    tags: ["Next.js", "Framer Motion", "tsParticles"],
+    link: "https://github.com/Finnn-45/PRAKTIK-SAAS",
+  },
+];
+
 export const fieldNotes = [
   "Development — HTML, CSS, JavaScript, Laravel, React.js, Next.js, C++",
   "Engineering — IoT Development, Arduino & ESP32",

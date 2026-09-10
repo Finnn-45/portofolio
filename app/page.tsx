@@ -12,6 +12,8 @@ import {
   achievements,
   socials,
   location,
+  profile,
+  stats,
 } from "@/lib/data";
 
 /* ============================================================
@@ -134,19 +136,25 @@ export default function Home() {
 
           <div className="mt-12 grid md:grid-cols-2 gap-10 items-end">
             <motion.p {...fadeUp} className="text-neutral-400 text-base md:text-lg leading-relaxed max-w-md">
-              Siswa SMK dengan keahlian di web development dan IoT, berpengalaman
-              dalam desain visual dan pengembangan aplikasi berbasis website —
-              mengubah ide menjadi karya digital melalui kode dan desain visual.
+              {profile.tagline}
             </motion.p>
 
             <motion.div {...fadeUp} className="flex flex-col items-start md:items-end gap-4">
               <StatusChip />
               <a
-                href={socials.instagram}
-                target="_blank"
+                href={`mailto:${socials.email}?subject=${encodeURIComponent(
+                  "Peluang Kerja / Magang — via Portfolio"
+                )}`}
                 className="px-6 py-3 rounded-full bg-neutral-100 text-neutral-900 font-medium hover:bg-white transition-colors"
               >
-                Lets Collab!
+                Hire Me →
+              </a>
+              <a
+                href={socials.cv}
+                target="_blank"
+                className="font-mono text-xs text-neutral-500 hover:text-neutral-200 transition-colors underline underline-offset-4"
+              >
+                download my CV ↓
               </a>
               <div className="flex flex-wrap gap-4 font-mono text-xs text-neutral-500">
                 <a href={`mailto:${socials.email}`} className="hover:text-neutral-200 transition-colors">
@@ -161,6 +169,27 @@ export default function Home() {
 
         <div className="mt-20">
           <Marquee text="arfin portfolio" />
+        </div>
+      </section>
+
+      {/* ===== IMPACT STATS ===== */}
+      <section className="px-6 py-20">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={i}
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: i * 0.08 }}
+              className="bg-[#0a0a0a] p-8 flex flex-col gap-2"
+            >
+              <span className="text-3xl md:text-5xl font-bold tracking-tight text-neutral-100">
+                {stat.value}
+              </span>
+              <span className="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                {stat.label}
+              </span>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -413,8 +442,28 @@ export default function Home() {
             {...fadeUp}
             className="mt-14 text-center font-mono text-xl md:text-4xl tracking-[0.35em] text-neutral-500"
           >
-            if you&apos;re still here
+            open for opportunities
           </motion.p>
+
+          <motion.p
+            {...fadeUp}
+            className="mt-8 text-center text-neutral-400 text-base md:text-lg leading-relaxed max-w-xl mx-auto"
+          >
+            Sedang mencari kesempatan magang atau kerja di bidang web development,
+            IoT, atau desain. Kalau tim Anda butuh orang yang bisa langsung
+            berkontribusi — nggak perlu ragu buat hubungi saya.
+          </motion.p>
+
+          <motion.div {...fadeUp} className="mt-10 flex justify-center">
+            <a
+              href={`mailto:${socials.email}?subject=${encodeURIComponent(
+                "Peluang Kerja / Magang — via Portfolio"
+              )}`}
+              className="px-8 py-4 rounded-full bg-neutral-100 text-neutral-900 font-medium text-lg hover:bg-white transition-colors"
+            >
+              {socials.email}
+            </a>
+          </motion.div>
 
           <div className="mt-14 flex flex-col md:flex-row items-center justify-center gap-6 text-lg md:text-2xl">
             <span className="text-neutral-400">follow me on</span>

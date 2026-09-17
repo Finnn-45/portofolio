@@ -7,14 +7,12 @@ import { TickerStrip } from "@/components/site/sections/bits";
 import { About } from "@/components/site/sections/about";
 import { Services } from "@/components/site/sections/services";
 import { Tools } from "@/components/site/sections/tools";
-import { Inside } from "@/components/site/sections/inside";
-import { BlackCover } from "@/components/site/sections/cover";
 import { Works } from "@/components/site/sections/works";
 import { Contact } from "@/components/site/sections/contact";
 import { TrackNav } from "@/components/site/track-nav";
 
-/* Home — semua track dalam satu halaman panjang */
-export default function Page() {
+/* Track WEB — fokus karya web & open source */
+export default function WebPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,8 +29,6 @@ export default function Page() {
       <About />
       <Services />
       <Tools />
-      <Inside />
-      <BlackCover />
       <Works />
       <Contact />
     </main>

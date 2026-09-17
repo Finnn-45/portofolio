@@ -268,6 +268,23 @@ export const C = {
     footerRight: b("[2026]", "[2026]"),
   },
 
+  track: {
+    all: b("Semua", "All"),
+    web: b("Web", "Web"),
+    design: b("Desain", "Design"),
+  },
+
+  design: {
+    kicker: b("Porto Desain", "Design Portfolio"),
+    titleLines: [b("Desain yang", "Design that"), b("Bicara.", "Speaks.")],
+    lede: b(
+      "Kolaborasi desain dan produksi konten visual — dari branding media sosial sekolah sampai materi kampanye event nasional.",
+      "Design collaborations and visual content production — from school social-media branding to national event campaign material."
+    ),
+    collab: b("Kolaborasi Desain", "Design Collaborations"),
+    achievements: b("Pencapaian & Sertifikasi", "Achievements & Certifications"),
+  },
+
   github: {
     featured: b("unggulan", "featured"),
     code: b("kode", "code"),

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useScroll } from "framer-motion";
 import { location } from "@/lib/data";
+import { useT } from "@/lib/i18n";
 
 /* ===== Custom cursor: titik + ring yang ngikutin mouse ===== */
 export function CustomCursor() {
@@ -62,6 +63,7 @@ export function ScrollProgress() {
 /* ===== Jam real-time WIB ===== */
 export function LocalTime() {
   const [time, setTime] = useState("");
+  const t = useT();
 
   useEffect(() => {
     const tick = () =>
@@ -84,8 +86,51 @@ export function LocalTime() {
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
       </span>
-      {location} — {time} WIB
+      {t(location)} — {time} WIB
     </span>
+  );
+}
+
+/* ===== Foto dengan tilt 3D ringan (CSS, nggak pakai WebGL) ===== */
+export function TiltPhoto({ src, alt }: { src: string; alt: string }) {
+  const rx = useMotionValue(0);
+  const ry = useMotionValue(0);
+  const rotateX = useSpring(rx, { stiffness: 140, damping: 18 });
+  const rotateY = useSpring(ry, { stiffness: 140, damping: 18 });
+  const [fine, setFine] = useState(false);
+
+  useEffect(() => {
+    setFine(window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+  }, []);
+
+  return (
+    <div
+      className="absolute inset-0"
+      style={{ perspective: 900 }}
+      onMouseMove={
+        fine
+          ? (e) => {
+              const r = e.currentTarget.getBoundingClientRect();
+              ry.set(((e.clientX - r.left) / r.width - 0.5) * 12);
+              rx.set(-((e.clientY - r.top) / r.height - 0.5) * 12);
+            }
+          : undefined
+      }
+      onMouseLeave={fine ? () => { rx.set(0); ry.set(0); } : undefined}
+    >
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        className="relative w-full h-full"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt}
+          className="absolute inset-0 w-full h-full object-cover object-top"
+          draggable={false}
+        />
+      </motion.div>
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/components/site/providers";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Arfin Desca Alzachri | Portfolio",
   description:
-    "Portfolio Arfin Desca Alzachri — siswa SMK yang suka banget bikin web, utak-atik IoT, dan desain visual. Lagi open buat magang digital. Bogor, Indonesia.",
+    "Portfolio of Arfin Desca Alzachri — web developer, IoT engineer, and visual designer. Open for digital internships. Bogor, Indonesia.",
 };
 
 export default function RootLayout({
@@ -28,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

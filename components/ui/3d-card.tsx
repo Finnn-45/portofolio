@@ -95,7 +95,7 @@ export const CardBody = ({
 };
 
 export const CardItem = ({
-  as: Tag = "div",
+  as: RawTag = "div",
   children,
   className,
   translateX = 0,
@@ -117,6 +117,9 @@ export const CardItem = ({
   rotateZ?: number | string;
   [key: string]: unknown;
 }) => {
+  const Tag = RawTag as React.ComponentType<
+    React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+  >;
   const ref = useRef<HTMLDivElement>(null);
   const [isMouseEntered] = useMouseEnter();
 

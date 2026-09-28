@@ -2,7 +2,14 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 
-export function Loader({ isLoading }: { isLoading: boolean }) {
+export function Loader({
+  isLoading,
+  variant = "default",
+}: {
+  isLoading: boolean;
+  variant?: "default" | "lemon";
+}) {
+  const lemon = variant === "lemon";
   return (
     <AnimatePresence>
       {isLoading && (
@@ -19,12 +26,16 @@ export function Loader({ isLoading }: { isLoading: boolean }) {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
-            <span className="font-mono text-[11px] uppercase tracking-[0.5em] text-white/70">
+            <span
+              className={`font-mono text-[11px] uppercase tracking-[0.5em] ${
+                lemon ? "text-mosaic-lemon" : "text-white/70"
+              }`}
+            >
               Arfin Desca
             </span>
             <div className="h-px w-40 bg-white/10 overflow-hidden">
               <motion.div
-                className="h-full bg-white/60"
+                className={`h-full ${lemon ? "bg-mosaic-lemon" : "bg-white/60"}`}
                 style={{ transformOrigin: "left" }}
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}

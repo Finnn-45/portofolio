@@ -2,15 +2,22 @@
 
 import { useEffect, useState } from "react";
 import { Loader } from "@/components/site/sections/loader";
-import { Hero } from "@/components/site/sections/hero";
+import { DesignCover } from "@/components/site/sections/design-cover";
 import { TickerStrip } from "@/components/site/sections/bits";
-import { About } from "@/components/site/sections/about";
-import { Services } from "@/components/site/sections/services";
 import { DesignShowcase } from "@/components/site/sections/design-showcase";
-import { Contact } from "@/components/site/sections/contact";
+import { DesignGallery } from "@/components/site/sections/design-gallery";
+import { DesignAbout } from "@/components/site/sections/design-about";
+import { DesignProcess } from "@/components/site/sections/design-process";
+import { DesignContact } from "@/components/site/sections/design-contact";
 import { TrackNav } from "@/components/site/track-nav";
 
-/* Track DESIGN — fokus karya desain & kolaborasi visual */
+/* ============================================================
+   Track DESAIN — edisi kanvas gelap gaya "Portofolio 2025":
+   hitam pekat, aksen kuning lemon, serif kontras tinggi untuk
+   judul display, dan pita kuning berjalan sebagai pembatas bagian.
+   Semua tema gelap dibungkus class "theme-design" (lihat
+   app/globals.css) supaya track terang "/" dan "/web" tetap utuh.
+============================================================ */
 export default function DesignPage() {
   const [loading, setLoading] = useState(true);
 
@@ -20,15 +27,16 @@ export default function DesignPage() {
   }, []);
 
   return (
-    <main className="w-full bg-white">
-      <Loader isLoading={loading} />
+    <main className="theme-design w-full bg-mosaic-black">
+      <Loader isLoading={loading} variant="lemon" />
       <TrackNav />
-      <Hero />
-      <TickerStrip />
-      <About />
-      <Services />
+      <DesignCover />
+      <TickerStrip variant="lemon" />
       <DesignShowcase />
-      <Contact />
+      <DesignGallery />
+      <DesignAbout />
+      <DesignProcess />
+      <DesignContact />
     </main>
   );
 }

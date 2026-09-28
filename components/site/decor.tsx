@@ -5,26 +5,55 @@ import { motion, useMotionValue, useSpring, useScroll } from "framer-motion";
 import { location } from "@/lib/data";
 import { useT } from "@/lib/i18n";
 
-/* ===== Custom cursor: titik + ring yang ngikutin mouse ===== */
+/* ===== Custom cursor: titik + ring yang ngikutin mouse =====
+   Aktif hanya di perangkat berpointer presisi. Cursor bawaan baru
+   disembunyikan setelah mouse pertama bergerak (class .cursor-custom di
+   <html>), jadi tidak ada momen pointer hilang saat mouse diam.
+   Warna dot/ring diatur di globals.css (putih + mix-blend difference). */
 export function CustomCursor() {
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
   const ringX = useSpring(x, { stiffness: 260, damping: 24, mass: 0.6 });
   const ringY = useSpring(y, { stiffness: 260, damping: 24, mass: 0.6 });
   const [hovering, setHovering] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    setEnabled(true);
+
+    const root = document.documentElement;
+
     const move = (e: MouseEvent) => {
+      if (!root.classList.contains("cursor-custom")) {
+        root.classList.add("cursor-custom");
+        setEnabled(true);
+      }
       x.set(e.clientX);
       y.set(e.clientY);
+      setVisible(true);
       const t = e.target as HTMLElement | null;
-      setHovering(!!t?.closest("a, button"));
+      setHovering(!!t?.closest("a, button, [role='button']"));
     };
+    /* relatedTarget null = pointer benar-benar keluar jendela */
+    const hide = (e: MouseEvent) => {
+      if (!e.relatedTarget) setVisible(false);
+    };
+    /* jendela kehilangan fokus (alt+tab dll) — jangan biarkan dot nyangkut */
+    const blur = () => setVisible(false);
+
     window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
+    window.addEventListener("mouseout", hide);
+    window.addEventListener("blur", blur);
+    document.addEventListener("mouseleave", blur);
+
+    return () => {
+      root.classList.remove("cursor-custom");
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseout", hide);
+      window.removeEventListener("blur", blur);
+      document.removeEventListener("mouseleave", blur);
+    };
   }, [x, y]);
 
   if (!enabled) return null;
@@ -32,15 +61,20 @@ export function CustomCursor() {
   return (
     <>
       <motion.div
+        aria-hidden
         className="cursor-dot"
         style={{ x, y }}
-        animate={{ scale: hovering ? 0.5 : 1 }}
+        animate={{ scale: hovering ? 0.5 : 1, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.15 }}
       />
       <motion.div
+        aria-hidden
         className="cursor-ring"
         style={{ x: ringX, y: ringY }}
-        animate={{ scale: hovering ? 1.9 : 1, opacity: hovering ? 0.9 : 0.5 }}
+        animate={{
+          scale: hovering ? 1.9 : 1,
+          opacity: visible ? (hovering ? 1 : 0.75) : 0,
+        }}
         transition={{ duration: 0.2 }}
       />
     </>

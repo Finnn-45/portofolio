@@ -2,7 +2,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* ===== Custom cursor ===== */
+/* ===== Custom cursor: titik + ring =====
+   Dipakai bareng <CustomCursor /> (components/site/decor.tsx).
+   Warna dasar putih + mix-blend-mode: difference → otomatis hitam di
+   atas section terang dan putih di atas section gelap (footer #090909,
+   hero, black cover), jadi pointer selalu kelihatan. */
 .cursor-dot,
 .cursor-ring {
   position: fixed;
@@ -11,27 +15,52 @@
   pointer-events: none;
   border-radius: 50%;
   z-index: 100;
+  mix-blend-mode: difference;
+  will-change: transform, opacity;
 }
 
 .cursor-dot {
   width: 6px;
   height: 6px;
   margin: -3px 0 0 -3px;
-  background: #1a1a1a;
+  background: #ffffff;
 }
 
 .cursor-ring {
   width: 34px;
   height: 34px;
   margin: -17px 0 0 -17px;
-  border: 1px solid rgba(26, 26, 26, 0.7);
+  border: 1.5px solid #ffffff;
 }
 
+/* Kalau mix-blend-mode nggak didukung, pakai warna gelap biasa
+   (biar tetap kebaca di halaman yang mayoritas terang) */
+@supports not (mix-blend-mode: difference) {
+  .cursor-dot {
+    background: #1a1a1a;
+  }
+  .cursor-ring {
+    border-color: rgba(26, 26, 26, 0.75);
+  }
+}
+
+/* Cursor bawaan disembunyikan HANYA setelah mouse pertama bergerak
+   (class .cursor-custom dipasang oleh <CustomCursor />). Kalau JS belum /
+   gagal jalan, atau mouse belum bergerak, pointer bawaan tetap kelihatan. */
 @media (hover: hover) and (pointer: fine) {
-  body,
-  a,
-  button {
+  html.cursor-custom,
+  html.cursor-custom body,
+  html.cursor-custom a,
+  html.cursor-custom button,
+  html.cursor-custom [role="button"] {
     cursor: none;
+  }
+}
+
+@media print {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
   }
 }
 
@@ -105,6 +134,98 @@
 
 .animate-marquee-right {
   animation: marquee-right 45s linear infinite;
+}
+
+/* ===== Palet mozaik — track DESAIN (colorfull tapi tetap hemat) ===== */
+@theme {
+  --color-mosaic-crimson: #831514;
+  --color-mosaic-cobalt: #1f3be0;
+  --color-mosaic-sky: #2f9cf0;
+  --color-mosaic-teal: #0f9b94;
+  --color-mosaic-amber: #e8a33d;
+  --color-mosaic-rose: #e4607a;
+  --color-mosaic-lilac: #7c5cfc;
+  --color-mosaic-ink: #141414;
+  --color-mosaic-paper: #f6f2e9;
+
+  /* ── Edisi kanvas gelap (track /design) ──
+     lemon = aksen tanda tangan, black/coal/smoke = permukaan,
+     cream/line = teks & garis di atas kanvas hitam.
+     Nilai hex-nya sama dengan lib/mosaic.ts (MOSAIC_ACCENT). */
+  --color-mosaic-lemon: #ffe846;
+  --color-mosaic-black: #131313;
+  --color-mosaic-coal: #1b1b1b;
+  --color-mosaic-smoke: #262626;
+  --color-mosaic-cream: #f4f1ea;
+  --color-mosaic-line: rgba(255, 255, 255, 0.12);
+  /* merah crimson versi terang — teks merah di atas kanvas hitam */
+  --color-mosaic-crimson-lite: #ef5350;
+
+  --font-handwriting: var(--font-caveat), cursive;
+  --font-editorial: var(--font-bodoni), "Times New Roman", Times, serif;
+}
+
+.font-handwriting {
+  font-family: var(--font-caveat), cursive, sans-serif;
+}
+
+/* ===== Aksen isolasi kertas / duct tape (gaya jenul) ===== */
+.duct-tape {
+  position: relative;
+}
+.duct-tape::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 78px;
+  height: 22px;
+  background: rgba(235, 230, 215, 0.78);
+  border-left: 2px dashed rgba(200, 190, 170, 0.5);
+  border-right: 2px dashed rgba(200, 190, 170, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* ===== Aksen Illustrator Artboard (anchor points di sudut) ===== */
+.illustrator-artboard {
+  position: relative;
+  outline: 1px solid rgba(20, 20, 20, 0.15);
+}
+.illustrator-artboard::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at top left, #1f3be0 3px, transparent 3.5px),
+    radial-gradient(circle at top right, #1f3be0 3px, transparent 3.5px),
+    radial-gradient(circle at bottom left, #1f3be0 3px, transparent 3.5px),
+    radial-gradient(circle at bottom right, #1f3be0 3px, transparent 3.5px);
+}
+
+/* ===== Pita mozaik berjalan ===== */
+@keyframes mosaic-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-mosaic-drift {
+  animation: mosaic-drift 30s linear infinite;
+  will-change: transform;
+}
+
+/* ===== Pita kuning berjalan (marquee signature edisi gelap) ===== */
+.animate-ribbon {
+  animation: marquee-left 34s linear infinite;
+  will-change: transform;
 }
 
 /* ===== Print / Download Portfolio ===== */
@@ -261,4 +382,75 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
+
+
+/* ============================================================
+   TRACK DESAIN — EDISI KANVAS GELAP (Portofolio 2025)
+   Bahasa visual: hitam pekat + kuning lemon + serif kontras tinggi.
+
+   Semua aturan di bawah HANYA hidup di dalam pembungkus
+   <main class="theme-design"> (lihat app/design/page.tsx).
+   Halaman terang "/" dan "/web" tidak memakai pembungkus itu, jadi
+   tidak tersentuh sama sekali.
+
+   Kenapa lewat pemetaan nama utility? Karena komponen design-*
+   memakai utility terang (bg-white, text-neutral-600, border-black/5)
+   di puluhan tempat; satu lapisan di sini jauh lebih konsisten
+   daripada mengganti kelas satu per satu. Aturan di luar @layer
+   selalu menang atas utility Tailwind v4 yang ada di @layer utilities.
+   ============================================================ */
+.theme-design {
+  background-color: var(--color-mosaic-black);
+  color: var(--color-mosaic-cream);
+}
+
+/* ── Permukaan ── */
+.theme-design .bg-white { background-color: var(--color-mosaic-coal); }
+.theme-design .bg-white\/70 { background-color: rgba(27, 27, 27, 0.72); }
+.theme-design .bg-white\/90 { background-color: rgba(27, 27, 27, 0.92); }
+
+/* ── Teks ── */
+.theme-design .text-mosaic-ink { color: var(--color-mosaic-cream); }
+.theme-design .text-neutral-300 { color: rgba(244, 241, 234, 0.3); }
+.theme-design .text-neutral-400 { color: rgba(244, 241, 234, 0.45); }
+.theme-design .text-neutral-500 { color: rgba(244, 241, 234, 0.58); }
+.theme-design .text-neutral-600 { color: rgba(244, 241, 234, 0.68); }
+.theme-design .text-neutral-700 { color: rgba(244, 241, 234, 0.78); }
+.theme-design .text-neutral-800 { color: rgba(244, 241, 234, 0.88); }
+.theme-design .text-emerald-700 { color: #5fd39a; }
+
+/* ── Garis & bayangan ── */
+.theme-design .border-black\/5 { border-color: rgba(255, 255, 255, 0.08); }
+.theme-design .border-black\/10 { border-color: rgba(255, 255, 255, 0.12); }
+.theme-design .border-black\/15 { border-color: rgba(255, 255, 255, 0.18); }
+.theme-design .border-neutral-300 { border-color: rgba(255, 255, 255, 0.22); }
+.theme-design .divide-black\/5 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.theme-design .shadow-sm { box-shadow: none; }
+
+/* ── Hover ── */
+.theme-design .hover\:border-black:hover { border-color: rgba(244, 241, 234, 0.5); }
+.theme-design .hover\:text-black:hover { color: var(--color-mosaic-cream); }
+
+/* ── Seleksi teks ikut aksen ── */
+.theme-design ::selection {
+  background: var(--color-mosaic-lemon);
+  color: var(--color-mosaic-black);
+}
+
+/* ── Craft tipografi (khusus track desain) ──
+   Ligatur + kern aktif di judul display, heading dirapikan
+   (baris seimbang), dan angka teknis rata kolom. */
+.theme-design .font-editorial {
+  font-feature-settings: "liga" 1, "dlig" 1, "kern" 1;
+  font-optical-sizing: auto;
+}
+.theme-design :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+.theme-design .tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
 

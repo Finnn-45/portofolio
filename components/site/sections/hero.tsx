@@ -5,6 +5,7 @@ import { useLang } from "@/lib/i18n";
 import { C } from "@/lib/content";
 import { motion } from "framer-motion";
 import { LangSwitch } from "@/components/site/lang-switch";
+import { Photo3DCard } from "@/components/site/photo-3d-card";
 import { useState, useEffect, Suspense } from "react";
 import dynamic from "next/dynamic";
 const HeroCanvas = dynamic(
@@ -29,7 +30,7 @@ export function Hero() {
     update();
     const t = setInterval(update, 1000);
     return () => clearInterval(t);
-  }, []);
+  }, [lang]);
 
   return (
     <section
@@ -98,25 +99,36 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* ── CENTER: big title ── */}
-      <div className="relative z-10 flex-1 flex flex-col justify-end px-8 md:px-12 lg:px-16 pb-4">
+      {/* ── CENTER: big title + kartu foto 3D ─ */}
+      <div className="relative z-10 flex-1 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-8 px-8 md:px-12 lg:px-16 pb-4">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="min-w-0 flex-1"
         >
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/50 mb-3">
             {t(C.hero.kicker)}
           </p>
           <h1
             className="font-black text-white leading-none tracking-tighter select-none"
-            style={{ fontSize: "clamp(64px, 17vw, 240px)", lineHeight: 0.87 }}
+            style={{ fontSize: "clamp(56px, 11.5vw, 200px)", lineHeight: 0.87 }}
           >
             Portfolio
           </h1>
           <p className="mt-5 max-w-md text-sm text-white/40 leading-relaxed font-light">
             {t(profile.tagline)}
           </p>
+        </motion.div>
+
+        {/* Kartu foto 3D — nutup celah kosong di kanan, tetap kalem */}
+        <motion.div
+          initial={{ opacity: 0, y: 44 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 w-full max-w-[210px] shrink-0 self-center sm:max-w-[250px] lg:mb-2 lg:w-[26%] lg:max-w-[330px] lg:self-end"
+        >
+          <Photo3DCard />
         </motion.div>
       </div>
 

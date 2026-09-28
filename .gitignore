@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# aset referensi kerja (bukan dipakai halaman — lihat public/images/behance-ref)
+/public/images/behance-ref/

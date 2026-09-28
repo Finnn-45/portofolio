@@ -1,4 +1,5 @@
 import type { Bi } from "./i18n";
+import type { Discipline } from "./mosaic";
 
 /* ============================================================
    DATA PORTFOLIO — bilingual (id / en).
@@ -360,4 +361,106 @@ export const achievements = [
       "ASEAN-level data science certification"
     ),
   },
+];
+/* ============================================================
+   PETA KERJA DESAIN — sumber data mozaik di track /design.
+   Tiap entri jadi satu kotak mozaik:
+     • discipline → warna kotak (lihat DISCIPLINE_COLORS di lib/mosaic)
+     • weight     → ukuran kotak (2 = cakupan pekerjaan paling luas)
+   Isinya diambil dari pengalaman yang sama dengan `professional`,
+   jadi mozaiknya beneran bisa dibaca — bukan warna acak.
+============================================================ */
+export type DesignWork = {
+  id: string;
+  title: Bi;
+  context: Bi;
+  discipline: Discipline;
+  weight: 1 | 2;
+  year: Bi;
+  note: Bi;
+};
+
+export const designWorks: DesignWork[] = [
+  {
+    id: "01",
+    title: b("Social Media Branding", "Social Media Branding"),
+    context: b("MENTION — SMK TI BAZMA", "MENTION — SMK TI BAZMA"),
+    discipline: "branding",
+    weight: 2,
+    year: b("2025 — Sekarang", "2025 — Present"),
+    note: b(
+      "Seluruh desain media dan informasi sekolah — konten visual, grafis, video, sampai materi promosi.",
+      "All media and information design for the school — visual content, graphics, video, and promotional material."
+    ),
+  },
+  {
+    id: "02",
+    title: b("Desain Event Nasional", "National Event Design"),
+    context: b("HIMPANA", "HIMPANA"),
+    discipline: "print",
+    weight: 2,
+    year: b("2025", "2025"),
+    note: b(
+      "Materi visual event nasional: X-banner, banner, dan kebutuhan cetak lainnya.",
+      "Visual material for a national event: X-banners, banners, and other print needs."
+    ),
+  },
+  {
+    id: "03",
+    title: b("Konten Sosial Harian", "Daily Social Content"),
+    context: b("BAZMA PERTAMINA", "BAZMA PERTAMINA"),
+    discipline: "content",
+    weight: 1,
+    year: b("2025", "2025"),
+    note: b(
+      "Rencana konten bulanan diubah jadi aset siap unggah untuk kebutuhan Instagram harian.",
+      "Monthly content plans turned into upload-ready assets for daily Instagram needs."
+    ),
+  },
+  {
+    id: "04",
+    title: b("Materi Promosi SPMB", "SPMB Promo Material"),
+    context: b("SPMB SMK TI BAZMA 2025", "SPMB SMK TI BAZMA 2025"),
+    discipline: "print",
+    weight: 1,
+    year: b("2025", "2025"),
+    note: b(
+      "Desain materi promosi kampanye penerimaan murid baru — dari cetak sampai konten digital.",
+      "Promotional design for the admission campaign — from print to digital content."
+    ),
+  },
+  {
+    id: "05",
+    title: b("Dokumentasi Foto & Video", "Photo & Video Documentation"),
+    context: b("TIM MULTIMEDIA SPMB", "SPMB MULTIMEDIA TEAM"),
+    discipline: "media",
+    weight: 1,
+    year: b("2025", "2025"),
+    note: b(
+      "Liputan foto dan video kegiatan sekolah untuk arsip dan konten kampanye.",
+      "Photo and video coverage of school activities for archives and campaign content."
+    ),
+  },
+  {
+    id: "06",
+    title: b("Ilustrasi & Aset Grafis", "Illustration & Graphic Assets"),
+    context: b("KONTEN & KEBUTUHAN CETAK", "CONTENT & PRINT NEEDS"),
+    discipline: "illustration",
+    weight: 1,
+    year: b("2024 — 2025", "2024 — 2025"),
+    note: b(
+      "Ilustrasi dan aset visual pendukung untuk konten, kampanye, dan materi cetak.",
+      "Illustration and supporting visual assets for content, campaigns, and print."
+    ),
+  },
+];
+
+/* Perkakas desain — dipakai di track /design (semua sudah tercatat
+   di skills/fieldNotes, bukan klaim baru). */
+export const designToolkit = [
+  { name: "Figma", use: b("layout & UI/UX", "layout & UI/UX") },
+  { name: "Adobe Illustrator", use: b("vektor & ilustrasi", "vector & illustration") },
+  { name: "Canva", use: b("materi cepat & kolaborasi", "quick material & collaboration") },
+  { name: "Kamera & Ponsel", use: b("dokumentasi event", "event documentation") },
+  { name: "Produksi Video", use: b("editing & format unggah", "editing & upload formats") },
 ];

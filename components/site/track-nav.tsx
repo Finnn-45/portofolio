@@ -16,6 +16,10 @@ export function TrackNav() {
     { href: "/design", label: t(C.track.design) },
   ];
 
+  /* Di track desain (kanvas gelap) pill aktifnya kuning lemon;
+     di "/" dan "/web" tetap seperti semula. */
+  const designTrack = pathname === "/design";
+
   return (
     <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[80]">
       <nav className="flex items-center gap-0.5 rounded-full border border-white/15 bg-[#0d0d0d]/85 p-0.5 backdrop-blur shadow-[0_8px_24px_-12px_rgba(0,0,0,0.5)]">
@@ -27,7 +31,9 @@ export function TrackNav() {
               href={item.href}
               className={`rounded-full px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] transition-colors duration-200 ${
                 active
-                  ? "bg-white text-[#0d0d0d]"
+                  ? designTrack
+                    ? "bg-[#ffe846] text-[#0d0d0d]"
+                    : "bg-white text-[#0d0d0d]"
                   : "text-white/55 hover:text-white"
               }`}
             >

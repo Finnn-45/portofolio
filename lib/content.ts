@@ -245,6 +245,12 @@ export const C = {
       b("INSTAGRAM", "INSTAGRAM"),
       b("CV / RESUME", "CV / RESUME"),
     ],
+    status: b("Terbuka untuk magang digital", "Open for digital internship"),
+    directLabel: b("[kanal langsung]", "[direct channels]"),
+    mailCta: b("Kirim email", "Send an email"),
+    marquee: b("Mari Berkolaborasi", "Let's Collaborate"),
+    timezone: b("Waktu Bogor", "Bogor time"),
+    backToTop: b("Kembali ke atas", "Back to top"),
     footerLeft: b("© 2026 ARFIN DESCA ALZACHRI", "© 2026 ARFIN DESCA ALZACHRI"),
     footerRight: b(
       "Terima kasih sudah menggulir sampai bawah.",
@@ -281,8 +287,129 @@ export const C = {
       "Kolaborasi desain dan produksi konten visual — dari branding media sosial sekolah sampai materi kampanye event nasional.",
       "Design collaborations and visual content production — from school social-media branding to national event campaign material."
     ),
+    /* ── edisi kanvas gelap (Portofolio 2025): folder + pita kuning ── */
+    folderOwner: b("Folder porto milik", "Portfolio folder of"),
+    selectedWork: b("Karya Terpilih", "Selected Work"),
+    folderRoles: [
+      b("Desainer Grafis", "Graphic Designer"),
+      b("Ilustrator", "Illustrator"),
+      b("Desainer Visual", "Visual Designer"),
+    ],
+    updateLabel: b("Pembaruan v.1.0", "Update v.1.0"),
+    ribbonItems: [
+      b("Arfin Desca Visual", "Arfin Desca Visual"),
+      b("Folder Portofolio Arfin", "Arfin's Portfolio Folder"),
+    ],
     collab: b("Kolaborasi Desain", "Design Collaborations"),
     achievements: b("Pencapaian & Sertifikasi", "Achievements & Certifications"),
+    palette: b("Palet Warna", "Color Palette"),
+    paletteNote: b(
+      "Warna dipakai hemat supaya tiap karya tetap punya suara — bukan sekadar rame.",
+      "Color used sparingly so every piece keeps one voice — bright, never loud."
+    ),
+    gridSpec: b(
+      "grid 12 kolom · gutter 24 · margin 96 · baseline 32",
+      "12-column grid · 24 gutter · 96 margin · 32 baseline"
+    ),
+    /* ── peta kerja (mozaik yang bisa dibaca) ── */
+    worksTitle: b("Peta Kerja Desain.", "Design Work Map."),
+    worksNote: b(
+      "Tiap kotak satu pekerjaan nyata. Warnanya menandai bidang, ukurannya menandai luas cakupan.",
+      "Each tile is a real piece of work. Colour marks the discipline, size marks the scope."
+    ),
+    legendTitle: b("Cara baca mozaik", "How to read the mosaic"),
+    legendHint: b(
+      "Satu bidang = satu warna. Kotak besar = pekerjaan dengan cakupan paling luas.",
+      "One discipline = one colour. Large tiles = the widest scope of work."
+    ),
+    legendCount: b("pekerjaan", "work"),
+    disciplines: {
+      branding: b("Branding Media Sosial", "Social Media Branding"),
+      content: b("Konten Sosial", "Social Content"),
+      print: b("Cetak & Promosi", "Print & Promo"),
+      media: b("Foto & Video", "Photo & Video"),
+      illustration: b("Ilustrasi", "Illustration"),
+      ui: b("UI/UX", "UI/UX"),
+      program: b("Program & Sertifikasi", "Program & Certification"),
+    },
+    /* ── tentang (versi track desain) ── */
+    aboutTitle: b("Desainer di balik", "The designer behind"),
+    principlesTitle: b("Tiga aturan main.", "Three ground rules."),
+    principles: [
+      {
+        title: b("Terbaca dulu, baru cantik.", "Legible first, pretty second."),
+        desc: b(
+          "Hierarki dan keterbacaan dikunci lebih dulu. Dekorasi datang setelah pesannya jelas.",
+          "Hierarchy and legibility come first. Decoration follows once the message is clear."
+        ),
+      },
+      {
+        title: b("Satu warna, satu peran.", "One colour, one role."),
+        desc: b(
+          "Warna bukan pengisi ruang — ia penanda. Karena itu tiap bidang punya warnanya sendiri.",
+          "Colour is not filler — it is a marker. That is why every discipline keeps its own colour."
+        ),
+      },
+      {
+        title: b("Grid dulu, ekspresi kemudian.", "Grid first, expression after."),
+        desc: b(
+          "Semua materi duduk di grid 12 kolom yang sama supaya satu kampanye terasa satu suara.",
+          "Every piece sits on the same 12-column grid so one campaign reads as one voice."
+        ),
+      },
+    ],
+    /* ── proses & perkakas ── */
+    processTitle: b("Cara saya bekerja.", "How I work."),
+    processNote: b(
+      "Alur yang sama dipakai untuk konten harian maupun materi event nasional.",
+      "The same flow runs for daily content and for national event material."
+    ),
+    steps: [
+      {
+        title: b("Brief & Riset", "Brief & Research"),
+        desc: b("Memastikan tujuan, audiens, dan pesan utamanya jelas sebelum menyentuh kanvas.", "Nail the goal, the audience, and the core message before touching the canvas."),
+      },
+      {
+        title: b("Konsep & Referensi", "Concept & References"),
+        desc: b("Menyusun arah visual, palet, dan referensi supaya keputusan desain punya alasan.", "Set the visual direction, palette, and references so design decisions have reasons."),
+      },
+      {
+        title: b("Desain & Produksi", "Design & Production"),
+        desc: b("Eksekusi di grid yang konsisten — tipografi, warna, dan komposisi dijaga rapi.", "Execution on a consistent grid — typography, colour, and composition kept tight."),
+      },
+      {
+        title: b("Revisi & Uji Cetak", "Revision & Print Test"),
+        desc: b("Revisi berbasis masukan, lalu cek ukuran, skala, dan keterbacaan di media akhirnya.", "Revisions from feedback, then checking size, scale, and legibility on the final medium."),
+      },
+      {
+        title: b("Serah Terima Aset", "Asset Handover"),
+        desc: b("File final diserahkan rapi: format cetak, format sosial, plus sumber yang bisa diedit.", "Final files handed over tidy: print format, social format, plus editable sources."),
+      },
+    ],
+    toolkitTitle: b("Perkakas & bahan.", "Tools & material."),
+    toolkitNote: b(
+      "Alat yang benar-benar saya pakai sehari-hari untuk desain dan produksi konten.",
+      "The tools I actually use daily for design and content production."
+    ),
+    /* ── kontak (versi track desain) ── */
+    contactTitle: b("Mari bikin", "Let's make"),
+    contactTitleAccent: b("sesuatu.", "something."),
+    contactNote: b(
+      "Terbuka untuk kolaborasi desain, magang, maupun proyek lepas — kirim brief singkatnya saja.",
+      "Open to design collaborations, internships, and freelance work — just send a short brief."
+    ),
+    /* ── galeri ala behance: feed vertikal 1 kolom ── */
+    galleryKicker: b("Galeri Proyek 2025", "2025 Project Gallery"),
+    galleryIntro: b(
+      "Gulir ke bawah kayak buka galeri Behance: tiap karya tampil penuh satu layar, lengkap dengan konteks, tahun, dan catatannya.",
+      "Scroll down like opening a Behance gallery: each work fills one screen, complete with context, year, and notes."
+    ),
+    galleryCta: b("Lihat konteks karya", "View work context"),
+    gallerySpecs: b("Spesifikasi artboard", "Artboard specs"),
+    galleryCaseNote: b("Catatan kasus", "Case note"),
+    galleryIndex: b("Indeks karya", "Work index"),
+    galleryCount: b("karya terdokumentasi", "documented works"),
+    galleryEnd: b("Akhir galeri — terima kasih sudah melihat sampai bawah.", "End of gallery — thanks for viewing all the way down."),
   },
 
   github: {

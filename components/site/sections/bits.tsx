@@ -3,32 +3,21 @@
 import { profile } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 import { C } from "@/lib/content";
-import { motion } from "framer-motion";
 
-export function SectionLabel({
-  dark = false,
-  className = "",
-}: {
-  dark?: boolean;
-  className?: string;
-}) {
+/* Label pembatas bagian: peran di kiri, tanggal hari ini di kanan.
+   Murni teks — tanpa animasi masuk. */
+export function SectionLabel({ className = "" }: { className?: string }) {
   const { t } = useLang();
   const today = new Date()
     .toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" })
     .toUpperCase();
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className={`flex justify-between items-start text-xs md:text-sm font-medium tracking-wider uppercase select-none ${
-        dark ? "text-neutral-400" : "text-neutral-600"
-      } ${className}`}
+    <div
+      className={`flex items-start justify-between text-xs font-medium uppercase tracking-wider select-none md:text-sm text-neutral-600 ${className}`}
     >
       <span>{t(profile.roles)}</span>
       <span>{today}</span>
-    </motion.div>
+    </div>
   );
 }
 
@@ -53,48 +42,26 @@ export function ArrowUpRight() {
   );
 }
 
-/* Pita berjalan.
-   • variant "default" → pita gelap tipis (dipakai "/" dan "/web")
-   • variant "lemon"   → pita kuning tanda tangan edisi gelap /design,
-     motif "→ Arfin Desca Visual → Folder Portofolio Arfin →" yang
-     berulang tanpa putus (lihat public/images/behance-ref/04.gif). */
-export function TickerStrip({ variant = "default" }: { variant?: "default" | "lemon" }) {
+/* Pita kuning berjalan — satu-satunya animasi yang tersisa di situs ini,
+   dan hanya ada di track /design (motif dari referensi "Portofolio 2025").
+   Loop mulus: 4 salinan daftar → geser -50% = pas 2 siklus. */
+export function TickerStrip() {
   const { tl } = useLang();
-  const lemon = variant === "lemon";
-  const items = tl(lemon ? C.design.ribbonItems : C.ticker.items);
-  /* 4 salinan = 8 satuan → geser -50% pas 2 siklus, jadi loop-nya mulus */
+  const items = tl(C.design.ribbonItems);
   const loop = [...items, ...items, ...items, ...items];
 
-  if (lemon) {
-    return (
-      <div className="group w-full overflow-hidden border-y border-black/10 bg-mosaic-lemon">
-        <div className="animate-ribbon flex w-max items-center whitespace-nowrap py-3 group-hover:[animation-play-state:paused]">
-          {loop.map((item, i) => (
-            <span
-              key={i}
-              className="inline-flex items-center gap-5 px-5 text-[13px] font-extrabold uppercase tracking-[0.14em] text-mosaic-black md:text-base"
-            >
-              <span aria-hidden className="text-base leading-none md:text-lg">
-                →
-              </span>
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="w-full overflow-hidden bg-[#0d0d0d] border-y border-white/5 group">
-      <div className="py-3.5 flex whitespace-nowrap animate-marquee-left group-hover:[animation-play-state:paused]">
-        {[...items, ...items, ...items].map((item, i) => (
+    <div className="group w-full overflow-hidden border-y border-black/10 bg-mosaic-lemon">
+      <div className="animate-ribbon flex w-max items-center whitespace-nowrap py-3 group-hover:[animation-play-state:paused]">
+        {loop.map((item, i) => (
           <span
             key={i}
-            className="inline-flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.22em] text-white/35 px-8"
+            className="inline-flex items-center gap-5 px-5 text-[13px] font-extrabold uppercase tracking-[0.14em] text-mosaic-black md:text-base"
           >
+            <span aria-hidden className="text-base leading-none md:text-lg">
+              →
+            </span>
             {item}
-            <span className="w-1 h-1 rounded-full bg-[#831514]/60 inline-block" />
           </span>
         ))}
       </div>

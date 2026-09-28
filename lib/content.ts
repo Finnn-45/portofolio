@@ -1,7 +1,7 @@
-import type { Bi } from "./i18n";
+﻿import type { Bi } from "./i18n";
 
 /* ============================================================
-   SEMUA TEKS SITUS — bilingual (id / en).
+   SEMUA TEKS SITUS â€” bilingual (id / en).
    Nada: profesional, menjual, apa adanya. Tanpa lebay.
 ============================================================ */
 
@@ -10,7 +10,6 @@ const b = (id: string, en: string): Bi => ({ id, en });
 export type CaseStudyContent = {
   id: string;
   title: Bi;
-  subtitle: Bi;
   category: Bi;
   year: string;
   tools: string[];
@@ -24,33 +23,14 @@ export type CaseStudyContent = {
 };
 
 export const C = {
-  loader: {
-    roles: [
-      b("PENGEMBANG WEB", "WEB DEVELOPER"),
-      b("ENGINEER IOT", "IOT ENGINEER"),
-      b("DESAINER VISUAL", "VISUAL DESIGNER"),
-    ],
-  },
-
   hero: {
-    kicker: b("web · iot · desain", "web · iot · design"),
+    kicker: b("web Â· iot Â· desain", "web Â· iot Â· design"),
     title: b("Portofolio", "Portfolio"),
     chip: b("terbuka untuk magang", "open for internship"),
     location: b("Bogor, ID", "Bogor, ID"),
     scroll: b("gulir", "scroll"),
     email: b("Email", "Email"),
     github: b("GitHub", "GitHub"),
-  },
-
-  ticker: {
-    items: [
-      b("Terbuka untuk Magang Digital", "Open for Digital Internship"),
-      b("Dipakai 1.000+ Pengguna", "Serving 1.000+ Users"),
-      b("Bogor, Indonesia", "Bogor, Indonesia"),
-      b("SMK TI BAZMA", "SMK TI BAZMA"),
-      b("Web · IoT · Desain", "Web · IoT · Design"),
-      b("Next.js · Arduino · Figma", "Next.js · Arduino · Figma"),
-    ],
   },
 
   about: {
@@ -62,14 +42,12 @@ export const C = {
       "Vocational high school student at SMK TI BAZMA, focused on web development, IoT, and visual design."
     ),
     p2: b(
-      "Saya membangun produk dari nol: merancang antarmuka, menulis front-end, sampai menyambungkannya ke perangkat. Pendekatannya sederhana — kode rapi, perangkat yang benar-benar bekerja, dan tampilan yang enak dipakai. Saat ini saya mencari pengalaman magang digital untuk mengasah cara kerja profesional.",
-      "I build products end to end: designing interfaces, writing the front-end, and connecting it to hardware. The approach is simple — clean code, hardware that actually works, and interfaces that feel right. I am currently looking for a digital internship to sharpen how I work in a professional team."
+      "Saya membangun produk dari nol: merancang antarmuka, menulis front-end, sampai menyambungkannya ke perangkat. Pendekatannya sederhana â€” kode rapi, perangkat yang benar-benar bekerja, dan tampilan yang enak dipakai. Saat ini saya mencari pengalaman magang digital untuk mengasah cara kerja profesional.",
+      "I build products end to end: designing interfaces, writing the front-end, and connecting it to hardware. The approach is simple â€” clean code, hardware that actually works, and interfaces that feel right. I am currently looking for a digital internship to sharpen how I work in a professional team."
     ),
     emailLabel: b("Email", "Email"),
     linkedinLabel: b("LinkedIn", "LinkedIn"),
     locationLabel: b("Lokasi", "Location"),
-    fullscreen: b("Lihat ID card selayar", "View ID card fullscreen"),
-    fullscreenShort: b("Selayar", "Fullscreen"),
   },
 
   services: {
@@ -78,16 +56,6 @@ export const C = {
       "Saya menggabungkan pengembangan web, IoT, dan desain grafis dalam satu alur kerja. Fokusnya sederhana: kode yang bersih, perangkat yang berjalan stabil, dan visual yang kuat.",
       "I combine web development, IoT, and graphic design in one workflow. The focus is simple: clean code, hardware that runs reliably, and visuals with impact."
     ),
-    row1: [
-      b("Pengembangan Web", "Web Development"),
-      b("Rekayasa IoT", "IoT Engineering"),
-      b("Desain UI/UX", "UI/UX Design"),
-    ],
-    row2: [
-      b("Ilustrasi Grafis", "Graphic Illustration"),
-      b("Arduino & ESP32", "Arduino & ESP32"),
-      b("Desain Visual", "Visual Design"),
-    ],
     cards: [
       {
         title: b("Pengembangan Web", "Web Development"),
@@ -99,15 +67,15 @@ export const C = {
       {
         title: b("Rekayasa IoT", "IoT Engineering"),
         desc: b(
-          "Perangkat yang benar-benar bekerja — dari sensor dan mikrokontroler sampai dashboard pemantauan.",
-          "Devices that actually work — from sensors and microcontrollers to monitoring dashboards."
+          "Perangkat yang benar-benar bekerja â€” dari sensor dan mikrokontroler sampai dashboard pemantauan.",
+          "Devices that actually work â€” from sensors and microcontrollers to monitoring dashboards."
         ),
       },
       {
         title: b("Desain UI/UX", "UI/UX Design"),
         desc: b(
           "Antarmuka yang jelas dan enak dipakai, dirancang dari alur pengguna, bukan tebakan.",
-          "Interfaces that are clear and pleasant to use — designed from real user flows, not guesswork."
+          "Interfaces that are clear and pleasant to use â€” designed from real user flows, not guesswork."
         ),
       },
       {
@@ -120,8 +88,8 @@ export const C = {
       {
         title: b("Arduino & ESP32", "Arduino & ESP32"),
         desc: b(
-          "Pemrograman embedded dengan C++ — kendali motor, sensor, dan komunikasi nirkabel.",
-          "Embedded programming in C++ — motor control, sensors, and wireless communication."
+          "Pemrograman embedded dengan C++ â€” kendali motor, sensor, dan komunikasi nirkabel.",
+          "Embedded programming in C++ â€” motor control, sensors, and wireless communication."
         ),
       },
       {
@@ -137,23 +105,17 @@ export const C = {
   tools: {
     titleLines: [b("Alat yang", "Tools I'm"), b("saya kuasai.", "fluent in.")],
     lede: b(
-      "Dari menulis kode sampai menyusun desain — ini alat yang saya pakai sehari-hari untuk membangun produk digital dari nol sampai siap dipakai.",
-      "From writing code to crafting design — these are the tools I use daily to build digital products from scratch to shipped."
+      "Dari menulis kode sampai menyusun desain â€” ini alat yang saya pakai sehari-hari untuk membangun produk digital dari nol sampai siap dipakai.",
+      "From writing code to crafting design â€” these are the tools I use daily to build digital products from scratch to shipped."
     ),
   },
 
   inside: {
     titleLines: [b("Apa saja yang", "What you will"), b("ada di dalam?", "find inside?")],
     lede: b(
-      "Terus gulir — seluruh proyek, perangkat, dan pencapaian tersusun rapi di bawah ini.",
-      "Keep scrolling — every project, device, and achievement is laid out neatly below."
+      "Terus gulir â€” seluruh proyek, perangkat, dan pencapaian tersusun rapi di bawah ini.",
+      "Keep scrolling â€” every project, device, and achievement is laid out neatly below."
     ),
-    list: [
-      b("PENGEMBANGAN WEB", "WEB DEVELOPMENT"),
-      b("PROYEK IOT", "IOT PROJECTS"),
-      b("KARYA DESAIN", "DESIGN WORKS"),
-      b("PENCAPAIAN", "ACHIEVEMENTS"),
-    ],
     cards: [
       {
         num: "01",
@@ -190,31 +152,18 @@ export const C = {
     ],
   },
 
-  cover: {
-    cornerLeft: b("Portfolio", "Portfolio"),
-    cornerYear: b("2025—2026", "2025—2026"),
-    cornerLocation: b("Bogor, ID", "Bogor, ID"),
-    cornerSchool: b("SMK TI BAZMA", "SMK TI BAZMA"),
-    headline: [
-      b("Pengembangan Web.", "Web Development."),
-      b("Rekayasa IoT.", "IoT Engineering."),
-      b("Desain Visual.", "Visual Design."),
-    ],
-    tags: [b("Web Dev", "Web Dev"), b("IoT", "IoT"), b("Desain", "Design")],
-  },
-
   works: {
     titleLines: [b("Merancang Pengalaman", "Designing Digital"), b("Digital.", "Experiences.")],
     lede: b(
-      "Klik salah satu karya untuk membuka studi kasusnya — mulai dari tantangan, proses pengerjaan, sampai hasil yang dicapai.",
-      "Click any work to open its case study — from the challenge and the process to the outcome it delivered."
+      "Klik salah satu karya untuk membuka studi kasusnya â€” mulai dari tantangan, proses pengerjaan, sampai hasil yang dicapai.",
+      "Click any work to open its case study â€” from the challenge and the process to the outcome it delivered."
     ),
-    githubKicker: b("github.com/Finnn-45 — open source", "github.com/Finnn-45 — open source"),
+    githubKicker: b("github.com/Finnn-45 â€” open source", "github.com/Finnn-45 â€” open source"),
     githubTitle: b("Proyek Open Source.", "Open Source Projects."),
     githubCta: b("Lihat semua di GitHub", "See all on GitHub"),
     githubNote: b(
-      "Repo publik dari github.com/Finnn-45 — klik kartu untuk membuka kode sumbernya.",
-      "Public repositories from github.com/Finnn-45 — click a card to open its source."
+      "Repo publik dari github.com/Finnn-45 â€” klik kartu untuk membuka kode sumbernya.",
+      "Public repositories from github.com/Finnn-45 â€” click a card to open its source."
     ),
   },
 
@@ -226,17 +175,14 @@ export const C = {
       b("04 / Solusi", "04 / Solution"),
       b("05 / Hasil", "05 / Result"),
     ],
-    close: b("Tutup [Esc]", "Close [Esc]"),
-    closeShort: b("Tutup", "Close"),
     repoLink: b("Lihat kode sumber di GitHub", "View source on GitHub"),
-    back: b("← Kembali ke Portofolio", "← Back to Portfolio"),
   },
 
   contact: {
     titleLines: [b("Mari", "Let's"), b("Berkolaborasi.", "Collaborate.")],
     lede: b(
-      "Punya ide, proyek, atau sekadar ingin berdiskusi? Jangan ragu menghubungi saya — saya terbuka untuk magang, kolaborasi, maupun proyek lepas.",
-      "Got an idea, a project, or just want to talk? Feel free to reach out — I am open to internships, collaborations, and freelance work."
+      "Punya ide, proyek, atau sekadar ingin berdiskusi? Jangan ragu menghubungi saya â€” saya terbuka untuk magang, kolaborasi, maupun proyek lepas.",
+      "Got an idea, a project, or just want to talk? Feel free to reach out â€” I am open to internships, collaborations, and freelance work."
     ),
     links: [
       b("GITHUB", "GITHUB"),
@@ -248,10 +194,8 @@ export const C = {
     status: b("Terbuka untuk magang digital", "Open for digital internship"),
     directLabel: b("[kanal langsung]", "[direct channels]"),
     mailCta: b("Kirim email", "Send an email"),
-    marquee: b("Mari Berkolaborasi", "Let's Collaborate"),
-    timezone: b("Waktu Bogor", "Bogor time"),
     backToTop: b("Kembali ke atas", "Back to top"),
-    footerLeft: b("© 2026 ARFIN DESCA ALZACHRI", "© 2026 ARFIN DESCA ALZACHRI"),
+    footerLeft: b("Â© 2026 ARFIN DESCA ALZACHRI", "Â© 2026 ARFIN DESCA ALZACHRI"),
     footerRight: b(
       "Terima kasih sudah menggulir sampai bawah.",
       "Thank you for scrolling all the way down."
@@ -259,18 +203,17 @@ export const C = {
   },
 
   cv: {
-    back: b("← kembali ke situs", "← back to site"),
+    back: b("â† kembali ke situs", "â† back to site"),
     savePdf: b("Simpan sebagai PDF", "Save as PDF"),
-    label: b("portfolio — 2026", "portfolio — 2026"),
+    label: b("portfolio â€” 2026", "portfolio â€” 2026"),
     education: b("pendidikan", "education"),
     experience: b("pengalaman", "experience"),
-    professional: b("pengalaman profesional — kolaborasi MENTION", "professional experience — MENTION collaborations"),
+    professional: b("pengalaman profesional â€” kolaborasi MENTION", "professional experience â€” MENTION collaborations"),
     skills: b("keahlian teknis", "technical skills"),
     achievements: b("pencapaian & sertifikasi", "achievement & certification"),
     works: b("karya terpilih", "selected works"),
-    present: b("Sekarang", "Now"),
-    repo: b("kode sumber — github.com/Finnn-45", "source code — github.com/Finnn-45"),
-    footerLeft: b("[arfin desca alzachri] — [portfolio]", "[arfin desca alzachri] — [portfolio]"),
+    repo: b("kode sumber â€” github.com/Finnn-45", "source code â€” github.com/Finnn-45"),
+    footerLeft: b("[arfin desca alzachri] â€” [portfolio]", "[arfin desca alzachri] â€” [portfolio]"),
     footerRight: b("[2026]", "[2026]"),
   },
 
@@ -281,13 +224,11 @@ export const C = {
   },
 
   design: {
-    kicker: b("Porto Desain", "Design Portfolio"),
-    titleLines: [b("Desain yang", "Design that"), b("Bicara.", "Speaks.")],
     lede: b(
-      "Kolaborasi desain dan produksi konten visual — dari branding media sosial sekolah sampai materi kampanye event nasional.",
-      "Design collaborations and visual content production — from school social-media branding to national event campaign material."
+      "Kolaborasi desain dan produksi konten visual â€” dari branding media sosial sekolah sampai materi kampanye event nasional.",
+      "Design collaborations and visual content production â€” from school social-media branding to national event campaign material."
     ),
-    /* ── edisi kanvas gelap (Portofolio 2025): folder + pita kuning ── */
+    /* â”€â”€ edisi kanvas gelap (Portofolio 2025): folder + pita kuning â”€â”€ */
     folderOwner: b("Folder porto milik", "Portfolio folder of"),
     selectedWork: b("Karya Terpilih", "Selected Work"),
     folderRoles: [
@@ -302,27 +243,8 @@ export const C = {
     ],
     collab: b("Kolaborasi Desain", "Design Collaborations"),
     achievements: b("Pencapaian & Sertifikasi", "Achievements & Certifications"),
-    palette: b("Palet Warna", "Color Palette"),
-    paletteNote: b(
-      "Warna dipakai hemat supaya tiap karya tetap punya suara — bukan sekadar rame.",
-      "Color used sparingly so every piece keeps one voice — bright, never loud."
-    ),
-    gridSpec: b(
-      "grid 12 kolom · gutter 24 · margin 96 · baseline 32",
-      "12-column grid · 24 gutter · 96 margin · 32 baseline"
-    ),
-    /* ── peta kerja (mozaik yang bisa dibaca) ── */
+    /* â”€â”€ peta kerja (mozaik yang bisa dibaca) â”€â”€ */
     worksTitle: b("Peta Kerja Desain.", "Design Work Map."),
-    worksNote: b(
-      "Tiap kotak satu pekerjaan nyata. Warnanya menandai bidang, ukurannya menandai luas cakupan.",
-      "Each tile is a real piece of work. Colour marks the discipline, size marks the scope."
-    ),
-    legendTitle: b("Cara baca mozaik", "How to read the mosaic"),
-    legendHint: b(
-      "Satu bidang = satu warna. Kotak besar = pekerjaan dengan cakupan paling luas.",
-      "One discipline = one colour. Large tiles = the widest scope of work."
-    ),
-    legendCount: b("pekerjaan", "work"),
     disciplines: {
       branding: b("Branding Media Sosial", "Social Media Branding"),
       content: b("Konten Sosial", "Social Content"),
@@ -332,8 +254,7 @@ export const C = {
       ui: b("UI/UX", "UI/UX"),
       program: b("Program & Sertifikasi", "Program & Certification"),
     },
-    /* ── tentang (versi track desain) ── */
-    aboutTitle: b("Desainer di balik", "The designer behind"),
+    /* â”€â”€ tentang (versi track desain) â”€â”€ */
     principlesTitle: b("Tiga aturan main.", "Three ground rules."),
     principles: [
       {
@@ -346,8 +267,8 @@ export const C = {
       {
         title: b("Satu warna, satu peran.", "One colour, one role."),
         desc: b(
-          "Warna bukan pengisi ruang — ia penanda. Karena itu tiap bidang punya warnanya sendiri.",
-          "Colour is not filler — it is a marker. That is why every discipline keeps its own colour."
+          "Warna bukan pengisi ruang â€” ia penanda. Karena itu tiap bidang punya warnanya sendiri.",
+          "Colour is not filler â€” it is a marker. That is why every discipline keeps its own colour."
         ),
       },
       {
@@ -358,7 +279,7 @@ export const C = {
         ),
       },
     ],
-    /* ── proses & perkakas ── */
+    /* â”€â”€ proses & perkakas â”€â”€ */
     processTitle: b("Cara saya bekerja.", "How I work."),
     processNote: b(
       "Alur yang sama dipakai untuk konten harian maupun materi event nasional.",
@@ -375,7 +296,7 @@ export const C = {
       },
       {
         title: b("Desain & Produksi", "Design & Production"),
-        desc: b("Eksekusi di grid yang konsisten — tipografi, warna, dan komposisi dijaga rapi.", "Execution on a consistent grid — typography, colour, and composition kept tight."),
+        desc: b("Eksekusi di grid yang konsisten â€” tipografi, warna, dan komposisi dijaga rapi.", "Execution on a consistent grid â€” typography, colour, and composition kept tight."),
       },
       {
         title: b("Revisi & Uji Cetak", "Revision & Print Test"),
@@ -391,25 +312,23 @@ export const C = {
       "Alat yang benar-benar saya pakai sehari-hari untuk desain dan produksi konten.",
       "The tools I actually use daily for design and content production."
     ),
-    /* ── kontak (versi track desain) ── */
+    /* â”€â”€ kontak (versi track desain) â”€â”€ */
     contactTitle: b("Mari bikin", "Let's make"),
     contactTitleAccent: b("sesuatu.", "something."),
     contactNote: b(
-      "Terbuka untuk kolaborasi desain, magang, maupun proyek lepas — kirim brief singkatnya saja.",
-      "Open to design collaborations, internships, and freelance work — just send a short brief."
+      "Terbuka untuk kolaborasi desain, magang, maupun proyek lepas â€” kirim brief singkatnya saja.",
+      "Open to design collaborations, internships, and freelance work â€” just send a short brief."
     ),
-    /* ── galeri ala behance: feed vertikal 1 kolom ── */
-    galleryKicker: b("Galeri Proyek 2025", "2025 Project Gallery"),
+    /* â”€â”€ galeri ala behance: feed vertikal 1 kolom â”€â”€ */
     galleryIntro: b(
       "Gulir ke bawah kayak buka galeri Behance: tiap karya tampil penuh satu layar, lengkap dengan konteks, tahun, dan catatannya.",
       "Scroll down like opening a Behance gallery: each work fills one screen, complete with context, year, and notes."
     ),
     galleryCta: b("Lihat konteks karya", "View work context"),
-    gallerySpecs: b("Spesifikasi artboard", "Artboard specs"),
     galleryCaseNote: b("Catatan kasus", "Case note"),
     galleryIndex: b("Indeks karya", "Work index"),
     galleryCount: b("karya terdokumentasi", "documented works"),
-    galleryEnd: b("Akhir galeri — terima kasih sudah melihat sampai bawah.", "End of gallery — thanks for viewing all the way down."),
+    galleryEnd: b("Akhir galeri â€” terima kasih sudah melihat sampai bawah.", "End of gallery â€” thanks for viewing all the way down."),
   },
 
   github: {
@@ -420,7 +339,7 @@ export const C = {
 } as const;
 
 /* ============================================================
-   CASE STUDIES — versi bilingual, dipakai Works & modal.
+   CASE STUDIES â€” versi bilingual, dipakai Works & modal.
    Nada: jelas, menjual, tanpa lebay.
 ============================================================ */
 
@@ -428,30 +347,29 @@ export const caseStudies: CaseStudyContent[] = [
   {
     id: "01",
     title: b("SPMB", "SPMB"),
-    subtitle: b("Sistem Penerimaan Murid Baru", "Student Admission System"),
     category: b("PENGEMBANGAN WEB", "WEB DEVELOPMENT"),
     year: "2025",
     tools: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui", "WhatsApp API"],
     repo: "https://github.com/Finnn-45/front-end-ppdb",
     description: b(
-      "Front-end platform penerimaan murid baru SMK TI BAZMA — dipakai lebih dari 1.000 pendaftar dengan alur pendaftaran bertahap dan notifikasi WhatsApp otomatis.",
-      "The front-end of SMK TI BAZMA's admission platform — used by 1,000+ applicants, with a guided multi-step flow and automatic WhatsApp notifications."
+      "Front-end platform penerimaan murid baru SMK TI BAZMA â€” dipakai lebih dari 1.000 pendaftar dengan alur pendaftaran bertahap dan notifikasi WhatsApp otomatis.",
+      "The front-end of SMK TI BAZMA's admission platform â€” used by 1,000+ applicants, with a guided multi-step flow and automatic WhatsApp notifications."
     ),
     overview: b(
-      "Sistem pendaftaran online terpadu yang menemani calon siswa dari registrasi, unggah berkas, verifikasi data, sampai pemantauan status seleksi secara real-time. Saya menangani front-end-nya — dari desain antarmuka sampai implementasi.",
-      "An end-to-end admission platform that guides applicants through registration, document upload, data verification, and real-time selection status. I owned the front-end — from interface design to implementation."
+      "Sistem pendaftaran online terpadu yang menemani calon siswa dari registrasi, unggah berkas, verifikasi data, sampai pemantauan status seleksi secara real-time. Saya menangani front-end-nya â€” dari desain antarmuka sampai implementasi.",
+      "An end-to-end admission platform that guides applicants through registration, document upload, data verification, and real-time selection status. I owned the front-end â€” from interface design to implementation."
     ),
     challenge: b(
-      "Banyaknya tahapan administrasi dan formulir yang panjang membuat pengguna baru mudah bingung — drop-off naik dan kesalahan pengisian data jadi masalah utama.",
-      "Long administrative steps and lengthy forms confused first-time users — driving up drop-off rates and data-entry mistakes."
+      "Banyaknya tahapan administrasi dan formulir yang panjang membuat pengguna baru mudah bingung â€” drop-off naik dan kesalahan pengisian data jadi masalah utama.",
+      "Long administrative steps and lengthy forms confused first-time users â€” driving up drop-off rates and data-entry mistakes."
     ),
     process: b(
-      "Menganalisis alur pendaftaran lama → memetakan user flow multi-step → merancang komponen UI yang konsisten → implementasi dengan Next.js dan validasi ketat di tiap langkah → usability testing bersama calon pengguna.",
-      "Analysed the old flow → mapped a multi-step user journey → designed consistent UI components → built it with Next.js and strict per-step validation → ran usability tests with real applicants."
+      "Menganalisis alur pendaftaran lama â†’ memetakan user flow multi-step â†’ merancang komponen UI yang konsisten â†’ implementasi dengan Next.js dan validasi ketat di tiap langkah â†’ usability testing bersama calon pengguna.",
+      "Analysed the old flow â†’ mapped a multi-step user journey â†’ designed consistent UI components â†’ built it with Next.js and strict per-step validation â†’ ran usability tests with real applicants."
     ),
     solution: b(
-      "Formulir dipecah menjadi multi-step dengan validasi otomatis, progres pendaftaran terlihat jelas di tiap langkah, dan notifikasi WhatsApp terkirim otomatis di tiap milestone — pendaftar tidak perlu menebak statusnya.",
-      "The form became a multi-step flow with automatic validation, visible progress at every stage, and WhatsApp notifications sent automatically at each milestone — applicants never have to guess their status."
+      "Formulir dipecah menjadi multi-step dengan validasi otomatis, progres pendaftaran terlihat jelas di tiap langkah, dan notifikasi WhatsApp terkirim otomatis di tiap milestone â€” pendaftar tidak perlu menebak statusnya.",
+      "The form became a multi-step flow with automatic validation, visible progress at every stage, and WhatsApp notifications sent automatically at each milestone â€” applicants never have to guess their status."
     ),
     result: b(
       "Dipakai 1.000+ pendaftar selama periode PPDB. Prosesnya jauh lebih mudah diikuti, kesalahan input turun drastis, dan tim PPDB terbantu besar oleh notifikasi otomatisnya.",
@@ -461,97 +379,94 @@ export const caseStudies: CaseStudyContent[] = [
   {
     id: "02",
     title: b("Absensi via RFID", "Attendance via RFID"),
-    subtitle: b("Sistem Absensi Kartu RFID", "RFID Card Attendance System"),
     category: b("REKAYASA IOT", "IOT ENGINEERING"),
     year: "2025",
     tools: ["Arduino", "C++", "RFID RC522", "Embedded System"],
     description: b(
-      "Sistem absensi siswa dengan kartu RFID dan Arduino — tempel kartu, kehadiran langsung tercatat otomatis tanpa proses manual.",
-      "A student attendance system built on RFID cards and Arduino — tap the card and attendance is logged instantly, no manual entry."
+      "Sistem absensi siswa dengan kartu RFID dan Arduino â€” tempel kartu, kehadiran langsung tercatat otomatis tanpa proses manual.",
+      "A student attendance system built on RFID cards and Arduino â€” tap the card and attendance is logged instantly, no manual entry."
     ),
     overview: b(
-      "Perangkat absensi otomatis berbasis kartu RFID: siswa menempelkan kartu ke reader dan kehadirannya langsung tersimpan ke sistem — tanpa panggilan manual sama sekali.",
-      "An automatic attendance device based on RFID cards: students tap their card on the reader and their attendance is stored straight into the system — no roll call at all."
+      "Perangkat absensi otomatis berbasis kartu RFID: siswa menempelkan kartu ke reader dan kehadirannya langsung tersimpan ke sistem â€” tanpa panggilan manual sama sekali.",
+      "An automatic attendance device based on RFID cards: students tap their card on the reader and their attendance is stored straight into the system â€” no roll call at all."
     ),
     challenge: b(
-      "Absensi manual memakan waktu, rawan salah catat, dan sulit direkap — terlebih untuk kelas dengan jumlah siswa yang besar.",
-      "Manual attendance is slow, error-prone, and hard to recap — especially for large classes."
+      "Absensi manual memakan waktu, rawan salah catat, dan sulit direkap â€” terlebih untuk kelas dengan jumlah siswa yang besar.",
+      "Manual attendance is slow, error-prone, and hard to recap â€” especially for large classes."
     ),
     process: b(
-      "Riset hardware reader → perakitan modul Arduino + RC522 → pemrograman pembacaan UID kartu di C++ → sinkronisasi data kehadiran ke sistem → uji akurasi dan kecepatan baca.",
-      "Researched reader hardware → assembled the Arduino + RC522 module → programmed card UID reading in C++ → synced attendance data to the system → tested accuracy and read speed."
+      "Riset hardware reader â†’ perakitan modul Arduino + RC522 â†’ pemrograman pembacaan UID kartu di C++ â†’ sinkronisasi data kehadiran ke sistem â†’ uji akurasi dan kecepatan baca.",
+      "Researched reader hardware â†’ assembled the Arduino + RC522 module â†’ programmed card UID reading in C++ â†’ synced attendance data to the system â†’ tested accuracy and read speed."
     ),
     solution: b(
       "Setiap kartu dipetakan ke data siswa, pembacaan UID divalidasi anti-duplikat dalam sesi yang sama, dan hasilnya tersimpan terstruktur supaya mudah direkap kapan saja.",
       "Each card maps to a student record, UID reads are de-duplicated per session, and results are stored in a structured format that is easy to recap anytime."
     ),
     result: b(
-      "Absensi yang tadinya berhitung menit per kelas menjadi hitungan detik per siswa — data lebih akurat dan rekapnya otomatis.",
-      "Attendance that took minutes per class now takes seconds per student — with more accurate data and automatic recaps."
+      "Absensi yang tadinya berhitung menit per kelas menjadi hitungan detik per siswa â€” data lebih akurat dan rekapnya otomatis.",
+      "Attendance that took minutes per class now takes seconds per student â€” with more accurate data and automatic recaps."
     ),
   },
   {
     id: "03",
     title: b("Jam Digital JWS", "JWS Digital Clock"),
-    subtitle: b("Jam Waktu Sholat", "Prayer Time Clock"),
     category: b("REKAYASA IOT", "IOT ENGINEERING"),
     year: "2025",
     tools: ["Mikrokontroler", "LED Display", "Real-time Data"],
     description: b(
-      "Jam waktu sholat digital yang tersambung ke jadwal real-time — LED display dan mikrokontroler, akurat tanpa perlu diatur ulang.",
-      "A digital prayer-time clock connected to real-time schedules — LED display and microcontroller, accurate without manual resets."
+      "Jam waktu sholat digital yang tersambung ke jadwal real-time â€” LED display dan mikrokontroler, akurat tanpa perlu diatur ulang.",
+      "A digital prayer-time clock connected to real-time schedules â€” LED display and microcontroller, accurate without manual resets."
     ),
     overview: b(
-      "Perangkat jam waktu sholat berbasis mikrokontroler dengan LED display yang menampilkan jadwal secara real-time — dirancang agar waktunya selalu akurat tanpa diatur manual.",
-      "A microcontroller-based prayer-time clock whose LED display pulls the schedule in real time — designed to stay accurate without manual adjustment."
+      "Perangkat jam waktu sholat berbasis mikrokontroler dengan LED display yang menampilkan jadwal secara real-time â€” dirancang agar waktunya selalu akurat tanpa diatur manual.",
+      "A microcontroller-based prayer-time clock whose LED display pulls the schedule in real time â€” designed to stay accurate without manual adjustment."
     ),
     challenge: b(
-      "Jam waktu sholat konvensional harus diatur manual dan sering telat mengikuti pergeseran jadwal — repot dan mudah salah.",
-      "Conventional prayer clocks need manual setting and lag behind schedule changes — tedious and error-prone."
+      "Jam waktu sholat konvensional harus diatur manual dan sering telat mengikuti pergeseran jadwal â€” repot dan mudah salah.",
+      "Conventional prayer clocks need manual setting and lag behind schedule changes â€” tedious and error-prone."
     ),
     process: b(
-      "Perancangan rangkaian mikrokontroler + LED display → integrasi data jadwal real-time → pemrograman logika tampilan dan alarm → kalibrasi dan uji akurasi harian.",
-      "Designed the microcontroller + LED display circuit → integrated real-time schedule data → programmed display and alarm logic → calibrated and tested accuracy daily."
+      "Perancangan rangkaian mikrokontroler + LED display â†’ integrasi data jadwal real-time â†’ pemrograman logika tampilan dan alarm â†’ kalibrasi dan uji akurasi harian.",
+      "Designed the microcontroller + LED display circuit â†’ integrated real-time schedule data â†’ programmed display and alarm logic â†’ calibrated and tested accuracy daily."
     ),
     solution: b(
       "Perangkat menarik data jadwal secara real-time, menampilkannya dalam format yang mudah dibaca, dan menyesuaikan perubahan jadwal secara otomatis.",
       "The device pulls schedule data in real time, renders it in a glanceable format, and adjusts to schedule changes automatically."
     ),
     result: b(
-      "Jam yang selalu akurat tanpa pernah perlu diatur ulang — dan benar-benar dipakai sehari-hari.",
-      "A clock that stays accurate and never needs resetting — and is genuinely used every day."
+      "Jam yang selalu akurat tanpa pernah perlu diatur ulang â€” dan benar-benar dipakai sehari-hari.",
+      "A clock that stays accurate and never needs resetting â€” and is genuinely used every day."
     ),
   },
   {
     id: "04",
     title: b("Mobil RC ESP32", "RC Car ESP32"),
-    subtitle: b("Kendali Nirkabel", "Wireless Control Car"),
     category: b("REKAYASA IOT", "IOT ENGINEERING"),
     year: "2025",
     tools: ["ESP32", "IoT", "Motor Control", "Wireless"],
     description: b(
-      "Mobil RC berbasis ESP32 yang dikendalikan nirkabel dari ponsel — gabungan komunikasi IoT, kontrol motor, dan elektronik.",
-      "An ESP32-based RC car controlled wirelessly from a phone — combining IoT communication, motor control, and electronics."
+      "Mobil RC berbasis ESP32 yang dikendalikan nirkabel dari ponsel â€” gabungan komunikasi IoT, kontrol motor, dan elektronik.",
+      "An ESP32-based RC car controlled wirelessly from a phone â€” combining IoT communication, motor control, and electronics."
     ),
     overview: b(
-      "Mobil RC berbasis ESP32 yang dikendalikan lewat perangkat mobile — komunikasi nirkabel, kontrol motor presisi, dan rangkaian hemat daya dalam satu proyek.",
-      "An ESP32 RC car driven from a mobile device — wireless communication, precise motor control, and a power-efficient circuit in one build."
+      "Mobil RC berbasis ESP32 yang dikendalikan lewat perangkat mobile â€” komunikasi nirkabel, kontrol motor presisi, dan rangkaian hemat daya dalam satu proyek.",
+      "An ESP32 RC car driven from a mobile device â€” wireless communication, precise motor control, and a power-efficient circuit in one build."
     ),
     challenge: b(
       "Membangun kendali yang responsif dan stabil lewat koneksi nirkabel, sekaligus mengatur kecepatan dan arah motor secara presisi dengan daya terbatas.",
       "Building control that stays responsive over a wireless link while managing speed and steering precisely on limited power."
     ),
     process: b(
-      "Perakitan chassis + motor driver → pemrograman ESP32 untuk menerima perintah → pembuatan antarmuka kontrol di ponsel → kalibrasi respons motor dan kestabilan koneksi → uji lapangan.",
-      "Assembled the chassis + motor driver → programmed the ESP32 command handler → built the phone control interface → calibrated motor response and connection stability → field-tested."
+      "Perakitan chassis + motor driver â†’ pemrograman ESP32 untuk menerima perintah â†’ pembuatan antarmuka kontrol di ponsel â†’ kalibrasi respons motor dan kestabilan koneksi â†’ uji lapangan.",
+      "Assembled the chassis + motor driver â†’ programmed the ESP32 command handler â†’ built the phone control interface â†’ calibrated motor response and connection stability â†’ field-tested."
     ),
     solution: b(
       "Komunikasi nirkabel low-latency antara ponsel dan ESP32, kontrol arah dan kecepatan yang dihaluskan lewat pengaturan PWM, dan rangkaian yang ringkas serta hemat daya.",
       "Low-latency wireless communication between phone and ESP32, smooth steering and throttle through PWM tuning, and a compact power-efficient circuit."
     ),
     result: b(
-      "Mobil RC yang responsif dan stabil dikendalikan jarak jauh — sekaligus proyek yang paling banyak mengajarkan soal integrasi hardware, software, dan troubleshooting.",
-      "A responsive, stable RC car controlled from a distance — and the project that taught me the most about hardware-software integration and troubleshooting."
+      "Mobil RC yang responsif dan stabil dikendalikan jarak jauh â€” sekaligus proyek yang paling banyak mengajarkan soal integrasi hardware, software, dan troubleshooting.",
+      "A responsive, stable RC car controlled from a distance â€” and the project that taught me the most about hardware-software integration and troubleshooting."
     ),
   },
 ];

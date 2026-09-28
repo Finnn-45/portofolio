@@ -4,23 +4,14 @@ import { useState } from "react";
 import { achievements, designWorks, professional } from "@/lib/data";
 import { useT } from "@/lib/i18n";
 import { C } from "@/lib/content";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  DISCIPLINE_COLORS,
-  MOSAIC_COLORS,
-  withAlpha,
-  type Discipline,
-} from "@/lib/mosaic";
+import { DISCIPLINE_COLORS, MOSAIC_COLORS, withAlpha, type Discipline } from "@/lib/mosaic";
 import { SectionLabel } from "./bits";
-import { MosaicLegend, WorkMosaic, type LegendItem, type WorkTile } from "./mosaic";
 
 /* ============================================================
-   SHOWCASE KARYA DESAIN — Editorial Framer Style ala Jenul
-   Dengan sentuhan:
-     • Tag bracket teknis [selected] [works]
-     • Filter mozaik bidang pekerjaan interaktif
-     • Kartu Artboard bergaya Adobe Illustrator
-     • Kunci baca mozaik (legend) terhitung otomatis
+   SHOWCASE KARYA DESAIN — daftar statis.
+   Dulu grid mozaik + kartu artboard; sekarang tiap karya = satu baris
+   dengan garis bidang pekerjaan sebagai penanda. Filter tetap dipakai karena
+   itu cara tercepat memindai isi, bukan hiasan.
 ============================================================ */
 
 const COLLAB_DISCIPLINES: Discipline[] = ["branding", "content", "print", "media"];
@@ -31,25 +22,10 @@ export function DesignShowcase() {
 
   const disciplines = Array.from(new Set(designWorks.map((work) => work.discipline)));
 
-  const filteredWorks = activeFilter === "all"
-    ? designWorks
-    : designWorks.filter((w) => w.discipline === activeFilter);
-
-  const tiles: WorkTile[] = filteredWorks.map((work) => ({
-    id: work.id,
-    label: t(work.title),
-    context: t(work.context),
-    year: t(work.year),
-    note: t(work.note),
-    color: DISCIPLINE_COLORS[work.discipline],
-    weight: work.weight,
-  }));
-
-  const legend: LegendItem[] = disciplines.map((discipline) => ({
-    color: DISCIPLINE_COLORS[discipline],
-    label: t(C.design.disciplines[discipline]),
-    count: designWorks.filter((work) => work.discipline === discipline).length,
-  }));
+  const filteredWorks =
+    activeFilter === "all"
+      ? designWorks
+      : designWorks.filter((work) => work.discipline === activeFilter);
 
   const programColor = MOSAIC_COLORS[DISCIPLINE_COLORS.program];
 
@@ -62,7 +38,7 @@ export function DesignShowcase() {
         <SectionLabel className="font-mono tracking-[0.22em] text-neutral-400" />
       </div>
 
-      {/* ── HEADER EDITORIAL ALA JENUL ── */}
+      {/* ── HEADER ── */}
       <div className="mb-10 flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-3">
           <span className="h-px w-8 bg-mosaic-lemon" />
@@ -74,39 +50,17 @@ export function DesignShowcase() {
           </span>
         </div>
 
-        <div className="grid w-full grid-cols-1 items-end gap-8 lg:grid-cols-12 mt-2">
-          <div className="lg:col-span-7">
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="font-editorial text-4xl leading-[1.05] tracking-tight text-mosaic-cream sm:text-5xl md:text-6xl"
-            >
-              {t(C.design.worksTitle)}
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="mt-4 max-w-xl text-base leading-relaxed text-neutral-600"
-            >
-              {t(C.design.worksNote)}
-            </motion.p>
-          </div>
-
-          <MosaicLegend
-            className="lg:col-span-5"
-            items={legend}
-            title={t(C.design.legendTitle)}
-            hint={t(C.design.legendHint)}
-            countLabel={t(C.design.legendCount)}
-          />
+        <div className="mt-2 grid w-full grid-cols-1 items-end gap-8 lg:grid-cols-12">
+          <h2 className="font-editorial text-4xl leading-[1.05] tracking-tight text-mosaic-cream sm:text-5xl md:text-6xl lg:col-span-7">
+            {t(C.design.worksTitle)}
+          </h2>
+          <p className="max-w-md shrink-0 text-sm leading-relaxed text-neutral-600 md:text-base lg:col-span-5">
+            {t(C.design.galleryIntro)}
+          </p>
         </div>
       </div>
 
-      {/* ── FILTER TABS BIDANG MOZAIK ── */}
+      {/* ── FILTER BIDANG ── */}
       <div className="mb-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-black/5 pb-4">
         <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-400">
           filter
@@ -140,21 +94,40 @@ export function DesignShowcase() {
         })}
       </div>
 
-      {/* ── GRID MOZAIK KARYA ── */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeFilter}
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -14 }}
-          transition={{ duration: 0.35 }}
-          className="mb-16"
-        >
-          <WorkMosaic tiles={tiles} />
-        </motion.div>
-      </AnimatePresence>
+      {/* -- DAFTAR KARYA -- */}
+      <ol className="mb-16 border-t border-black/5">
+        {filteredWorks.map((work) => {
+          const hex = MOSAIC_COLORS[DISCIPLINE_COLORS[work.discipline]];
+          return (
+            <li key={work.id} className="border-b border-black/5">
+              <div
+                className="grid grid-cols-1 gap-2 py-6 pl-4 md:grid-cols-12 md:gap-6"
+                style={{ borderLeft: `3px solid ${hex}` }}
+              >
+                <span
+                  className="font-mono text-[10px] uppercase tracking-[0.22em] md:col-span-3"
+                  style={{ color: hex }}
+                >
+                  /{work.id} · {t(C.design.disciplines[work.discipline])}
+                </span>
+                <div className="md:col-span-9">
+                  <h3 className="font-editorial text-2xl leading-tight tracking-tight text-mosaic-cream sm:text-3xl">
+                    {t(work.title)}
+                  </h3>
+                  <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.22em] text-neutral-500">
+                    {t(work.context)} · {t(work.year)}
+                  </p>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600">
+                    {t(work.note)}
+                  </p>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
 
-      {/* ── KOLABORASI DESAIN ── */}
+      {/* -- KOLABORASI DESAIN -- */}
       <div className="mb-4 flex items-center gap-3">
         <span className="h-px w-8 bg-mosaic-crimson" />
         <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-mosaic-crimson">
@@ -167,13 +140,9 @@ export function DesignShowcase() {
           const discipline = COLLAB_DISCIPLINES[i % COLLAB_DISCIPLINES.length];
           const color = MOSAIC_COLORS[DISCIPLINE_COLORS[discipline]];
           return (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 4) * 0.07 }}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white p-5"
+              className="relative flex flex-col justify-between rounded-2xl bg-white p-5"
             >
               <span
                 aria-hidden
@@ -202,12 +171,12 @@ export function DesignShowcase() {
                   {t(item.year)}
                 </span>
               ) : null}
-            </motion.div>
+            </div>
           );
         })}
       </div>
 
-      {/* ── PENCAPAIAN & SERTIFIKASI ── */}
+      {/* -- PENCAPAIAN & SERTIFIKASI -- */}
       <div className="mb-4 flex items-center gap-3">
         <span className="h-px w-8" style={{ background: programColor }} />
         <p
@@ -220,12 +189,8 @@ export function DesignShowcase() {
 
       <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
         {achievements.map((item, i) => (
-          <motion.div
+          <div
             key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
             className="flex items-center justify-between gap-4 rounded-2xl border border-black/10 bg-white p-5"
           >
             <div className="flex items-start gap-3">
@@ -241,7 +206,7 @@ export function DesignShowcase() {
               </div>
             </div>
             <span className="shrink-0 font-mono text-xs text-neutral-400">[{item.year}]</span>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono, Caveat } from "next/font/google";
+import { Inter, Geist_Mono, Bodoni_Moda } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/site/providers";
-import { CustomCursor } from "@/components/site/decor";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -14,15 +13,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const caveat = Caveat({
-  variable: "--font-caveat",
+/* Display serif seluruh situs (semua track) — dipakai lewat token
+   --font-editorial. Bodoni Moda: serif didone kontras tinggi + italic. */
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
-
-/* Catatan: display serif edisi gelap (Bodoni Moda) dimuat di
-   app/design/layout.tsx — cuma untuk track /design, biar halaman
-   terang "/" dan "/web" tidak ikut mengunduhnya. */
 
 export const metadata: Metadata = {
   title: "Arfin Desca Alzachri | Portfolio",
@@ -38,11 +36,9 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body
-        className={`${inter.variable} ${geistMono.variable} ${caveat.variable} antialiased`}
+        className={`${inter.variable} ${geistMono.variable} ${bodoni.variable} antialiased`}
       >
         <Providers>{children}</Providers>
-        {/* Cursor kustom — titik + ring, kebaca di section terang & gelap */}
-        <CustomCursor />
       </body>
     </html>
   );

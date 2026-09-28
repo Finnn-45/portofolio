@@ -214,11 +214,11 @@ export const githubProjects: GithubProject[] = [
   {
     name: "portofolio",
     desc: b(
-      "Kode sumber portofolio ini — Next.js dengan React Three Fiber, kartu identitas 3D yang bisa diputar, dan animasi scroll.",
-      "The source of this portfolio — Next.js with React Three Fiber, a draggable 3D ID card, and scroll animation."
+      "Kode sumber portofolio ini — Next.js App Router, TypeScript, dan Tailwind, ditulis tanpa pustaka animasi.",
+      "The source of this portfolio — Next.js App Router, TypeScript, and Tailwind, written without an animation library."
     ),
     lang: "TypeScript",
-    tags: ["Next.js", "React Three Fiber", "Tailwind"],
+    tags: ["Next.js", "TypeScript", "Tailwind"],
     link: "https://github.com/Finnn-45/portofolio",
     year: "2026",
     featured: false,
@@ -363,95 +363,182 @@ export const achievements = [
   },
 ];
 /* ============================================================
-   PETA KERJA DESAIN — sumber data mozaik di track /design.
-   Tiap entri jadi satu kotak mozaik:
-     • discipline → warna kotak (lihat DISCIPLINE_COLORS di lib/mosaic)
-     • weight     → ukuran kotak (2 = cakupan pekerjaan paling luas)
-   Isinya diambil dari pengalaman yang sama dengan `professional`,
-   jadi mozaiknya beneran bisa dibaca — bukan warna acak.
-============================================================ */
+/* ============================================================
+   PETA KERJA DESAIN — sumber data karya di track /design.
+   Tiap entri jadi satu baris di daftar karya; discipline menentukan
+   warna garis penandanya (lihat DISCIPLINE_COLORS di lib/mosaic).
+   Isinya diambil dari pengalaman yang sama dengan professional,
+   jadi warnanya bukan acak.
+   ============================================================ */
 export type DesignWork = {
   id: string;
   title: Bi;
   context: Bi;
   discipline: Discipline;
-  weight: 1 | 2;
   year: Bi;
   note: Bi;
+  tools: string[];
+  dimensions: string;
+  palette: string[];
+  categoryLabel: Bi;
+  problem: Bi;
+  solution: Bi;
+  deliverables: string[];
+  visualType: "branding" | "banner" | "editorial" | "admission" | "uiux" | "illustration";
+  image?: string;
 };
 
 export const designWorks: DesignWork[] = [
   {
     id: "01",
-    title: b("Social Media Branding", "Social Media Branding"),
+    title: b("Brand Identity & Social Media MENTION", "Brand Identity & Social Media MENTION"),
     context: b("MENTION — SMK TI BAZMA", "MENTION — SMK TI BAZMA"),
     discipline: "branding",
-    weight: 2,
+    categoryLabel: b("Brand Identity & Feed System", "Brand Identity & Feed System"),
     year: b("2025 — Sekarang", "2025 — Present"),
     note: b(
-      "Seluruh desain media dan informasi sekolah — konten visual, grafis, video, sampai materi promosi.",
-      "All media and information design for the school — visual content, graphics, video, and promotional material."
+      "Merancang sistem identitas visual komprehensif untuk media informasi sekolah, mencakup grid 12 kolom, tipografi editorial, palet warna berkarakter, dan template carousel Instagram.",
+      "Crafted a comprehensive visual identity system for school media communication, covering 12-column grids, editorial typography, character-rich color palettes, and Instagram carousel templates."
     ),
+    tools: ["Figma", "Adobe Illustrator", "Photoshop"],
+    dimensions: "1080 × 1350 px · 300 DPI",
+    palette: ["#0E0F14", "#831514", "#FFE846", "#F4F1EA"],
+    problem: b(
+      "Informasi kegiatan dan program sekolah sebelumnya dipublikasikan tanpa panduan visual terpadu, sehingga terasa sporadis dan kurang memiliki daya tarik profesional bagi calon mitra & siswa.",
+      "Previous school event information lacked a unified visual design system, appearing sporadic and lacking professional appeal for prospective partners and students."
+    ),
+    solution: b(
+      "Menciptakan brand guide modular: rasio aspek 4:5 yang optimal di feed, palet warna kontras tinggi, sistem hierarki heading yang terbaca cepat dalam 2 detik pertama scroll.",
+      "Built a modular brand guide: 4:5 aspect ratio optimized for feeds, high-contrast colors, and a clear heading hierarchy legible within the first 2 seconds of scrolling."
+    ),
+    deliverables: ["Brand Styleguide", "Instagram Grid System (15+ Templates)", "Typography Hierarchy", "Story & Highlight Kits"],
+    visualType: "branding",
+    image: "/images/behance-ref/01.jpg",
   },
   {
     id: "02",
-    title: b("Desain Event Nasional", "National Event Design"),
-    context: b("HIMPANA", "HIMPANA"),
+    title: b("Desain Event Nasional HIMPANA", "National Event Visuals HIMPANA"),
+    context: b("HIMPANA (Himpunan Alumni)", "HIMPANA (Alumni Association)"),
     discipline: "print",
-    weight: 2,
+    categoryLabel: b("Event & Spatial Print Design", "Event & Spatial Print Design"),
     year: b("2025", "2025"),
     note: b(
-      "Materi visual event nasional: X-banner, banner, dan kebutuhan cetak lainnya.",
-      "Visual material for a national event: X-banners, banners, and other print needs."
+      "Materi visual terpadu untuk konferensi & gathering nasional: main stage backdrop 6x3m, standing roll-up banner, ID card peserta VIP, dan buku panduan acara.",
+      "Unified visual materials for a national conference & gathering: 6x3m main stage backdrop, standing roll-up banners, VIP participant ID cards, and event handbooks."
     ),
+    tools: ["Adobe Illustrator", "Photoshop", "InDesign"],
+    dimensions: "6000 × 3000 mm & 800 × 2000 mm · CMYK",
+    palette: ["#141416", "#E8A33D", "#1F3BE0", "#FFFFFF"],
+    problem: b(
+      "Kebutuhan cetak berukuran raksasa menuntut akurasi layout skala vektor tanpa distorsi resolusi, dengan keterbacaan tinggi dari jarak pandang 15 meter.",
+      "Large-format print requirements demanded vector precision without resolution distortion, maintaining crystal-clear legibility from a 15-meter viewing distance."
+    ),
+    solution: b(
+      "Penerapan sistem grid arsitektural berbasis vektor murni, kalibrasi warna CMYK terstandarisasi percetakan, dan penataan margin aman bleed 50mm.",
+      "Pure vector architectural grid layout, standardized CMYK print calibration, and 50mm safe bleed margin enforcement."
+    ),
+    deliverables: ["Panggung Utama 6×3m", "Roll-Up X-Banner", "Kartu Peserta & Lanyard VIP", "Brosur & Run-Down Cetak"],
+    visualType: "banner",
   },
   {
     id: "03",
-    title: b("Konten Sosial Harian", "Daily Social Content"),
+    title: b("Editorial Content BAZMA Pertamina", "BAZMA Pertamina Daily Editorial Content"),
     context: b("BAZMA PERTAMINA", "BAZMA PERTAMINA"),
     discipline: "content",
-    weight: 1,
+    categoryLabel: b("Corporate Social Content", "Corporate Social Content"),
     year: b("2025", "2025"),
     note: b(
-      "Rencana konten bulanan diubah jadi aset siap unggah untuk kebutuhan Instagram harian.",
-      "Monthly content plans turned into upload-ready assets for daily Instagram needs."
+      "Menerjemahkan laporan program bulanan dan konten edukatif menjadi infografis visual modern yang mudah dipahami donatur dan publik di Instagram.",
+      "Transformed monthly program reports and educational materials into modern visual infographics readily digestible by donors and the public on Instagram."
     ),
+    tools: ["Figma", "Adobe Illustrator", "Canva Pro"],
+    dimensions: "1080 × 1080 px & 1080 × 1350 px",
+    palette: ["#0B0E14", "#1F3BE0", "#2F9CF0", "#F8FAFC"],
+    problem: b(
+      "Data laporan kegiatan sosial dan penyaluran donasi seringkali terasa membosankan dan padat teks jika disajikan dalam format konvensional.",
+      "Social activity data and donation distribution reports often felt dry and text-heavy when presented in conventional formats."
+    ),
+    solution: b(
+      "Mengembangkan format infografis berbasis kartu bertingkat, diagram data visual yang bersih, dan kutipan tipografis yang memiliki nilai emosional kuat.",
+      "Developed tiered card infographic formats, clean visual data diagrams, and typographic quotes carrying high emotional resonance."
+    ),
+    deliverables: ["30+ Aset Feed Bulanan", "Infografis Penyaluran Dana", "Template Kutipan Inspiratif", "Cover Video Reels"],
+    visualType: "editorial",
   },
   {
     id: "04",
-    title: b("Materi Promosi SPMB", "SPMB Promo Material"),
-    context: b("SPMB SMK TI BAZMA 2025", "SPMB SMK TI BAZMA 2025"),
+    title: b("Kampanye SPMB 2025 (Penerimaan Siswa)", "SPMB 2025 Admission Campaign Visuals"),
+    context: b("TIM MULTIMEDIA SPMB BAZMA", "SPMB MULTIMEDIA TEAM"),
     discipline: "print",
-    weight: 1,
+    categoryLabel: b("Marketing & Admission Campaign", "Marketing & Admission Campaign"),
     year: b("2025", "2025"),
     note: b(
-      "Desain materi promosi kampanye penerimaan murid baru — dari cetak sampai konten digital.",
-      "Promotional design for the admission campaign — from print to digital content."
+      "Kampanye visual multi-channel untuk penerimaan siswa baru yang sukses menjaring lebih dari 1.000 pendaftar daring dari seluruh Indonesia.",
+      "Multi-channel visual campaign for new student admissions successfully engaging over 1,000 online applicants across Indonesia."
     ),
+    tools: ["Adobe Illustrator", "Figma", "Photoshop"],
+    dimensions: "A3 Poster, A4 Brochure, 1080×1920 Story",
+    palette: ["#0F172A", "#0F9B94", "#FFE846", "#FFFFFF"],
+    problem: b(
+      "Menargetkan calon siswa SMP dan orang tua secara bersamaan membutuhkan gaya visual yang profesional namun tetap energik dan ramah anak muda.",
+      "Simultaneously targeting middle-school students and parents required a visual tone that was professional yet energetic and youth-friendly."
+    ),
+    solution: b(
+      "Visual hybrid: tipografi bold modern yang memikat remaja dikombinasikan dengan struktur informasi beasiswa dan akreditasi yang terpercaya bagi orang tua.",
+      "Hybrid visual approach: bold modern typography engaging youth combined with clear, trustworthy scholarship & accreditation breakdowns for parents."
+    ),
+    deliverables: ["Poster Fisik & Pamflet A3", "Brosur Lipat Tiga (Trifold)", "Set Iklan Digital Instagram", "Visual Panduan Alur Pendaftaran"],
+    visualType: "admission",
   },
   {
     id: "05",
-    title: b("Dokumentasi Foto & Video", "Photo & Video Documentation"),
-    context: b("TIM MULTIMEDIA SPMB", "SPMB MULTIMEDIA TEAM"),
-    discipline: "media",
-    weight: 1,
-    year: b("2025", "2025"),
+    title: b("Smart Ecosystem UI/UX Interface Concept", "Smart Ecosystem UI/UX Interface Concept"),
+    context: b("PORTFOLIO DESIGN LAB", "PORTFOLIO DESIGN LAB"),
+    discipline: "ui",
+    categoryLabel: b("UI/UX & Design System", "UI/UX & Design System"),
+    year: b("2025 — 2026", "2025 — 2026"),
     note: b(
-      "Liputan foto dan video kegiatan sekolah untuk arsip dan konten kampanye.",
-      "Photo and video coverage of school activities for archives and campaign content."
+      "Rancangan antarmuka dashboard IoT dan mobile app pemantau sensor lingkungan: sensor suhu, kelembapan, saklar relay, dan analitik grafis real-time.",
+      "UI/UX design of an IoT dashboard and mobile companion app monitoring environmental sensors: temperature, humidity, relay switches, and real-time graphics."
     ),
+    tools: ["Figma", "Auto Layout", "Design Tokens"],
+    dimensions: "1440 × 900 px (Desktop) & 393 × 852 px (Mobile)",
+    palette: ["#0B0D13", "#1B2236", "#2F9CF0", "#7C5CFC"],
+    problem: b(
+      "Dashboard IoT teknis seringkali membingungkan dengan terlalu banyak grafik mentah dan kontrol tombol yang tidak ergonomis.",
+      "Technical IoT dashboards are frequently cluttered with raw charts and un-ergonomic controls."
+    ),
+    solution: b(
+      "Penyusunan komponen UI berbasis Atomic Design, status color-coded yang intuitif (Normal / Warning / Critical), serta gestur toggle satu jempol di layar ponsel.",
+      "Structured Atomic Design components, intuitive color-coded telemetry states, and single-thumb mobile toggle ergonomics."
+    ),
+    deliverables: ["Figma Wireframes & User Flows", "High-Fidelity Component Library", "Interactive Clickable Prototype", "Dark/Light Design Tokens"],
+    visualType: "uiux",
   },
   {
     id: "06",
-    title: b("Ilustrasi & Aset Grafis", "Illustration & Graphic Assets"),
-    context: b("KONTEN & KEBUTUHAN CETAK", "CONTENT & PRINT NEEDS"),
+    title: b("Ilustrasi Vektor & Koleksi Aset Grafis", "Vector Illustrations & Asset Collection"),
+    context: b("PERSONAL & EDITORIAL LAB", "PERSONAL & EDITORIAL LAB"),
     discipline: "illustration",
-    weight: 1,
+    categoryLabel: b("Vector Art & Mascot Asset", "Vector Art & Mascot Asset"),
     year: b("2024 — 2025", "2024 — 2025"),
     note: b(
-      "Ilustrasi dan aset visual pendukung untuk konten, kampanye, dan materi cetak.",
-      "Illustration and supporting visual assets for content, campaigns, and print."
+      "Koleksi ilustrasi vektor orisinal untuk kebutuhan maskot robotik, ikonografi kustom, stiker komunitas, dan elemen visual pendukung situs web.",
+      "Collection of original vector illustrations for robotics mascots, custom iconography, community stickers, and supporting web visual assets."
     ),
+    tools: ["Adobe Illustrator", "Procreate", "SVG Optimizer"],
+    dimensions: "Infinite Vector Scalable (SVG / AI)",
+    palette: ["#12131C", "#E4607A", "#FFE846", "#0F9B94"],
+    problem: b(
+      "Ketergantungan pada aset stok gratis membuat proyek visual terasa generik dan sulit menciptakan persona merek yang unik.",
+      "Relying on generic stock art makes visual branding forgettable and hinders distinctive brand persona creation."
+    ),
+    solution: b(
+      "Membuat perpustakaan vektor buatan tangan dengan siluet geometris tegas, sudut kurva harmonis, dan format SVG ringan teroptimasi untuk web.",
+      "Handcrafted vector library featuring sharp geometric silhouettes, harmonious curve radiuses, and lightweight optimized SVG web assets."
+    ),
+    deliverables: ["Maskot Robotik MCROBO", "50+ Set Ikon Vektor Kustom", "Pack Stiker Digital", "Elemen Grafis Header"],
+    visualType: "illustration",
   },
 ];
 

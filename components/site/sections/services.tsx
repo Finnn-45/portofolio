@@ -2,62 +2,55 @@
 
 import { useT } from "@/lib/i18n";
 import { C } from "@/lib/content";
-import { motion } from "framer-motion";
 import { SectionLabel } from "./bits";
 
 export function Services() {
   const t = useT();
+
   return (
     <section
       id="services"
-      className="relative w-full bg-white px-8 md:px-16 lg:px-24 py-16 md:py-20 flex flex-col"
+      className="relative w-full bg-[#090a0f] text-[#f4f1ea] px-6 py-20 md:px-12 md:py-24 lg:px-16 border-t border-white/10"
     >
-      <div className="w-full flex flex-col gap-4 mb-8 md:mb-10">
-        <SectionLabel />
-      </div>
+      <div className="mx-auto w-full max-w-[1240px]">
+        <SectionLabel className="font-mono text-white/40" />
 
-      <div className="w-full flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-14">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-[#1a1a1a] leading-[0.95] tracking-tight"
-        >
-          {t(C.services.titleLines[0])}
-          <br />
-          {t(C.services.titleLines[1])}
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-base md:text-lg text-gray-700 leading-relaxed max-w-md shrink-0"
-        >
-          {t(C.services.lede)}
-        </motion.p>
-      </div>
+        <div className="mt-10 grid gap-6 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#ffe846] mb-2">
+              CAPABILITIES & CRAFT
+            </p>
+            <h2 className="font-editorial text-[clamp(32px,4.5vw,64px)] leading-[1.02] tracking-[-0.01em] text-white">
+              {t(C.services.titleLines[0])}{" "}
+              <span className="italic text-[#ffe846]">{t(C.services.titleLines[1])}</span>
+            </h2>
+          </div>
+          <p className="text-sm md:text-base leading-relaxed text-white/70 lg:col-span-5">
+            {t(C.services.lede)}
+          </p>
+        </div>
 
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {C.services.cards.map((card, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-            className="group flex flex-col p-6 rounded-2xl border border-neutral-200 bg-[#fafafa] transition-all duration-300 hover:-translate-y-1 hover:border-[#1a1a1a] hover:shadow-[0_16px_40px_-24px_rgba(0,0,0,0.3)]"
-          >
-            <span className="font-mono text-[10px] tracking-[0.3em] text-[#831514] mb-4">
-              0{i + 1}
-            </span>
-            <h3 className="text-lg md:text-xl font-extrabold tracking-tight text-[#1a1a1a] mb-2">
-              {t(card.title)}
-            </h3>
-            <p className="text-sm text-neutral-600 leading-relaxed">{t(card.desc)}</p>
-          </motion.div>
-        ))}
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {C.services.cards.map((card, i) => (
+            <div
+              key={i}
+              className="p-6 rounded-2xl bg-[#111218] border border-white/10 hover:border-[#ffe846]/30 transition-all duration-300 hover:shadow-xl group"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-mono text-xs tabular-nums text-[#ffe846] font-bold">
+                  [ 0{i + 1} ]
+                </span>
+                <span className="w-2 h-2 rounded-full bg-white/20 group-hover:bg-[#ffe846] transition-colors" />
+              </div>
+              <h3 className="text-lg md:text-xl font-bold tracking-tight text-white mb-2 group-hover:text-[#ffe846] transition-colors">
+                {t(card.title)}
+              </h3>
+              <p className="text-sm leading-relaxed text-white/70">
+                {t(card.desc)}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

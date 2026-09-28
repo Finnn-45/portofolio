@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { profile, socials, location } from "@/lib/data";
 import { useT } from "@/lib/i18n";
 import { C } from "@/lib/content";
@@ -24,12 +23,7 @@ export function DesignCover() {
       className="relative flex min-h-screen w-full flex-col bg-mosaic-black text-mosaic-cream"
     >
       {/* ── METADATA SUDUT ── */}
-      <motion.div
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex flex-wrap items-start justify-between gap-6 px-6 pt-20 md:px-12 md:pt-24 lg:px-20"
-      >
+      <div className="flex flex-wrap items-start justify-between gap-6 px-6 pt-20 md:px-12 md:pt-24 lg:px-20">
         <div className="flex flex-col gap-2">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
             <span className="text-neutral-500">{t(C.hero.chip)}</span>
@@ -84,17 +78,12 @@ export function DesignCover() {
         </div>
 
         <div className="flex items-center gap-3">
-          <LangSwitch variant="dark" />
+          <LangSwitch />
         </div>
-      </motion.div>
+      </div>
       {/* ── DISPLAY: FOLDER KUNING + JUDUL SERIF ── */}
       <div className="grid flex-1 grid-cols-1 items-center gap-12 px-6 py-14 md:px-12 lg:grid-cols-12 lg:gap-16 lg:px-20 lg:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="lg:col-span-4"
-        >
+        <div className="lg:col-span-4">
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-neutral-400">
             {t(C.design.folderOwner)} {profile.name}
           </p>
@@ -105,14 +94,9 @@ export function DesignCover() {
           <p className="mt-6 font-mono text-[10px] uppercase leading-relaxed tracking-[0.22em] text-neutral-400">
             {C.design.folderRoles.map((role) => t(role)).join(" · ")}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="lg:col-span-8"
-        >
+        <div className="lg:col-span-8">
           <h1
             className="font-editorial font-medium leading-[0.82] tracking-[-0.02em] text-mosaic-cream"
             style={{ fontSize: "clamp(56px, 12vw, 200px)" }}
@@ -130,7 +114,7 @@ export function DesignCover() {
               <span className="tabular-nums text-mosaic-lemon">2026</span>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
       {/* ── BARIS STATUS ── */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/5 px-6 py-5 font-mono text-[9px] uppercase tracking-[0.24em] text-neutral-400 md:px-12 lg:px-20">

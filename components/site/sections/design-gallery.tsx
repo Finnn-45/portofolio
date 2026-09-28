@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
 import { designWorks } from "@/lib/data";
 import { useT } from "@/lib/i18n";
 import { C } from "@/lib/content";
@@ -18,7 +16,6 @@ import { GalleryCard } from "./design-gallery-card";
 
 export function DesignGallery() {
   const t = useT();
-  const [openNote, setOpenNote] = useState<string | null>(null);
 
   return (
     <section
@@ -41,35 +38,18 @@ export function DesignGallery() {
         </div>
 
         <div className="mt-2 flex w-full flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-editorial text-4xl leading-[1.05] tracking-tight text-mosaic-cream sm:text-5xl md:text-6xl"
-          >
+          <h2 className="font-editorial text-4xl leading-[1.05] tracking-tight text-mosaic-cream sm:text-5xl md:text-6xl">
             {t(C.design.worksTitle)}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="max-w-md shrink-0 text-sm leading-relaxed text-neutral-600 md:text-base"
-          >
+          </h2>
+          <p className="max-w-md shrink-0 text-sm leading-relaxed text-neutral-600 md:text-base">
             {t(C.design.galleryIntro)}
-          </motion.p>
+          </p>
         </div>
       </div>
 
       <div className="flex w-full flex-col gap-10 md:gap-14">
         {designWorks.map((work) => (
-          <GalleryCard
-            key={work.id}
-            work={work}
-            openNote={openNote}
-            setOpenNote={setOpenNote}
-          />
+          <GalleryCard key={work.id} work={work} />
         ))}
       </div>
 

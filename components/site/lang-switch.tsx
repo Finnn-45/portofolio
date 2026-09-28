@@ -2,14 +2,9 @@
 
 import { useLang, type Lang } from "@/lib/i18n";
 
-/* Tombol ganti bahasa — dipakai di hero (gelap) & toolbar CV (terang) */
-export function LangSwitch({
-  variant = "dark",
-  className = "",
-}: {
-  variant?: "dark" | "light";
-  className?: string;
-}) {
+/* Tombol ganti bahasa — teks biasa "ID / EN", tanpa pill atau blur.
+   Putih + mix-blend-difference: terbaca di halaman terang maupun gelap. */
+export function LangSwitch({ className = "" }: { className?: string }) {
   const { lang, setLang } = useLang();
 
   const options: { key: Lang; label: string }[] = [
@@ -17,37 +12,32 @@ export function LangSwitch({
     { key: "en", label: "EN" },
   ];
 
-  const shell =
-    variant === "dark"
-      ? "border-white/15 bg-white/5"
-      : "border-neutral-300 bg-white/70";
-  const idle =
-    variant === "dark"
-      ? "text-white/45 hover:text-white/80"
-      : "text-neutral-500 hover:text-neutral-900";
-  const active =
-    variant === "dark" ? "bg-white text-[#0d0d0d]" : "bg-[#1a1a1a] text-white";
-
   return (
     <div
       role="group"
       aria-label="Language / Bahasa"
-      className={`inline-flex items-center gap-0.5 rounded-full border p-0.5 backdrop-blur ${shell} ${className}`}
+      className={`inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white mix-blend-difference ${className}`}
     >
-      {options.map((option) => {
+      {options.map((option, i) => {
         const isActive = lang === option.key;
         return (
-          <button
-            key={option.key}
-            type="button"
-            onClick={() => setLang(option.key)}
-            aria-pressed={isActive}
-            className={`rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors duration-200 ${
-              isActive ? active : idle
-            }`}
-          >
-            {option.label}
-          </button>
+          <span key={option.key} className="inline-flex items-center gap-2">
+            {i > 0 ? (
+              <span aria-hidden className="opacity-30">
+                /
+              </span>
+            ) : null}
+            <button
+              type="button"
+              onClick={() => setLang(option.key)}
+              aria-pressed={isActive}
+              className={`transition-opacity duration-200 ${
+                isActive ? "opacity-100" : "opacity-45 hover:opacity-80"
+              }`}
+            >
+              {option.label}
+            </button>
+          </span>
         );
       })}
     </div>

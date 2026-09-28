@@ -1,90 +1,90 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import type { DesignWork } from "@/lib/data";
 import { useT } from "@/lib/i18n";
 import { C } from "@/lib/content";
 import { DISCIPLINE_COLORS, MOSAIC_COLORS } from "@/lib/mosaic";
+import { DesignArtboardPreview } from "./design-artboard-preview";
 
-export function GalleryCard({
-  work,
-  openNote,
-  setOpenNote,
-}: {
-  work: DesignWork;
-  openNote: string | null;
-  setOpenNote: (id: string | null) => void;
-}) {
+export function GalleryCard({ work }: { work: DesignWork }) {
   const t = useT();
   const color = MOSAIC_COLORS[DISCIPLINE_COLORS[work.discipline]];
-  const noteOpen = openNote === work.id;
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6 }}
-      className="relative overflow-hidden rounded-2xl bg-white"
-    >
-      <div className="grid w-full grid-cols-1 gap-8 p-6 md:p-10 lg:grid-cols-12 lg:gap-12 lg:p-12">
-        <div className="lg:col-span-7">
-          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 font-mono text-[10px] uppercase tracking-[0.24em]">
-            <span style={{ color }}>/{work.id}</span>
-            <span style={{ color }}>{t(C.design.disciplines[work.discipline])}</span>
-            <span className="text-neutral-400">{t(work.year)}</span>
+    <article className="relative overflow-hidden rounded-2xl bg-[#141520] border border-white/10 shadow-2xl p-6 md:p-8 lg:p-10 group hover:border-[#ffe846]/40 transition-colors">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left: Artboard Preview */}
+        <div className="lg:col-span-6 w-full">
+          <div className="rounded-xl overflow-hidden shadow-xl border border-white/10">
+            <DesignArtboardPreview work={work} />
+          </div>
+        </div>
+
+        {/* Right: Project Information & Specs */}
+        <div className="lg:col-span-6 flex flex-col justify-between h-full">
+          <div>
+            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 font-mono text-[10px] uppercase tracking-[0.24em] mb-2">
+              <span style={{ color }} className="font-bold">/{work.id}</span>
+              <span style={{ color }}>{t(C.design.disciplines[work.discipline])}</span>
+              <span className="text-white/40">· {t(work.year)}</span>
+            </div>
+
+            <h3 className="font-editorial text-2xl md:text-3xl lg:text-4xl leading-tight font-bold text-white group-hover:text-[#ffe846] transition-colors">
+              {t(work.title)}
+            </h3>
+
+            <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-[#ffe846]/80">
+              {t(work.context)}
+            </p>
+
+            <p className="mt-4 text-sm leading-relaxed text-white/70">
+              {t(work.note)}
+            </p>
+
+            {/* Problem & Solution Accordion */}
+            <div className="mt-6 space-y-4 pt-4 border-t border-white/10">
+              <div>
+                <span className="block font-mono text-[9px] uppercase tracking-widest text-[#ffe846] mb-1">
+                  [ TANTANGAN ]
+                </span>
+                <p className="text-xs leading-relaxed text-white/80">
+                  {t(work.problem)}
+                </p>
+              </div>
+
+              <div>
+                <span className="block font-mono text-[9px] uppercase tracking-widest text-emerald-400 mb-1">
+                  [ SOLUSI & EKSEKUSI ]
+                </span>
+                <p className="text-xs leading-relaxed text-white/80">
+                  {t(work.solution)}
+                </p>
+              </div>
+            </div>
           </div>
 
-          <h3 className="mt-4 font-editorial text-2xl leading-tight tracking-tight text-mosaic-cream sm:text-3xl md:text-4xl">
-            {t(work.title)}
-          </h3>
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-neutral-500">
-            {t(work.context)}
-          </p>
-        </div>
+          {/* Footer Metadata */}
+          <div className="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 font-mono text-[10px]">
+            {/* Palette */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-white/40 mr-1">PALETTE:</span>
+              {work.palette.map((c, i) => (
+                <span
+                  key={i}
+                  className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm"
+                  style={{ backgroundColor: c }}
+                  title={c}
+                />
+              ))}
+            </div>
 
-        <div className="flex flex-col gap-4 lg:col-span-5">
-          <button
-            type="button"
-            onClick={() => setOpenNote(noteOpen ? null : work.id)}
-            aria-expanded={noteOpen}
-            className="group flex items-center justify-between gap-3 border-t border-black/10 pt-4 text-left transition-colors"
-            style={{ borderLeft: `4px solid ${color}` }}
-          >
-            <span>
-              <span className="block font-mono text-[9px] uppercase tracking-[0.24em] text-neutral-400">
-                [{t(C.design.galleryCaseNote).toLowerCase()}]
-              </span>
-              <span className="mt-1 block text-sm font-extrabold tracking-tight text-mosaic-ink">
-                {t(C.design.galleryCta)}
-              </span>
-            </span>
-            <span className="pl-3 font-mono text-lg leading-none" style={{ color }}>
-              {noteOpen ? "–" : "+"}
-            </span>
-          </button>
-
-          <AnimatePresence initial={false}>
-            {noteOpen ? (
-              <motion.div
-                key="note"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <p
-                  className="p-5 text-sm leading-relaxed text-neutral-700"
-                  style={{ borderLeft: `4px solid ${color}` }}
-                >
-                  {t(work.note)}
-                </p>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+            {/* Tools */}
+            <div className="flex items-center gap-1.5 text-white/50">
+              <span>{work.tools.join(" · ")}</span>
+            </div>
+          </div>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }

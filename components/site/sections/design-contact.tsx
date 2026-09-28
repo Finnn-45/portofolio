@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { location, socials } from "@/lib/data";
 import { useT } from "@/lib/i18n";
 import { C } from "@/lib/content";
@@ -85,13 +84,7 @@ export function DesignContact() {
           </span>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="relative mt-2"
-        >
+        <div className="relative mt-2">
           <div className="mt-3 flex flex-col md:flex-row md:items-baseline md:justify-between gap-4">
             <p className="max-w-2xl font-editorial text-4xl leading-[1.05] tracking-tight text-mosaic-cream sm:text-5xl md:text-6xl">
               {t(C.design.contactTitle)}{" "}
@@ -102,20 +95,16 @@ export function DesignContact() {
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-neutral-600 md:text-base">
             {t(C.design.contactNote)}
           </p>
-        </motion.div>
+        </div>
       </div>
 
       {/* ── BARIS KANAL SOSIAL BERWARNA PALET MOZAIK ── */}
       <div className="mt-12 mb-12 flex w-full flex-col md:mt-16">
-        {links.map((link, i) => {
+        {links.map((link) => {
           const hex = MOSAIC_COLORS[link.color];
           return (
-            <motion.a
+            <a
               key={link.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
@@ -139,13 +128,13 @@ export function DesignContact() {
                   {link.sub}
                 </span>
                 <span
-                  className="inline-block shrink-0 transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+                  className="inline-block shrink-0"
                   style={{ color: hex }}
                 >
                   <ArrowUpRight />
                 </span>
               </div>
-            </motion.a>
+            </a>
           );
         })}
       </div>
@@ -173,9 +162,9 @@ export function DesignContact() {
           <span className="font-mono text-[9px] uppercase tracking-[0.24em] text-neutral-400">
             [status]
           </span>
-          <span className="inline-flex items-center gap-2 text-sm font-medium text-emerald-700">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Open for Digital Internship
+          <span className="text-sm font-medium text-[#5fd39a]">
+            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            {t(C.hero.chip)}
           </span>
         </div>
       </div>
@@ -195,7 +184,7 @@ export function DesignContact() {
           onClick={scrollToTop}
           className="font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500 transition-colors hover:text-mosaic-lemon"
         >
-          back to top ↑
+          ↑ {t(C.contact.backToTop)}
         </button>
       </div>
 

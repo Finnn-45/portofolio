@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { designToolkit } from "@/lib/data";
 import { useT } from "@/lib/i18n";
 import { C } from "@/lib/content";
@@ -46,25 +45,13 @@ export function DesignProcess() {
           </span>
         </div>
 
-        <div className="flex w-full flex-col gap-6 md:flex-row md:items-end md:justify-between mt-2">
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-editorial text-4xl leading-[1.05] tracking-tight text-mosaic-cream sm:text-5xl md:text-6xl"
-          >
+        <div className="flex w-full flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <h2 className="font-editorial text-4xl leading-[1.05] tracking-tight text-mosaic-cream sm:text-5xl md:text-6xl">
             {t(C.design.processTitle)}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="max-w-md shrink-0 text-sm leading-relaxed text-neutral-600 md:text-base"
-          >
+          </h2>
+          <p className="max-w-md shrink-0 text-sm leading-relaxed text-neutral-600 md:text-base">
             {t(C.design.processNote)}
-          </motion.p>
+          </p>
         </div>
       </div>
 
@@ -74,13 +61,9 @@ export function DesignProcess() {
           const hex = MOSAIC_COLORS[tone(i)];
           const techTag = STEP_TECH_TAGS[i];
           return (
-            <motion.li
+            <li
               key={step.title.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white p-5"
+              className="relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white p-5"
             >
               <span
                 aria-hidden
@@ -110,7 +93,7 @@ export function DesignProcess() {
                   {techTag}
                 </span>
               </div>
-            </motion.li>
+            </li>
           );
         })}
       </ol>
@@ -124,13 +107,9 @@ export function DesignProcess() {
       </div>
 
       <div className="grid w-full grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
-        {designToolkit.map((tool, i) => (
-          <motion.div
+        {designToolkit.map((tool) => (
+          <div
             key={tool.name}
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: i * 0.06 }}
             className="flex flex-col gap-1 border-t border-black/10 pt-4"
           >
             <span className="text-sm font-medium tracking-tight text-mosaic-ink">
@@ -139,7 +118,7 @@ export function DesignProcess() {
             <span className="text-xs leading-snug text-neutral-500">
               {t(tool.use)}
             </span>
-          </motion.div>
+          </div>
         ))}
       </div>
 

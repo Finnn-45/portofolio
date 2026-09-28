@@ -2,85 +2,66 @@
 
 import { useT } from "@/lib/i18n";
 import { C } from "@/lib/content";
-const tools = [
-  { name: "HTML", icon: "◈" },
-  { name: "CSS", icon: "◑" },
-  { name: "JavaScript", icon: "✦" },
-  { name: "React.js", icon: "⚛" },
-  { name: "Next.js", icon: "▲" },
-  { name: "Laravel", icon: "⬢" },
-  { name: "C++", icon: "✚" },
-  { name: "Arduino", icon: "⏣" },
-  { name: "ESP32", icon: "⌬" },
-  { name: "Figma", icon: "✏" },
-  { name: "Illustrator", icon: "✒" },
-  { name: "Canva", icon: "◧" },
-];
-import { motion } from "framer-motion";
 
-function ToolChip({ name, icon }: { name: string; icon: string }) {
-  return (
-    <div className="group flex items-center gap-3 shrink-0 px-6 py-3 rounded-full border border-neutral-200 bg-white hover:border-[#831514]/40 transition-colors duration-300">
-      <span className="text-[#831514] text-base leading-none">{icon}</span>
-      <span className="font-mono text-xs md:text-sm font-semibold uppercase tracking-widest text-[#1a1a1a] whitespace-nowrap">
-        {name}
-      </span>
-    </div>
-  );
-}
+const toolsData = [
+  { name: "Figma", category: "Design & UI/UX", level: "Primary" },
+  { name: "Adobe Illustrator", category: "Vector & Branding", level: "Primary" },
+  { name: "Photoshop", category: "Image Editing", level: "Proficient" },
+  { name: "Next.js & React", category: "Web Frontend", level: "Primary" },
+  { name: "TypeScript", category: "Programming", level: "Proficient" },
+  { name: "Tailwind CSS", category: "Design System / Styling", level: "Primary" },
+  { name: "Laravel & PHP", category: "Full-Stack Web", level: "Proficient" },
+  { name: "C++ & Arduino", category: "IoT Embedded", level: "Proficient" },
+  { name: "ESP32", category: "Hardware & Sensors", level: "Proficient" },
+  { name: "Canva Pro", category: "Fast Social Assets", level: "Proficient" },
+  { name: "Git & GitHub", category: "Version Control", level: "Daily" },
+  { name: "Procreate", category: "Digital Sketching", level: "Creative" },
+];
 
 export function Tools() {
   const t = useT();
-  const firstRow = tools.slice(0, 6);
-  const secondRow = tools.slice(6);
 
   return (
     <section
       id="tools"
-      className="relative w-full bg-white px-8 md:px-16 lg:px-24 py-14 md:py-16 flex flex-col overflow-hidden border-t border-neutral-100"
+      className="relative w-full bg-[#0a0b10] text-[#f4f1ea] px-6 py-20 md:px-12 md:py-24 lg:px-16 border-t border-white/10"
     >
-      <div className="w-full flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 md:mb-10">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1a1a1a] leading-[0.95] tracking-tight"
-        >
-          {t(C.tools.titleLines[0])} {t(C.tools.titleLines[1])}
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-sm md:text-base text-gray-600 leading-relaxed max-w-md shrink-0"
-        >
-          {t(C.tools.lede)}
-        </motion.p>
-      </div>
+      <div className="mx-auto w-full max-w-[1240px]">
+        <div className="grid gap-6 md:grid-cols-12 md:items-end md:gap-12">
+          <div className="md:col-span-7">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#ffe846] mb-2 block">
+              TOOLKIT & ENVIRONMENT
+            </span>
+            <h2 className="font-editorial text-[clamp(28px,3.8vw,52px)] leading-[1.05] tracking-[-0.01em] text-white">
+              {t(C.tools.titleLines[0])}{" "}
+              <span className="italic text-[#ffe846]">{t(C.tools.titleLines[1])}</span>
+            </h2>
+          </div>
+          <p className="text-sm md:text-base leading-relaxed text-white/70 md:col-span-5">
+            {t(C.tools.lede)}
+          </p>
+        </div>
 
-      <div className="w-full flex flex-col gap-4">
-        {[firstRow, secondRow].map((row, rowIndex) => (
-          <motion.div
-            key={rowIndex}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 + rowIndex * 0.15 }}
-            className="group w-full flex overflow-hidden"
-          >
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {toolsData.map((tool) => (
             <div
-              className={`flex gap-4 pr-4 group-hover:[animation-play-state:paused] ${
-                rowIndex % 2 === 0 ? "animate-marquee-left" : "animate-marquee-right"
-              }`}
+              key={tool.name}
+              className="p-4 rounded-xl bg-[#12131b] border border-white/10 hover:border-[#ffe846]/40 transition-colors flex flex-col justify-between"
             >
-              {[...row, ...row, ...row, ...row].map((t, i) => (
-                <ToolChip key={`${t.name}-${i}`} name={t.name} icon={t.icon} />
-              ))}
+              <div>
+                <span className="font-mono text-[9px] uppercase tracking-wider text-[#ffe846]">
+                  {tool.category}
+                </span>
+                <h4 className="mt-1 font-mono text-sm font-bold text-white">
+                  {tool.name}
+                </h4>
+              </div>
+              <span className="mt-3 font-mono text-[9px] text-white/40 uppercase tracking-widest pt-2 border-t border-white/5">
+                ● {tool.level}
+              </span>
             </div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -31,17 +31,17 @@ export default function PortfolioPage() {
   return (
     <main className="min-h-screen bg-[#f4f1ea] text-neutral-900">
       {/* Toolbar — tidak ikut tercetak */}
-      <div className="no-print sticky top-0 z-10 flex items-center justify-between bg-[#f4f1ea]/90 backdrop-blur border-b border-neutral-300 px-6 py-3">
+      <div className="no-print sticky top-0 z-10 flex items-center justify-between border-b border-neutral-300 bg-[#f4f1ea] px-6 py-3">
         <Link href="/" className="font-mono text-sm text-neutral-500 hover:text-neutral-900 transition-colors">
           {t(C.cv.back)}
         </Link>
         <div className="flex items-center gap-3">
-          <LangSwitch variant="light" />
+          <LangSwitch />
           <button
             onClick={() => window.print()}
-            className="px-5 py-2 rounded-full bg-[#831514] text-[#fafafa] font-mono text-sm hover:bg-[#5a0e0e] transition-colors cursor-pointer"
+            className="font-mono text-sm text-neutral-700 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-[#831514] hover:decoration-[#831514] cursor-pointer"
           >
-            ⬇ {t(C.cv.savePdf)}
+            {t(C.cv.savePdf)}
           </button>
         </div>
       </div>
@@ -122,6 +122,26 @@ export default function PortfolioPage() {
                   )}
                 </div>
                 <p className="mt-1 text-sm text-neutral-600 leading-relaxed">{t(exp.desc)}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ===== PROFESSIONAL EXPERIENCE ===== */}
+        <section className="border-b border-neutral-300 py-10">
+          <Label>{t(C.cv.professional)}</Label>
+          <div className="mt-4 space-y-4">
+            {professional.map((item, i) => (
+              <div key={i} className="print-item">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="font-semibold text-sm">{t(item.role)}</h3>
+                  {item.year.id !== "" ? (
+                    <span className="shrink-0 font-mono text-xs text-neutral-500">
+                      {t(item.year)}
+                    </span>
+                  ) : null}
+                </div>
+                <p className="mt-1 text-sm text-neutral-600 leading-relaxed">{t(item.desc)}</p>
               </div>
             ))}
           </div>

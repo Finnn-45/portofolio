@@ -1,14 +1,14 @@
 /* ============================================================
-   MOZAIK — sistem warna & grid untuk track DESAIN.
-   Dua aturan supaya mozaiknya punya arti (bukan corat-coret):
+   WARNA — sistem warna untuk track DESAIN.
+   Dua aturan supaya warnanya punya arti (bukan corat-coret):
      1. satu bidang pekerjaan = satu warna (DISCIPLINE_COLORS)
-     2. ukuran kotak = bobot/cakupan pekerjaan (dipakai <WorkMosaic />)
+     2. satu siklus warna (TONE_CYCLE) buat semua penekanan lain,
+        supaya ritmenya konsisten antar section
    Semua nilai di sini statis — render server & client identik.
-============================================================ */
+   ============================================================ */
 
 /* Aksen tanda tangan edisi kanvas gelap (Portofolio 2025).
-   SENGAJA tidak dimasukkan ke TONE_CYCLE: siklus warna dipakai juga oleh
-   halaman terang "/" (photo-3d-card) & "/web", jadi urutannya harus tetap. */
+   SENGAJA tidak masuk TONE_CYCLE: lemon hanya dipakai di track /design. */
 export const MOSAIC_ACCENT = "#ffe846";
 
 export const MOSAIC_COLORS = {
@@ -44,10 +44,10 @@ export const tone = (i: number): MosaicColor => TONE_CYCLE[wrap(i, TONE_CYCLE.le
 
 /* ============================================================
    BIDANG PEKERJAAN → WARNA.
-   Aturannya satu: satu bidang = satu warna. Dengan begitu kotak
-   mozaik bisa dibaca (ada artinya), bukan sekadar corat-coret.
-   Dipakai bareng <MosaicLegend /> di track /design.
-============================================================ */
+   Aturannya satu: satu bidang = satu warna. Dengan begitu daftar
+   karya bisa dibaca (ada artinya), bukan sekadar corat-coret.
+   Dipakai sebagai garis penanda di tiap baris karya track /design.
+   ============================================================ */
 export const DISCIPLINE_COLORS = {
   branding: "crimson",
   content: "cobalt",
@@ -59,18 +59,6 @@ export const DISCIPLINE_COLORS = {
 } as const;
 
 export type Discipline = keyof typeof DISCIPLINE_COLORS;
-
-/* ============================================================
-   NETRAL KANVAS GELAP — pengganti "ink" di track /design.
-   Dipakai untuk grid, garis bantu, dan overlay di atas kanvas hitam.
-   Halaman terang tetap memakai MOSAIC_COLORS.ink (gelap).
-============================================================ */
-export const CANVAS_NEUTRAL = {
-  /** pengganti "ink" untuk garis/tint di atas kanvas #131313 */
-  line: "#f4f1ea",
-  /** overlay keterangan di atas kotak warna */
-  scrim: "#131313",
-} as const;
 
 /** Versi hex dengan alpha — dipakai buat border/tint tipis */
 export const withAlpha = (hex: string, alpha: number) =>
